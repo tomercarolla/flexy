@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  margin-bottom: 12px;
+
+  .progress-bar-container {
+    background-color: #eee;
+  }
+
+  .progress-bar {
+    height: 8px;
+    width: 0;
+  }
+  .progress-bar {
+    background-color: #ffd740;
+  }
+  .progress-bar.yellow {
+    background-color: #ffd740;
+  }
+  .progress-bar.red {
+    background-color: #ffd740;
+  }
+}

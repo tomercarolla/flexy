@@ -1,0 +1,19 @@
+{
+  "npmScope": "flexy",
+  "affected": {
+    "defaultBase": "undefined"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "cli": {
+    "analytics": false,
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "flexy"
+}

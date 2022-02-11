@@ -1,0 +1,30 @@
+<div class="container" *ngIf="currentQuestion$ | async as question">
+  <mat-toolbar color="primary">סגנון למידה: {{questionLearningTypeTranslate(question.learningType)}}</mat-toolbar>
+
+  <ng-container *ngIf="allQuestions$ | async as all">
+    <flexy-progress-bar [progress]="progress" [total]="all.length"></flexy-progress-bar>
+  </ng-container>
+
+  <section class="question-form" [@slideInOut]="question">
+    <div class="question">
+      {{question.question}}
+    </div>
+
+    <mat-radio-group
+      [formControl]="answerFormControl"
+      class="answers-radio-group">
+      <mat-radio-button class="radio-button" *ngFor="let answer of answers" [value]="answer.value">
+        {{answer.text}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <div class="button-container">
+      <button type="button" mat-raised-button color="primary"
+              (click)="nextQuestion(question)"
+              [disabled]="!answerFormControl.valid">{{question.id < 30 ? 'הבא' : 'סיים'}}
+      </button>
+      <button mat-button *ngIf="question.id !== 1" (click)="previousQuestion()">חזור
+      </button>
+    </div>
+  </section>
+</div>

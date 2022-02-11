@@ -1,0 +1,29 @@
+:host {
+
+  .container {
+    height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .question-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px;
+  }
+
+  .question {
+    font-size: 18px;
+  }
+
+  .answers-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 10px 0;
+  }
+
+  button {
+    min-width: 90px;
+  }
+}

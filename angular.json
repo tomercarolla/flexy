@@ -10,28 +10,26 @@
           "style": "scss"
         },
         "@schematics/angular:application": {
-          "strict": true
+          "strict": false
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/flexy",
+      "sourceRoot": "apps/flexy/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/flexy",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/apps/flexy",
+            "index": "apps/flexy/src/index.html",
+            "main": "apps/flexy/src/main.ts",
+            "polyfills": "apps/flexy/src/polyfills.ts",
+            "tsConfig": "apps/flexy/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["apps/flexy/src/favicon.ico", "apps/flexy/src/assets"],
             "styles": [
-              "src/styles.scss"
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/flexy/src/styles.scss"
             ],
             "scripts": []
           },
@@ -51,8 +49,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/flexy/src/environments/environment.ts",
+                  "with": "apps/flexy/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -89,23 +87,43 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
+            "main": "apps/flexy/src/test.ts",
+            "polyfills": "apps/flexy/src/polyfills.ts",
+            "tsConfig": "apps/flexy/tsconfig.spec.json",
+            "karmaConfig": "apps/flexy/karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["apps/flexy/src/favicon.ico", "apps/flexy/src/assets"],
             "styles": [
-              "src/styles.scss"
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/flexy/src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
+    },
+    "ui": {
+      "root": "libs/ui",
+      "sourceRoot": "libs/ui/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/ui/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui"],
+          "options": {
+            "jestConfig": "libs/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     }
-  },
-  "defaultProject": "flexy"
+  }
 }
