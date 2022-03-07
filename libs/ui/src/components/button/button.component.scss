@@ -1,0 +1,33 @@
+@import 'button-theme';
+@import 'button-colors';
+
+::ng-deep {
+  [flexyButton] {
+    appearance: none;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    cursor: pointer;
+    //height: 100%;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &.full-width {
+      width: 100%;
+    }
+  }
+
+  @include theme-button();
+  @include ui-button();
+}

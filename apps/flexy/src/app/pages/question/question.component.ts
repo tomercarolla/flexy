@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {QuestionInterface} from "../../shared/question.interface";
+import {QuestionInterface} from "../../../../../../libs/shared/question.interface";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {combineLatest, filter, lastValueFrom, take, tap} from "rxjs";
-import {QuestionsService} from "../../shared/questions.service";
+import { combineLatest, filter, lastValueFrom, Subscription, take, tap } from "rxjs";
+import {FlexyService} from "../../../../../../libs/shared/flexy.service";
 import {QuestionQuery} from "../../store/question.query";
 import {QuestionStore} from "../../store/question.store";
 import {Location} from "@angular/common";
@@ -37,12 +37,12 @@ export class QuestionComponent implements OnInit, OnDestroy {
   currentQuestion$ = this.questionQuery.currentQuestion$;
   allQuestions$ = this.questionQuery.selectQuestions$;
   progress: number;
-  visualPoints = 0;
+  subscription: Subscription | null = null;
 
   constructor(private activatedRoute: ActivatedRoute,
               private questionQuery: QuestionQuery,
               private questionStore: QuestionStore,
-              private questionsService: QuestionsService,
+              private flexyService: FlexyService,
               private router: Router,
               private fb: FormBuilder,
               private location: Location) {
@@ -50,7 +50,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initQuestionForm();
-    this.questionsService.getAllQuestions().subscribe((questions: any) => {
+    this.subscription = this.flexyService.getAllQuestions().subscribe((questions: any) => {
       this.questionStore.update(store => {
         return {
           ...store,
@@ -122,5 +122,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

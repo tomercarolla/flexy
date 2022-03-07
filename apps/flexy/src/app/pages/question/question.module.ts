@@ -5,7 +5,7 @@ import {QuestionComponent} from "./question.component";
 import {MatRadioModule} from "@angular/material/radio";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
-import {ProgressBarModule} from "../../../../../../libs/ui/src";
+import {ProgressBarModule} from "@flexy/ui";
 import {MatToolbarModule} from "@angular/material/toolbar";
 
 

@@ -1,0 +1,51 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  section {
+    width: 100%;
+    flex: 1;
+  }
+
+  .mat-toolbar-single-row {
+    justify-content: space-between;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      height: 30px;
+    }
+  }
+
+  .table-container {
+    position: relative;
+  }
+
+  table {
+    width: 100%;
+
+    tr.mat-row {
+      &:hover {
+        background: whitesmoke;
+      }
+    }
+
+    td.mat-cell:last-of-type, {
+      width: 110px;
+    }
+
+    .mat-header-cell {
+      font-size: 14px;
+      text-align: right;
+    }
+  }
+}

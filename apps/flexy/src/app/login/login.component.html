@@ -1,1 +1,33 @@
-<button mat-raised-button color="primary" (click)="login()">כניסה</button>
+<div class="loader"
+     *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+
+  <mat-form-field class="form-dir-rtl" appearance="outline">
+    <mat-label>שם פרטי</mat-label>
+    <input type="text" matInput formControlName="firstName">
+    <mat-error *ngIf="loginForm.controls['firstName'].hasError('required')">
+      יש להכניס שם פרטי
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-dir-rtl" appearance="outline">
+    <mat-label>שם משפחה</mat-label>
+    <input type="text" matInput formControlName="lastName">
+    <mat-error *ngIf="loginForm.controls['lastName'].hasError('required')">
+      יש להכניס שם משפחה
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-dir-rtl" appearance="outline">
+    <mat-label>טלפון</mat-label>
+    <input type="number" matInput formControlName="phone">
+    <mat-error *ngIf="loginForm.controls['phone'].hasError('required')">
+      יש להכניס מספר טלפון
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="!loginForm.valid">כניסה</button>
+</form>

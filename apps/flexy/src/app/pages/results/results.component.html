@@ -15,12 +15,13 @@
   </div>
 
   <canvas baseChart
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [chartType]="pieChartType"
-          [options]="pieChartOptions"
-          [plugins]="pieChartPlugins"
-          [legend]="pieChartLegend">
+          [data]="chartData"
+          [labels]="chartLabels"
+          [chartType]="chartType"
+          [options]="chartOptions"
+          [plugins]="chartPlugins"
+          [datasets]="chartDataSets"
+          [legend]="chartLegend">
   </canvas>
 
   <div class="result-explanation-text">

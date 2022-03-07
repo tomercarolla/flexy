@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "d20d4513-fbc9-4bd6-957f-83a589879bf0"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -26,8 +29,12 @@
             "polyfills": "apps/flexy/src/polyfills.ts",
             "tsConfig": "apps/flexy/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/flexy/src/favicon.ico", "apps/flexy/src/assets"],
+            "assets": [
+              "apps/flexy/src/favicon.ico",
+              "apps/flexy/src/assets"
+            ],
             "styles": [
+              "./libs/ui/styles/styles.scss",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "apps/flexy/src/styles.scss"
             ],
@@ -92,7 +99,10 @@
             "tsConfig": "apps/flexy/tsconfig.spec.json",
             "karmaConfig": "apps/flexy/karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/flexy/src/favicon.ico", "apps/flexy/src/assets"],
+            "assets": [
+              "apps/flexy/src/favicon.ico",
+              "apps/flexy/src/assets"
+            ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "apps/flexy/src/styles.scss"
@@ -109,14 +119,20 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/ui/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/ui/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui"],
+          "outputs": [
+            "coverage/libs/ui"
+          ],
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true
@@ -124,6 +140,111 @@
         }
       },
       "tags": []
+    },
+    "flexy-manager": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "apps/flexy-manager",
+      "sourceRoot": "apps/flexy-manager/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/flexy-manager",
+            "index": "apps/flexy-manager/src/index.html",
+            "main": "apps/flexy-manager/src/main.ts",
+            "polyfills": "apps/flexy-manager/src/polyfills.ts",
+            "tsConfig": "apps/flexy-manager/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/flexy-manager/src/favicon.ico",
+              "apps/flexy-manager/src/assets"
+            ],
+            "styles": [
+              "./libs/ui/styles/styles.scss",
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/flexy-manager/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/flexy-manager/src/environments/environment.ts",
+                  "with": "apps/flexy-manager/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "flexy-manager:build:production"
+            },
+            "development": {
+              "browserTarget": "flexy-manager:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "flexy-manager:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/flexy-manager/src/test.ts",
+            "polyfills": "apps/flexy-manager/src/polyfills.ts",
+            "tsConfig": "apps/flexy-manager/tsconfig.spec.json",
+            "karmaConfig": "apps/flexy-manager/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/flexy-manager/src/favicon.ico",
+              "apps/flexy-manager/src/assets"
+            ],
+            "styles": [
+              "apps/flexy-manager/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
     }
   }
 }

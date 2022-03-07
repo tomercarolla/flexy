@@ -1,0 +1,7 @@
+@function component-sizes() {
+  @return 'xsmall', 'small', 'medium', 'large';
+}
+
+@function component-colors() {
+  @return 'primary', 'secondary', 'success', 'info', 'warning', 'danger';
+}

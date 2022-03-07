@@ -8,7 +8,6 @@ import {DeviceDetectorService} from "ngx-device-detector";
 })
 export class AppComponent implements OnInit {
   title = 'flexy';
-  deviceInfo: any;
   isMobile!: boolean;
 
   constructor(private deviceService: DeviceDetectorService) {

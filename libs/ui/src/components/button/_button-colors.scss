@@ -1,0 +1,57 @@
+@import '../../../../ui/styles/tools/functions';
+
+
+@mixin ui-button() {
+  [flexyButton] {
+    //primary
+    --btn-primary-box-shadow: none;
+    --btn-primary-font-color: #fefefe;
+    --btn-primary-hover-font-color: #fefefe;
+    --btn-primary-focus-font-color: #fefefe;
+    --btn-primary-active-font-color: #fefefe;
+    --btn-primary-background-color: #1195af;
+    --btn-primary-hover-background-color: #42C2CF;
+    --btn-primary-focus-background-color: #0C7596;
+    --btn-primary-active-background-color: #0C7596;
+    --btn-primary-border-color: var(--btn-primary-background-color);
+    --btn-primary-hover-border-color: var(--btn-primary-hover-background-color);
+    --btn-primary-focus-border-color: var(--btn-primary-focus-background-color);
+    --btn-primary-active-border-color: var(--btn-primary-active-background-color);
+
+
+    @each $color in component-colors() {
+      &.color--#{$color} {
+        background-color: var(--btn-#{$color}-background-color);
+        color: var(--btn-#{$color}-font-color);
+        box-shadow: var(--btn-#{$color}-box-shadow);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--btn-#{$color}-border-color);
+
+        &:hover {
+          background-color: var(--btn-#{$color}-hover-background-color);
+          border-color: var(--btn-#{$color}-hover-border-color);
+          color: var(--btn-#{$color}-hover-font-color);
+        }
+
+        &:focus {
+          background-color: var(--btn-#{$color}-focus-background-color);
+          border-color: var(--btn-#{$color}-focus-border-color);
+          color: var(--btn-#{$color}-hover-font-color);
+        }
+
+        //&:active {
+        //  background-color: var(--btn-#{$color}-active-background-color);
+        //  border-color: var(--btn-#{$color}-active-border-color);
+        //  color: var(--btn-#{$color}-active-font-color);
+        //}
+
+        &[disabled] {
+          &:hover {
+            background-color: var(--btn-#{$color}-background-color);
+          }
+        }
+      }
+    }
+  }
+}

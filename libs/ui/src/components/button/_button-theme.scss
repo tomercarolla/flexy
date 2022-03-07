@@ -1,0 +1,69 @@
+@import '../../../../ui/styles/tools/functions';
+
+@mixin theme-button() {
+  [flexyButton] {
+    --btn-font-weight: normal;
+    --btn-border: none;
+    --btn-letter-spacing: .5px;
+    --btn-disabled-opacity: .5;
+    --btn-disabled-cursor: default;
+
+    //Xsmall - 30px
+    --btn-xsmall-padding: 0 12px;
+    --btn-xsmall-font-size: var(--size-12);
+    --btn-xsmall-line-height: 28px;
+    --btn-xsmall-icon-font-size: 16px;
+    --btn-xsmall-border-radius: 4px;
+    --btn-xsmall-icon-btn-padding: 6px;
+
+    //Small - 34px
+    --btn-small-padding: 0 16px;
+    --btn-small-font-size: var(--size-14);
+    --btn-small-line-height: 32px;
+    --btn-small-icon-font-size: 18px;
+    --btn-small-border-radius: 8px;
+    --btn-small-icon-btn-padding: 7px;
+
+    //Medium - 45px
+    --btn-medium-padding: 0 20px;
+    --btn-medium-font-size: var(--size-14);
+    --btn-medium-line-height: 45px;
+    --btn-medium-icon-font-size: 24px;
+    --btn-medium-border-radius: 8px;
+    --btn-medium-icon-btn-padding: 9.5px;
+
+    //Large - 56px
+    --btn-large-padding: 0 20px;
+    --btn-large-font-size: var(--size-16);
+    --btn-large-line-height: 56px;
+    --btn-large-icon-font-size: 28px;
+    --btn-large-border-radius: 8px;
+    --btn-large-icon-btn-padding: 13px;
+
+    letter-spacing: var(--btn-letter-spacing);
+    border: var(--btn-border);
+
+    &[disabled] {
+      opacity: var(--btn-disabled-opacity);
+      cursor: var(--btn-disabled-cursor);
+    }
+
+    @each $size in component-sizes() {
+      &.size--#{$size} {
+        font-weight: var(--btn-font-weight);
+        padding: var(--btn-#{$size}-padding);
+        font-size: var(--btn-#{$size}-font-size);
+        line-height: var(--btn-#{$size}-line-height);
+        border-radius: var(--btn-#{$size}-border-radius);
+      }
+    }
+  }
+
+  a[flexyButton] {
+    text-decoration: none;
+
+    &.disabled {
+      pointer-events: none;
+    }
+  }
+}
