@@ -8,6 +8,8 @@ import { environment } from "../../../flexy/src/environments/environment";
 import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
 import { AkitaNgRouterStoreModule } from "@datorama/akita-ng-router-store";
 import { NG_ENTITY_SERVICE_CONFIG } from "@datorama/akita-ng-entity-service";
+import { StudentsComponent } from './students/students.component';
+import { TeachersComponent } from './teachers/teachers.component';
 
 @NgModule({
   declarations: [

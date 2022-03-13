@@ -6,26 +6,22 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()">
 
   <mat-form-field class="form-dir-rtl" appearance="outline">
-    <mat-label>שם פרטי</mat-label>
-    <input type="text" matInput formControlName="firstName">
-    <mat-error *ngIf="loginForm.controls['firstName'].hasError('required')">
-      יש להכניס שם פרטי
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="form-dir-rtl" appearance="outline">
-    <mat-label>שם משפחה</mat-label>
-    <input type="text" matInput formControlName="lastName">
-    <mat-error *ngIf="loginForm.controls['lastName'].hasError('required')">
-      יש להכניס שם משפחה
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="form-dir-rtl" appearance="outline">
     <mat-label>טלפון</mat-label>
-    <input type="number" matInput formControlName="phone">
+    <input type="text" matInput formControlName="phone">
     <mat-error *ngIf="loginForm.controls['phone'].hasError('required')">
       יש להכניס מספר טלפון
+    </mat-error>
+    <mat-error
+      *ngIf="!loginForm.controls['phone'].valid && loginForm.controls['phone'].touched && loginForm.controls['phone'].dirty && loginForm.controls['phone'].hasError('minlength')">
+      מספר קצר מידי
+    </mat-error>
+    <mat-error
+      *ngIf="!loginForm.controls['phone'].valid && loginForm.controls['phone'].touched && loginForm.controls['phone'].dirty && loginForm.controls['phone'].hasError('maxlength')">
+      מספר ארוך מידי
+    </mat-error>
+    <mat-error
+      *ngIf="userNotExist">
+      מספר לא קיים
     </mat-error>
   </mat-form-field>
 

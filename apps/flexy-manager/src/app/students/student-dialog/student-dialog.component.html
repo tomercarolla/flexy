@@ -1,0 +1,77 @@
+<div mat-dialog-title>
+  <div class="title">{{data.title}} {{data.firstName}} {{data.lastName}}</div>
+  <mat-icon (click)="close()">close</mat-icon>
+</div>
+<div mat-dialog-content [formGroup]="form">
+  <mat-tab-group>
+    <mat-tab label="פרטים אישיים">
+      <mat-form-field class="form-dir-rtl user-info">
+        <mat-label>שם פרטי</mat-label>
+        <input matInput formControlName="firstName">
+        <mat-error *ngIf="form.controls['firstName'].hasError('required')">
+          יש להכניס שם פרטי
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-dir-rtl user-info">
+        <mat-label>שם משפחה</mat-label>
+        <input matInput formControlName="lastName">
+        <mat-error *ngIf="form.controls['lastName'].hasError('required')">
+          יש להכניס שם משפחה
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-dir-rtl user-info">
+        <mat-label>מספר טלפון</mat-label>
+        <input matInput formControlName="phone">
+        <mat-error *ngIf="form.controls['phone'].hasError('required')">
+          יש להכניס מספר טלפון
+        </mat-error>
+        <mat-error
+          *ngIf="!form.controls['phone'].valid && form.controls['phone'].touched && form.controls['phone'].dirty && form.controls['phone'].hasError('minlength')">
+          מספר קצר מידי
+        </mat-error>
+        <mat-error
+          *ngIf="!form.controls['phone'].valid && form.controls['phone'].touched && form.controls['phone'].dirty && form.controls['phone'].hasError('maxlength')">
+          מספר ארוך מידי
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-dir-rtl user-info">
+        <mat-label>בית ספר</mat-label>
+        <input matInput formControlName="school">
+        <mat-error *ngIf="form.controls['school'].hasError('required')">
+          יש להכניס בית ספר
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-dir-rtl user-info">
+        <mat-label>שכבה</mat-label>
+        <input matInput formControlName="class">
+        <mat-error *ngIf="form.controls['class'].hasError('required')">
+          יש להכניס שכבה
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-dir-rtl user-progress" *ngIf="data.isEdit">
+        <mat-label>התקדמות של התלמיד</mat-label>
+        <textarea matInput placeholder="איך התלמיד מתקדם בתהליך" formControlName="progress"></textarea>
+      </mat-form-field>
+    </mat-tab>
+    <mat-tab label="אבחון" [disabled]="!data.isEdit"> Content 2</mat-tab>
+  </mat-tab-group>
+</div>
+<div mat-dialog-actions>
+  <div class="btn-container">
+    <button mat-raised-button color="primary" (click)="save(form.value)" [disabled]="!form.valid">שמור</button>
+    <button mat-button (click)="close()">בטל</button>
+  </div>
+
+  <button mat-raised-button color="warn" (click)="deleteStudent(form.value)" *ngIf="data.isEdit">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+  <button mat-button color="warn" (click)="resetForm()" *ngIf="!data.isEdit">
+    איפוס
+  </button>
+</div>

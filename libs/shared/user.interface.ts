@@ -11,6 +11,7 @@ export interface UserInterface {
 export interface Student extends UserInterface {
   school: string;
   class: string;
+  progress: string;
   questionaryAnswered: boolean;
   totalVisual: number;
   totalMovement: number;

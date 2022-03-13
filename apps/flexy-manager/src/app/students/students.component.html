@@ -1,107 +1,98 @@
-<mat-toolbar color="accent">
-  FLEXY
-  <button mat-raised-button color="primary" (click)="logout()">יציאה</button>
-</mat-toolbar>
+<div class="top">
+  <mat-form-field class="form-dir-rtl">
+    <mat-label>חיפוש</mat-label>
+    <input matInput (keyup)="applyFilter($event)" #input>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="addNewStudent()">+</button>
+</div>
 
-<section>
-  <div class="container">
-    <div class="top">
-      <mat-form-field class="form-dir-rtl" appearance="standard">
-        <mat-label>חיפוש</mat-label>
-        <input matInput (keyup)="applyFilter($event)" #input>
-      </mat-form-field>
-      <button mat-raised-button color="warn">+</button>
-    </div>
-
-    <div class="table-container">
-      <div class="loader"
-           *ngIf="isLoading || isRateLimitReached">
-        <mat-spinner></mat-spinner>
-      </div>
-
-      <table mat-table [dataSource]="allStudents$" matSort
-             matSortActive="firstName" matSortDisableClear matSortDirection="asc">
-        <!-- First Name Column -->
-        <ng-container matColumnDef="firstName">
-          <th mat-header-cell mat-sort-header *matHeaderCellDef>שם פרטי</th>
-          <td mat-cell *matCellDef="let student">{{student.firstName}}</td>
-        </ng-container>
-
-        <!-- Last Name Column -->
-        <ng-container matColumnDef="lastName">
-          <th mat-header-cell mat-sort-header *matHeaderCellDef>שם משפחה</th>
-          <td mat-cell *matCellDef="let student">{{student.lastName}}</td>
-        </ng-container>
-
-        <!-- Phone Column -->
-        <ng-container matColumnDef="phone">
-          <th mat-header-cell mat-sort-header *matHeaderCellDef>מס' טלפון</th>
-          <td mat-cell *matCellDef="let student">0{{student.phone}}</td>
-        </ng-container>
-
-        <!-- School Column -->
-        <ng-container matColumnDef="school">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            בית ספר
-          </th>
-          <td mat-cell *matCellDef="let student">{{student.school}}</td>
-        </ng-container>
-
-        <!-- Class Column -->
-        <ng-container matColumnDef="class">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            שכבה
-          </th>
-          <td mat-cell *matCellDef="let student">{{student.class}}</td>
-        </ng-container>
-
-        <!-- Questionary Column -->
-        <ng-container matColumnDef="questionaryAnswered">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            אבחון
-          </th>
-          <td mat-cell *matCellDef="let student">
-            {{student.questionaryAnswered ? 'בוצע' : ''}}
-          </td>
-        </ng-container>
-
-        <!-- Visual Column -->
-        <ng-container matColumnDef="totalVisual">
-          <th mat-header-cell *matHeaderCellDef>
-            ויזואלי
-          </th>
-          <td mat-cell *matCellDef="let student">{{student.totalVisual}}</td>
-        </ng-container>
-
-        <!-- Movement Column -->
-        <ng-container matColumnDef="totalMovement">
-          <th mat-header-cell *matHeaderCellDef>
-            תנועתי
-          </th>
-          <td mat-cell *matCellDef="let student">{{student.totalMovement}}</td>
-        </ng-container>
-
-        <!-- Auditory Column -->
-        <ng-container matColumnDef="totalAuditory">
-          <th mat-header-cell *matHeaderCellDef>
-            שמיעתי
-          </th>
-          <td mat-cell *matCellDef="let student">{{student.totalAuditory}}</td>
-        </ng-container>
-
-        <!-- Auditory Column -->
-        <ng-container matColumnDef="reset">
-          <th mat-header-cell *matHeaderCellDef>
-          </th>
-          <td mat-cell *matCellDef="let student">
-            <button mat-button color="accent" *ngIf="student.questionaryAnswered">איפוס אבחון</button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let student; columns: displayedColumns;"></tr>
-      </table>
-    </div>
-    <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
+<div class="table-container">
+  <div class="loader"
+       *ngIf="isLoading || isRateLimitReached">
+    <mat-spinner></mat-spinner>
   </div>
-</section>
+
+  <table mat-table [dataSource]="allStudents$" matSort
+         matSortActive="firstName" matSortDisableClear matSortDirection="asc">
+    <!-- First Name Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>שם פרטי</th>
+      <td mat-cell *matCellDef="let student">{{student.firstName}}</td>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>שם משפחה</th>
+      <td mat-cell *matCellDef="let student">{{student.lastName}}</td>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>מס' טלפון</th>
+      <td mat-cell *matCellDef="let student">0{{student.phone}}</td>
+    </ng-container>
+
+    <!-- School Column -->
+    <ng-container matColumnDef="school">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        בית ספר
+      </th>
+      <td mat-cell *matCellDef="let student">{{student.school}}</td>
+    </ng-container>
+
+    <!-- Class Column -->
+    <ng-container matColumnDef="class">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        שכבה
+      </th>
+      <td mat-cell *matCellDef="let student">{{student.class}}</td>
+    </ng-container>
+
+    <!-- Questionary Column -->
+    <ng-container matColumnDef="questionaryAnswered">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        אבחון
+      </th>
+      <td mat-cell *matCellDef="let student">
+        {{student.questionaryAnswered ? 'בוצע' : ''}}
+      </td>
+    </ng-container>
+
+    <!-- Visual Column -->
+    <ng-container matColumnDef="totalVisual">
+      <th mat-header-cell *matHeaderCellDef>
+        ויזואלי
+      </th>
+      <td mat-cell *matCellDef="let student">{{student.totalVisual}}</td>
+    </ng-container>
+
+    <!-- Movement Column -->
+    <ng-container matColumnDef="totalMovement">
+      <th mat-header-cell *matHeaderCellDef>
+        תנועתי
+      </th>
+      <td mat-cell *matCellDef="let student">{{student.totalMovement}}</td>
+    </ng-container>
+
+    <!-- Auditory Column -->
+    <ng-container matColumnDef="totalAuditory">
+      <th mat-header-cell *matHeaderCellDef>
+        שמיעתי
+      </th>
+      <td mat-cell *matCellDef="let student">{{student.totalAuditory}}</td>
+    </ng-container>
+
+    <!-- Auditory Column -->
+    <ng-container matColumnDef="reset">
+      <th mat-header-cell *matHeaderCellDef>
+      </th>
+      <td mat-cell *matCellDef="let student">
+        <button mat-button color="accent" *ngIf="student.questionaryAnswered">איפוס אבחון</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let student; columns: displayedColumns;" (click)="editStudent(student)"></tr>
+  </table>
+</div>
+<mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>

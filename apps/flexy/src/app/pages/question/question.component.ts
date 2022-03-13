@@ -107,6 +107,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     }
 
     if (question.id === 30) {
+      this.flexyService.updateAnswers();
       await this.router.navigate(['results']);
     } else {
       await this.router.navigate(['question', questionClone.id + 1]);

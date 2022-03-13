@@ -34,8 +34,8 @@
               "apps/flexy/src/assets"
             ],
             "styles": [
-              "./libs/ui/styles/styles.scss",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./libs/ui/styles/styles.scss",
               "apps/flexy/src/styles.scss"
             ],
             "scripts": []
@@ -169,8 +169,8 @@
               "apps/flexy-manager/src/assets"
             ],
             "styles": [
-              "./libs/ui/styles/styles.scss",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./libs/ui/styles/styles.scss",
               "apps/flexy-manager/src/styles.scss"
             ],
             "scripts": []

@@ -3,7 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../apps/flexy/src/environments/environment";
 import { Observable } from "rxjs";
 import { QuestionInterface } from "./question.interface";
-import { UserInterface } from "./user.interface";
+import { Student, UserInterface } from "./user.interface";
+import { Response } from "./response.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,22 @@ export class FlexyService {
   }
 
   getAllStudents(): Observable<UserInterface[]> {
-    return this.http.get<UserInterface[]>(`${environment.baseUrl}?Action=getAllStudents`);
+    return this.http.get<Student[]>(`${environment.baseUrl}?Action=getAllStudents`);
   }
 
   getAllManagers(): Observable<UserInterface[]> {
     return this.http.get<UserInterface[]>(`${environment.baseUrl}?Action=getAllManagers`);
+  }
+
+  updateAnswers() {
+    const formData: any = new FormData();
+    const answers = sessionStorage.getItem('questions');
+    const userToken = sessionStorage.getItem('token');
+    formData.append("Action", "updateAnswers");
+    formData.append("phone", userToken);
+    formData.append("answers", answers);
+
+    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
   }
 
   // getAllStudents(

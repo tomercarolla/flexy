@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
-import { DeviceDetectorService } from "ngx-device-detector";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../../../../libs/auth/auth.service";
-import { catchError, tap } from "rxjs";
+import { catchError, of, Subscription, tap } from "rxjs";
 
 @Component({
   selector: "app-login",
@@ -11,43 +10,68 @@ import { catchError, tap } from "rxjs";
   styleUrls: ["./login.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
-  isMobile!: boolean;
-  errorLoginMessage: string;
   isLoading: boolean;
+  userNotExist = false;
+  loginSubscription: Subscription | null = null;
 
   constructor(
     private route: Router,
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cd: ChangeDetectorRef
   ) {
   }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      firstName: ["", [Validators.required]],
-      lastName: ["", [Validators.required]],
-      phone: ["", [Validators.required]]
+      phone: ["",
+        [
+          Validators.required,
+          Validators.pattern("^[0-9]*$"),
+          Validators.minLength(10),
+          Validators.maxLength(10)
+        ]
+      ]
     });
   }
 
   login() {
     this.isLoading = true;
-    this.authService.login(this.loginForm.value).pipe(
+    this.userNotExist = false;
+    this.loginSubscription = this.authService.loginUser(this.loginForm.value).pipe(
       tap(
         resData => {
-          console.log(resData);
-          this.router.navigateByUrl("/main");
-          this.isLoading = false;
-        },
-        catchError(err => {
-          this.isLoading = false;
-          return this.errorLoginMessage = err;
-        })
+          if (resData?.statusCode) {
+            switch (resData.statusCode) {
+              case 200:
+                this.router.navigate(["main"]);
+                sessionStorage.setItem("token", resData.data);
+                this.isLoading = false;
+                break;
+              case 999:
+                this.userNotExist = true;
+                this.isLoading = false;
+                console.log(this.userNotExist);
+                this.cd.markForCheck();
+                break;
+              case 777:
+                this.router.navigateByUrl("results");
+                sessionStorage.setItem("token", resData.data);
+                break;
+            }
+          }
+        }
       )
     ).subscribe();
+  }
+
+  ngOnDestroy() {
+    this.loginSubscription?.unsubscribe();
+    this.isLoading = false;
+    this.userNotExist = false;
   }
 }

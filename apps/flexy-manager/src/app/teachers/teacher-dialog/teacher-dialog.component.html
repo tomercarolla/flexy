@@ -1,0 +1,44 @@
+<div mat-dialog-title>
+  <div class="title">{{data.title}} {{data.firstName}} {{data.lastName}}</div>
+  <mat-icon (click)="close()">close</mat-icon>
+</div>
+<div mat-dialog-content>
+  <mat-form-field class="form-dir-rtl user-info" *ngIf="!data.isEdit">
+    <mat-label>שם פרטי</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <mat-form-field class="form-dir-rtl user-info" *ngIf="!data.isEdit">
+    <mat-label>שם משפחה</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <mat-form-field class="form-dir-rtl user-info" *ngIf="!data.isEdit">
+    <mat-label>שם משתמש</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <mat-form-field class="form-dir-rtl user-info">
+    <mat-label>סיסמא</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <mat-form-field class="form-dir-rtl user-info">
+    <mat-label>אימות סיסמא</mat-label>
+    <input matInput>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <div class="btn-container">
+    <button mat-raised-button color="primary">שמור</button>
+    <button mat-button (click)="close()">בטל</button>
+  </div>
+
+  <button mat-raised-button color="warn" *ngIf="data.isEdit">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+  <button mat-button color="warn" *ngIf="!data.isEdit">
+    איפוס
+  </button>
+</div>

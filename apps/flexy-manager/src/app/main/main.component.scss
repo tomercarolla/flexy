@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .mat-toolbar-single-row {
+    justify-content: space-between;
+  }
+
+  mat-sidenav-container {
+    height: 100vh;
+  }
+
+  mat-sidenav {
+    padding: 0 10px;
+  }
+
+  ::ng-deep .mat-list-item-content {
+    gap: 8px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .link {
+    &.active {
+      background-color: var(--primary-200);
+    }
+  }
+}

@@ -1,0 +1,34 @@
+:host {
+  direction: rtl;
+  width: 600px;
+  display: block;
+
+  .mat-dialog-title {
+    display: flex;
+    align-items: center;
+
+    .title {
+      flex: 1;
+    }
+
+    mat-icon {
+      cursor: pointer;
+    }
+  }
+
+  .mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+
+    .user-info {
+      max-width: 200px;
+    }
+  }
+
+  .btn-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
