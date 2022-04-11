@@ -1,0 +1,67 @@
+@import '../../../../ui/styles/tools/functions';
+
+
+@mixin ui-button-ghost() {
+  [flexyButton] {
+    &.ghost {
+      --btn-box-shadow: none;
+      --btn-background-color: transparent;
+      --btn-border-width: 1px;
+      --btn-border-style: solid;
+
+      --btn-primary-font-color: var(--primary-500);
+      --btn-primary-hover-background-color: var(--primary-200);
+      --btn-primary-focus-background-color: var(--primary-300);
+      --btn-primary-active-background-color: var(--primary-300);
+
+      --btn-success-font-color: var(--success-500);
+      --btn-success-hover-background-color: var(--success-200);
+      --btn-success-focus-background-color: var(--success-300);
+      --btn-success-active-background-color: var(--success-300);
+
+      --btn-info-font-color: var(--info-500);
+      --btn-info-hover-background-color: var(--info-100);
+      --btn-info-focus-background-color: var(--info-200);
+      --btn-info-active-background-color: var(--info-200);
+
+      --btn-warning-font-color: var(--warning-500);
+      --btn-warning-hover-background-color: var(--warning-200);
+      --btn-warning-focus-background-color: var(--warning-300);
+      --btn-warning-active-background-color: var(--warning-300);
+
+      --btn-danger-font-color: var(--danger-500);
+      --btn-danger-hover-background-color: var(--danger-200);
+      --btn-danger-focus-background-color: var(--danger-300);
+      --btn-danger-active-background-color: var(--danger-300);
+
+      @each $color in component-colors() {
+        &.color--#{$color} {
+          background-color: var(--btn-background-color);
+          color: var(--btn-#{$color}-font-color);
+          box-shadow: var(--btn-box-shadow);
+          border-width: var(--btn-border-width);
+          border-style: var(--btn-border-style);
+          border-color: var(--btn-#{$color}-font-color);
+
+          &:hover {
+            background-color: var(--btn-#{$color}-hover-background-color);
+          }
+
+          &:focus {
+            background-color: var(--btn-#{$color}-focus-background-color);
+          }
+
+          &:active {
+            background-color: var(--btn-#{$color}-active-background-color);
+          }
+
+          &[disabled] {
+            &:hover {
+              background-color: var(--btn-background-color);
+            }
+          }
+        }
+      }
+    }
+  }
+}

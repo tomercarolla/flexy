@@ -10,17 +10,34 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['startQuest']
+    }
   },
   {
     path: 'question',
     loadChildren: () => import('./pages/question/question.module').then(m => m.QuestionModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['startQuest']
+    }
   },
   {
     path: 'results',
     loadChildren: () => import('./pages/results/results.module').then(m => m.ResultsModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['startQuest','endQuest']
+    }
+  },
+  {
+    path: 'noMobile',
+    loadChildren: () => import('./pages/no-mobile-message/no-mobile-message.module').then(m => m.NoMobileMessageModule),
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['startQuest','endQuest']
+    }
   },
   {
     path: '**', redirectTo: 'login'

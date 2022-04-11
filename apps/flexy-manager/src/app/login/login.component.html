@@ -4,7 +4,6 @@
 </div>
 
 <form [formGroup]="loginForm" (ngSubmit)="login()">
-
   <mat-form-field class="form-dir-rtl" appearance="outline">
     <mat-label>שם משתמש</mat-label>
     <input type="text" matInput formControlName="userName">
@@ -19,6 +18,11 @@
     <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
       יש להכניס סיסמא
     </mat-error>
+
+    <div class="validation"
+         *ngIf="userNameOrPasswordError$ | async as errorMessage">
+      {{errorMessage}}
+    </div>
   </mat-form-field>
 
   <button mat-raised-button color="primary" [disabled]="!loginForm.valid">כניסה</button>

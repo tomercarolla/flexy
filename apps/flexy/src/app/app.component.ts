@@ -1,19 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {DeviceDetectorService} from "ngx-device-detector";
+import { Component } from "@angular/core";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
   title = 'flexy';
-  isMobile!: boolean;
-
-  constructor(private deviceService: DeviceDetectorService) {
-  }
-
-  ngOnInit() {
-    this.isMobile = this.deviceService.isMobile();
-  }
 }

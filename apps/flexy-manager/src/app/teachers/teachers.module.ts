@@ -10,6 +10,9 @@ import { TeacherDialogComponent } from './teacher-dialog/teacher-dialog.componen
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatSortModule } from "@angular/material/sort";
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { MatIconModule } from "@angular/material/icon";
     MatTableModule,
     MatDialogModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatSortModule
   ],
   exports: [TeachersComponent]
 })

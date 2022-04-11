@@ -1,5 +1,6 @@
 @import 'button-theme';
-@import 'button-colors';
+@import 'button-filled-colors';
+@import 'button-ghost-colors';
 
 ::ng-deep {
   [flexyButton] {
@@ -12,6 +13,7 @@
     vertical-align: middle;
     user-select: none;
     cursor: pointer;
+    border: none;
     //height: 100%;
 
     &:hover,
@@ -29,5 +31,6 @@
   }
 
   @include theme-button();
-  @include ui-button();
+  @include ui-button-filled();
+  @include ui-button-ghost();
 }

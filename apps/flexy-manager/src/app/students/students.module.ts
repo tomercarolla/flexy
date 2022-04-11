@@ -7,13 +7,14 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatButtonModule } from "@angular/material/button";
-import { StudentDialogComponent } from './student-dialog/student-dialog.component';
+import { StudentDialogComponent } from "./student-dialog/student-dialog.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { ReactiveFormsModule } from "@angular/forms";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [StudentsComponent, StudentDialogComponent],
@@ -25,12 +26,13 @@ import { ReactiveFormsModule } from "@angular/forms";
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule,
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
     MatTabsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatSelectModule
   ],
   exports: [StudentsComponent]
 })

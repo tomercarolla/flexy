@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { of } from "rxjs";
 import { UserInterface } from "../shared/user.interface";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
@@ -10,6 +9,8 @@ import { Response } from "../shared/response.interface";
   providedIn: "root"
 })
 export class AuthService {
+
+  role: string;
 
   constructor(private router: Router, private http: HttpClient) {
   }
@@ -23,17 +24,25 @@ export class AuthService {
   }
 
   loginManager(user: UserInterface) {
-    return of(true);
-    // this.setUser(user);
-    // return this.http.post<Response<string>>(`${environment.baseUrl}?Action=loginManager`,
-    //   {
-    //     userName: user.userName,
-    //     password: user.password
-    //   });
+    const formData: any = new FormData();
+    formData.append("Action", "loginManager");
+    formData.append("userName", user.userName);
+    formData.append("userPassword", user.password);
+
+    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
+  }
+
+  getRole() {
+    return this.role = sessionStorage.getItem('role');
+  }
+
+  getIsMobile() {
+    return false;
   }
 
   logout() {
-    sessionStorage.setItem('student', null);
+    sessionStorage.setItem("token", null);
+    sessionStorage.setItem("role", null);
     this.router.navigateByUrl('login');
   }
 }

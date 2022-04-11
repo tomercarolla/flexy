@@ -11,15 +11,21 @@ import { ComponentColors } from "../../shared/component-colors";
 export class ButtonComponent {
   @Input() size: ComponentSizes = ComponentSizes.Small;
   @Input() color: ComponentColors = 'primary';
+  @Input() appearance: 'filled' | 'ghost' = 'filled';
+
+  @HostBinding('class.filled')
+  get filled() {
+    return this.appearance === 'filled';
+  }
+
+  @HostBinding('class.ghost')
+  get ghost() {
+    return this.appearance === 'ghost';
+  }
 
   @HostBinding('class.color--primary')
   get primary() {
     return this.color === 'primary';
-  }
-
-  @HostBinding('class.color--secondary')
-  get secondary() {
-    return this.color === 'secondary';
   }
 
   @HostBinding('class.color--success')

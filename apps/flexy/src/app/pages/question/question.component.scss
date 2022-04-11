@@ -1,5 +1,4 @@
 :host {
-
   .container {
     height: 100vh;
     overflow-x: hidden;
@@ -25,5 +24,13 @@
 
   button {
     min-width: 90px;
+  }
+
+  .button-container {
+    justify-content: space-around;
+
+    &.first-question {
+      justify-content: flex-end;
+    }
   }
 }

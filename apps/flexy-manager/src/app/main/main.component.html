@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
-  <button mat-mini-fab (click)="sidenav?.toggle()">
+  <button mat-mini-fab (click)="sidenav?.toggle()" *ngIf="!hideMenu">
     <mat-icon>menu</mat-icon>
   </button>
-  FLEXY
+  FLEXY MANAGER
   <button mat-raised-button color="primary" (click)="logout()">יציאה</button>
 </mat-toolbar>
 

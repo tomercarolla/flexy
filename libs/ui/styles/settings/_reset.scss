@@ -5,12 +5,16 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: 'Rubik', sans-serif;
   direction: rtl
 }
 
 textarea {
   min-height: 40px;
+}
+
+p {
+  margin: 0;
 }
 
 .button-container {
@@ -48,4 +52,107 @@ textarea {
   right: 0;
   background: rgba(0, 0, 0, 0.15);
   z-index: 1;
+}
+
+.mat-simple-snackbar {
+  direction: rtl;
+}
+
+.flexy-snackbar {
+  background-color: #FFF;
+  border-top-width: 5px;
+  border-top-style: solid;
+  border-top-color: #000;
+  color: #000;
+  font-weight: bold;
+
+  &.success {
+    border-top-color: var(--success-600);
+    color: var(--success-600);
+  }
+
+  &.failed {
+    border-top-color: var(--warning-600);
+    color: var(--warning-600);
+  }
+
+  .mat-simple-snackbar-action {
+    margin: -8px 8px -8px -8px;
+  }
+
+  .mat-simple-snackbar-action button {
+    font-size: 20px;
+    color: #000;
+  }
+}
+
+.answers-radio-group {
+  .mat-radio-button {
+    &.mat-accent .mat-radio-inner-circle {
+      background-color: var(--primary-500);
+    }
+
+    &.mat-accent:active .mat-radio-persistent-ripple {
+      background-color: var(--primary-500);
+    }
+
+    &.mat-accent.mat-radio-checked .mat-radio-persistent-ripple {
+      background-color: var(--primary-500);
+    }
+
+    .mat-radio-ripple {
+      left: calc(50% - 30px);
+      top: calc(50% - 30px);
+      height: 60px;
+      width: 60px;
+    }
+  }
+
+  .mat-radio-container,
+  .mat-radio-outer-circle,
+  .mat-radio-inner-circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .mat-radio-checked .mat-radio-inner-circle {
+    transform: scale(0.6);
+  }
+
+  .mat-radio-outer-circle {
+    background-color: var(--primary-300);
+    border: none;
+  }
+
+  .mat-radio-label-content {
+    font-size: 18px;
+  }
+}
+
+.mat-input-element {
+  direction: rtl;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  .validation {
+    color: #f44336;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+}
+
+.mat-select-trigger {
+  direction: rtl;
+}
+
+.mat-select-panel .mat-option {
+  text-align: right;
+}
+
+.mat-tab-body {
+  min-height: 497px;
+  max-height: calc(100vh - 440px);
 }

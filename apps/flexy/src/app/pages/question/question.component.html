@@ -18,12 +18,14 @@
       </mat-radio-button>
     </mat-radio-group>
 
-    <div class="button-container">
-      <button type="button" mat-raised-button color="primary"
+    <div class="button-container" [class.first-question]="question.id === 1">
+
+      <button flexyButton appearance="ghost" color="info" *ngIf="question.id !== 1" (click)="previousQuestion()">חזור
+      </button>
+
+      <button type="button" flexyButton color="info"
               (click)="nextQuestion(question)"
               [disabled]="!answerFormControl.valid">{{question.id < 30 ? 'הבא' : 'סיים'}}
-      </button>
-      <button mat-button *ngIf="question.id !== 1" (click)="previousQuestion()">חזור
       </button>
     </div>
   </section>

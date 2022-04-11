@@ -2,7 +2,9 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../../../../libs/auth/auth.service";
-import { catchError, of, Subscription, tap } from "rxjs";
+import { Subscription, tap } from "rxjs";
+import { AuthStore } from "../../../../../libs/auth/auth.store";
+import { AuthQuery } from "../../../../../libs/auth/auth.query";
 
 @Component({
   selector: "app-login",
@@ -14,19 +16,24 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
   isLoading: boolean;
-  userNotExist = false;
   loginSubscription: Subscription | null = null;
+
+  phoneNotExist$ = this.authQuery.selectPhoneNotExist$;
 
   constructor(
     private route: Router,
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private authStore: AuthStore,
+    private authQuery: AuthQuery
   ) {
   }
 
   ngOnInit() {
+    sessionStorage.setItem("token", null);
+    sessionStorage.setItem("questions", null);
     this.loginForm = this.fb.group({
       phone: ["",
         [
@@ -41,26 +48,33 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     this.isLoading = true;
-    this.userNotExist = false;
+    this.authStore.update((store) => ({
+      ...store,
+      phoneNotExist: ''
+    }));
     this.loginSubscription = this.authService.loginUser(this.loginForm.value).pipe(
       tap(
         resData => {
           if (resData?.statusCode) {
             switch (resData.statusCode) {
               case 200:
-                this.router.navigate(["main"]);
                 sessionStorage.setItem("token", resData.data);
                 this.isLoading = false;
+                this.router.navigate(["main"]);
                 break;
               case 999:
-                this.userNotExist = true;
+                this.authStore.update((store) => ({
+                  ...store,
+                  phoneNotExist: resData.message
+                }));
                 this.isLoading = false;
-                console.log(this.userNotExist);
                 this.cd.markForCheck();
                 break;
               case 777:
-                this.router.navigateByUrl("results");
                 sessionStorage.setItem("token", resData.data);
+                sessionStorage.setItem("questions", resData.message);
+                this.isLoading = false;
+                this.router.navigate(["results"]);
                 break;
             }
           }
@@ -72,6 +86,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.loginSubscription?.unsubscribe();
     this.isLoading = false;
-    this.userNotExist = false;
+    this.authStore.update((store) => ({
+      ...store,
+      phoneNotExist: ''
+    }));
   }
 }

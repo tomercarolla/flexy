@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { LoginRoutingModule } from './login-routing.module';
-import {LoginComponent} from "./login.component";
-import {MatButtonModule} from "@angular/material/button";
+import { LoginRoutingModule } from "./login-routing.module";
+import { LoginComponent } from "./login.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { ButtonModule } from "@flexy/ui";
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
   imports: [
     CommonModule,
     LoginRoutingModule,
-    MatButtonModule,
+    ButtonModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,

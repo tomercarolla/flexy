@@ -19,11 +19,11 @@
       *ngIf="!loginForm.controls['phone'].valid && loginForm.controls['phone'].touched && loginForm.controls['phone'].dirty && loginForm.controls['phone'].hasError('maxlength')">
       מספר ארוך מידי
     </mat-error>
-    <mat-error
-      *ngIf="userNotExist">
-      מספר לא קיים
-    </mat-error>
+    <div class="validation"
+      *ngIf="phoneNotExist$ | async as errorMessage">
+      {{errorMessage}}
+    </div>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" [disabled]="!loginForm.valid">כניסה</button>
+  <button flexyButton size="large" color="primary" [disabled]="!loginForm.valid">כניסה</button>
 </form>

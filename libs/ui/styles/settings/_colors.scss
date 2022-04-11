@@ -46,4 +46,10 @@
 --danger-700: #A77326;
 --danger-800: #875618;
 --danger-900: #6F410E;
+
+  --progress-bar-bg: var(--success-500);
+  --progress-bar-filled-bg: var(--success-600);
+
+  --checkbox-not-checked: var(--primary-300);
+  --checkbox-circle-checked: var(--primary-500);
 }

@@ -1,6 +1,6 @@
 :host {
   direction: rtl;
-  width: 600px;
+  width: 750px;
   display: block;
 
   .mat-dialog-title {
@@ -19,13 +19,36 @@
   ::ng-deep .mat-tab-body-content {
     display: flex;
     flex-direction: column;
-    height: auto;
-    margin-top: 2rem;
     gap: 10px;
+    height: 100%;
+    padding-left: 20px;
 
     .user-info {
       max-width: 200px;
+
+      &:nth-child(1) {
+        margin-top: 2rem;
+      }
     }
+
+    .question-read-only {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom: 1px solid;
+      padding-bottom: 10px;
+
+      .answer-title {
+        font-style: italic;
+      }
+    }
+  }
+
+  .empty-answers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 
   .btn-container {

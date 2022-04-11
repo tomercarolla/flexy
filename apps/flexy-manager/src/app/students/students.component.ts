@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Student, UserInterface } from "../../../../../libs/shared/user.interface";
-import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { FlexyService } from "../../../../../libs/shared/flexy.service";
 import { ManagerStore } from "../store/manager.store";
 import { ManagerQuery } from "../store/manager.query";
-import { AuthService } from "../../../../../libs/auth/auth.service";
 import { MatDialog } from "@angular/material/dialog";
 import { StudentDialogComponent } from "./student-dialog/student-dialog.component";
+import { MatTableDataSource } from "@angular/material/table";
+import { debounceTime, distinctUntilChanged, Observable, Subject, Subscription, tap } from "rxjs";
 
 @Component({
   selector: "app-students",
@@ -15,16 +15,14 @@ import { StudentDialogComponent } from "./student-dialog/student-dialog.componen
   styleUrls: ["./students.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StudentsComponent implements OnInit {
-
-  allStudents$ = this.managerQuery.selectStudents$;
+export class StudentsComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [
     "firstName",
     "lastName",
     "phone",
     "school",
-    "class",
+    "year",
     "questionaryAnswered",
     "totalVisual",
     "totalMovement",
@@ -33,10 +31,34 @@ export class StudentsComponent implements OnInit {
   ];
   userData: UserInterface[] = [];
   resultsLength = 0;
-  isLoading = true;
-  isRateLimitReached = false;
+  isLoading$ = this.managerQuery.selectIsLoading$;
+  dataSource: MatTableDataSource<Student> = new MatTableDataSource();
+  allStudentsSubscription: Subscription | null = null;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  searchSub$ = new Subject<string>();
+
+  allStudents$: Observable<Student[]> = this.managerQuery.selectStudents$
+    .pipe(
+      tap((res) => {
+        console.log(res)
+        const tableData = [];
+        res.forEach(item => {
+          tableData.push({
+            id: item.id,
+            firstName: item.firstName,
+            lastName: item.lastName,
+            phone: '0' + item.phone,
+            year: item.year,
+            questionaryAnswered: item.questionaryAnswered,
+            totalVisual: item.totalVisual,
+            totalMovement: item.totalMovement,
+            totalAuditory: item.totalAuditory,
+          })
+        })
+        this.dataSource = new MatTableDataSource(tableData);
+      })
+    )
+
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
@@ -44,50 +66,53 @@ export class StudentsComponent implements OnInit {
     private managerStore: ManagerStore,
     private managerQuery: ManagerQuery,
     private dialog: MatDialog,
-    private authService: AuthService
+    private cd: ChangeDetectorRef
   ) {
   }
 
   ngOnInit(): void {
-    this.flexyService.getAllStudents().subscribe((students: any) => {
-      this.managerStore.update(store => {
-        return {
-          ...store,
-          students: students.Table
-        };
-      });
-      sessionStorage.setItem(`students`, JSON.stringify(students));
+    this.refresh();
+    this.searchSub$.pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+    ).subscribe((filterValue: string) => {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
     });
   }
 
   ngAfterViewInit() {
-    this.isLoading = false;
-    // const studentsData = this.flexyService.getAllStudents().subscribe((students: any) => {
-    //   this.studentStore.update(store => {
-    //     return {
-    //       ...store,
-    //       students: students.Table
-    //     }
-    //   })
-    //   sessionStorage.setItem(`students`, JSON.stringify(students))
-    // })
 
-    // If the user changes the sort order, reset back to the first page.
-    // this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
-
-    // merge(this.sort.sortChange, this.paginator.page)
-    //   .pipe(
-    //     startWith({}),
-    //     switchMap(() => {
-    //       this.isLoading = true;
-    //       return
-    //     })
-    //   )
   }
 
-  applyFilter(event: Event) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
+  refresh() {
+    this.managerStore.update(store => {
+      return {
+        ...store,
+        isLoading: true
+      };
+    });
+    this.allStudentsSubscription = this.flexyService.getAllStudents().pipe(
+      tap((students: any) => {
+        this.managerStore.update(store => {
+          return {
+            ...store,
+            students: students.Table
+          };
+        });
+        sessionStorage.setItem(`students`, JSON.stringify(students));
+        this.managerStore.update(store => {
+          return {
+            ...store,
+            isLoading: false
+          };
+        });
+        this.cd.detectChanges();
+      })
+    ).subscribe();
+  }
+
+  applyFilter(value: string) {
+    this.searchSub$.next(value);
   }
 
   editStudent(student) {
@@ -95,19 +120,28 @@ export class StudentsComponent implements OnInit {
       data: {
         title: "עריכת תלמיד:",
         isEdit: true,
+        id: student.id,
         firstName: student.firstName,
         lastName: student.lastName,
         phone: student.phone,
         school: student.school,
-        class: student.class
+        year: student.year,
+        studentProgress: student.studentProgress
       }
+    }).afterClosed().subscribe(() => {
+      this.refresh();
     });
-    console.log(student);
   }
 
   addNewStudent() {
     this.dialog.open(StudentDialogComponent, {
       data: { title: "הוספה תלמיד", isEdit: false }
+    }).afterClosed().subscribe(() => {
+      this.refresh();
     });
+  }
+
+  ngOnDestroy() {
+    this.allStudentsSubscription?.unsubscribe();
   }
 }

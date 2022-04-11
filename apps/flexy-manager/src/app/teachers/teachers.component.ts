@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { UserInterface } from "../../../../../libs/shared/user.interface";
 import { ManagerQuery } from "../store/manager.query";
-import { StudentDialogComponent } from "../students/student-dialog/student-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { FlexyService } from "../../../../../libs/shared/flexy.service";
 import { ManagerStore } from "../store/manager.store";
 import { TeacherDialogComponent } from "./teacher-dialog/teacher-dialog.component";
+import { Subscription, tap } from "rxjs";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatSort } from "@angular/material/sort";
 
 @Component({
   selector: "app-teachers",
@@ -13,42 +15,73 @@ import { TeacherDialogComponent } from "./teacher-dialog/teacher-dialog.componen
   styleUrls: ["./teachers.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TeachersComponent implements OnInit {
-
-  allTeachers$ = this.managerQuery.selectTeachers$;
+export class TeachersComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [
     "firstName",
     "lastName",
     "userName",
-    "password"
+    "phone"
   ];
   userData: UserInterface[] = [];
-  isLoading = false;
+  isLoading$ = this.managerQuery.selectIsLoading$;
+  allManagersSubscription: Subscription | null = null;
+  dataSource: MatTableDataSource<UserInterface> = new MatTableDataSource();
+
+  allTeachers$ = this.managerQuery.selectTeachers$.pipe(
+    tap(res => {
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.sort = this.sort;
+    })
+  );
+
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private flexyService: FlexyService,
     private managerQuery: ManagerQuery,
     private managerStore: ManagerStore,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cd: ChangeDetectorRef
   ) {
   }
 
   ngOnInit(): void {
-    this.flexyService.getAllManagers().subscribe( (managers: any) => {
-      this.managerStore.update(store => {
-        return  {
-          ...store,
-          managers: managers.Table
-        }
+    this.refresh();
+  }
+
+  refresh() {
+    this.managerStore.update(store => {
+      return {
+        ...store,
+        isLoading: true
+      };
+    });
+    this.allManagersSubscription = this.flexyService.getAllManagers().pipe(
+      tap((managers: any) => {
+        this.managerStore.update(store => {
+          return {
+            ...store,
+            managers: managers.Table
+          };
+        });
+        sessionStorage.setItem("managers", JSON.stringify(managers));
+        this.managerStore.update(store => {
+          return {
+            ...store,
+            isLoading: false
+          };
+        });
+        this.cd.detectChanges();
       })
-      sessionStorage.setItem('managers', JSON.stringify(managers))
-    })
+    ).subscribe();
   }
 
   addNewTeacher() {
     this.dialog.open(TeacherDialogComponent, {
       data: { title: "הוספה מדריך", isEdit: false }
+    }).afterClosed().subscribe(() => {
+      this.refresh();
     });
   }
 
@@ -57,11 +90,19 @@ export class TeachersComponent implements OnInit {
       data: {
         title: "עריכת מדריך:",
         isEdit: true,
+        id: teacher.id,
         firstName: teacher.firstName,
         lastName: teacher.lastName,
+        userName: teacher.userName,
+        phone: teacher.phone,
         password: teacher.password
       }
+    }).afterClosed().subscribe(() => {
+      this.refresh();
     });
-    console.log(teacher);
+  }
+
+  ngOnDestroy() {
+    this.allManagersSubscription?.unsubscribe();
   }
 }

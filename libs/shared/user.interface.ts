@@ -10,10 +10,10 @@ export interface UserInterface {
 
 export interface Student extends UserInterface {
   school: string;
-  class: string;
-  progress: string;
+  year: string;
   questionaryAnswered: boolean;
   totalVisual: number;
   totalMovement: number;
   totalAuditory: number;
+  studentProgress: string;
 }

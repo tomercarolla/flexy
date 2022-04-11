@@ -3,20 +3,20 @@
   margin-bottom: 12px;
 
   .progress-bar-container {
-    background-color: #eee;
+    background-color: var(--progress-bar-bg);
   }
 
   .progress-bar {
-    height: 8px;
+    height: 14px;
     width: 0;
   }
   .progress-bar {
-    background-color: #ffd740;
+    background-color: var(--progress-bar-filled-bg);
   }
   .progress-bar.yellow {
-    background-color: #ffd740;
+    background-color: var(--progress-bar-filled-bg);
   }
   .progress-bar.red {
-    background-color: #ffd740;
+    background-color: var(--progress-bar-filled-bg);
   }
 }

@@ -1,0 +1,15 @@
+<div mat-dialog-title>
+  <div class="title">{{title}}</div>
+  <mat-icon (click)="onClose()">close</mat-icon>
+</div>
+
+<div mat-dialog-content>
+  <p>{{message}}</p>
+</div>
+
+<div mat-dialog-actions>
+  <div class="btn-container">
+    <button mat-raised-button color="primary" (click)="onConfirm()">כן</button>
+    <button mat-button (click)="onClose()">לא</button>
+  </div>
+</div>

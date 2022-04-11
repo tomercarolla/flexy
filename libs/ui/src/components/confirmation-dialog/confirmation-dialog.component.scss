@@ -1,9 +1,5 @@
 :host {
   direction: rtl;
-  width: 600px;
-  display: block;
-
-
 
   .mat-dialog-title {
     display: flex;
@@ -15,15 +11,6 @@
 
     mat-icon {
       cursor: pointer;
-    }
-  }
-
-  .mat-dialog-content {
-    display: flex;
-    flex-direction: column;
-
-    .user-info {
-      max-width: 200px;
     }
   }
 
