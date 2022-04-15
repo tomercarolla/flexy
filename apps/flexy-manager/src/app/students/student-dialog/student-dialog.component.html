@@ -75,37 +75,99 @@
           </mat-error>
         </mat-form-field>
       </mat-tab>
-      <mat-tab label="אבחון" [disabled]="!data.isEdit">
+      <mat-tab label="אבחון" *ngIf="data.isEdit">
         <ng-container *ngIf="selectQuestionsByUser$ | async as questions; else emptyQuestions">
-          <div *ngFor="let question of questions; let i = index">
-            <ng-container *ngIf="question.learningType === 'visual'">
-              <h1 *ngIf="i < 1">סגנון ויזואלי</h1>
+          <mat-accordion class="results-accordion" multi>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  סגנון ויזואלי
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
               <div class="question-read-only">
-                <b>{{question.id}} - {{question.question}}</b>
-                <p><span class="answer-title"> תשובה:</span>{{question.answer}}</p>
+                <table>
+                  <thead>
+                  <tr>
+                    <th>מ. שאלה</th>
+                    <th>שאלה</th>
+                    <th>תשובה</th>
+                  </tr>
+                  </thead>
+                  <tbody *ngFor="let question of questions | slice:0:10">
+                  <tr>
+                    <td>{{question.id}}</td>
+                    <td>{{question.question}}</td>
+                    <td>{{question.answer}}</td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
-            </ng-container>
-            <ng-container *ngIf="question.learningType === 'movement'">
-              <h1 *ngIf="i < 11">סגנון תנועתי</h1>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  סגנון תנועתי
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
               <div class="question-read-only">
-                <b>{{question.id}} - {{question.question}}</b>
-                <p><span class="answer-title"> תשובה:</span>{{question.answer}}</p>
+                <table>
+                  <thead>
+                  <tr>
+                    <th>מ. שאלה</th>
+                    <th>שאלה</th>
+                    <th>תשובה</th>
+                  </tr>
+                  </thead>
+                  <tbody *ngFor="let question of questions | slice:10:20">
+                  <tr>
+                    <td>{{question.id}}</td>
+                    <td>{{question.question}}</td>
+                    <td>{{question.answer}}</td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
-            </ng-container>
-            <ng-container *ngIf="question.learningType === 'auditory'">
-              <h1 *ngIf="i < 21">סגנון שמיעתי</h1>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  סגנון שמיעתי
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
               <div class="question-read-only">
-                <b>{{question.id}} - {{question.question}}</b>
-                <p><span class="answer-title"> תשובה:</span>{{question.answer}}</p>
+                <table>
+                  <thead>
+                  <tr>
+                    <th>מ. שאלה</th>
+                    <th>שאלה</th>
+                    <th>תשובה</th>
+                  </tr>
+                  </thead>
+                  <tbody *ngFor="let question of questions | slice:20">
+                  <tr>
+                    <td>{{question.id}}</td>
+                    <td>{{question.question}}</td>
+                    <td>{{question.answer}}</td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
-            </ng-container>
-          </div>
+            </mat-expansion-panel>
+          </mat-accordion>
         </ng-container>
         <ng-template #emptyQuestions>
           <div class="empty-answers">
             תלמיד זה עדיין לא עשה אבחון
           </div>
         </ng-template>
+      </mat-tab>
+      <mat-tab label="התקדמות" *ngIf="data.isEdit">
+        here graph with all results by date
       </mat-tab>
     </mat-tab-group>
   </div>

@@ -2,7 +2,7 @@
   <mat-toolbar color="primary">סגנון למידה: {{questionLearningTypeTranslate(question.learningType)}}</mat-toolbar>
 
   <ng-container *ngIf="allQuestions$ | async as all">
-    <flexy-progress-bar [progress]="progress" [total]="all.length"></flexy-progress-bar>
+    <flexy-progress-bar [progress]="progress$ | async" [total]="all.length"></flexy-progress-bar>
   </ng-container>
 
   <section class="question-form" [@slideInOut]="question">
@@ -13,20 +13,22 @@
     <mat-radio-group
       [formControl]="answerFormControl"
       class="answers-radio-group">
-      <mat-radio-button class="radio-button" *ngFor="let answer of answers" [value]="answer.value">
+      <mat-radio-button [disabled]="sendAnswers" class="radio-button" *ngFor="let answer of answers" [value]="answer.value">
         {{answer.text}}
       </mat-radio-button>
     </mat-radio-group>
 
     <div class="button-container" [class.first-question]="question.id === 1">
 
-      <button flexyButton appearance="ghost" color="info" *ngIf="question.id !== 1" (click)="previousQuestion()">חזור
+      <button flexyButton appearance="ghost" color="info" *ngIf="question.id !== 1" [disabled]="sendAnswers" (click)="previousQuestion()">חזור
       </button>
 
       <button type="button" flexyButton color="info"
               (click)="nextQuestion(question)"
-              [disabled]="!answerFormControl.valid">{{question.id < 30 ? 'הבא' : 'סיים'}}
+              [disabled]="!answerFormControl.valid || sendAnswers">{{question.id < 30 ? 'הבא' : 'סיים'}}
       </button>
     </div>
+
+    <button flexyButton color="info" size="large" type="button" *ngIf="sendAnswers" (click)="goToResults()">לעבור לתוצאות</button>
   </section>
 </div>

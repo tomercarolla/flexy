@@ -7,6 +7,7 @@ export interface QuestionState {
   questions: QuestionInterface[];
   currentAnswer: string;
   progress: number;
+  sendAnswers: boolean;
   visualLearningPoints: number;
   movementLearningPoints: number;
   auditoryLearningPoints: number;
@@ -18,6 +19,7 @@ export function createInitialState(): QuestionState {
     questions: [],
     currentAnswer: null,
     progress: 0,
+    sendAnswers: null,
     visualLearningPoints: 0,
     movementLearningPoints: 0,
     auditoryLearningPoints: 0

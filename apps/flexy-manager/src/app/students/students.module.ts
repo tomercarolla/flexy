@@ -15,6 +15,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatSelectModule } from "@angular/material/select";
+import { MatExpansionModule } from "@angular/material/expansion";
 
 @NgModule({
   declarations: [StudentsComponent, StudentDialogComponent],
@@ -32,7 +33,8 @@ import { MatSelectModule } from "@angular/material/select";
     MatTabsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule
   ],
   exports: [StudentsComponent]
 })

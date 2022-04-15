@@ -3,7 +3,13 @@
     <mat-label>חיפוש</mat-label>
     <input matInput (keyup)="applyFilter($event.target.value)">
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="addNewStudent()">+</button>
+  <div class="btn-container">
+    <button mat-raised-button color="primary" (click)="addNewStudent()">הוספה תלמיד</button>
+    <button mat-raised-button color="accent" (click)="exportToExcel()">
+      <mat-icon>file_download</mat-icon>
+      הורדה אקסל
+    </button>
+  </div>
 </div>
 
 <div class="table-container" *ngIf="allStudents$ | async">
@@ -12,7 +18,7 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <table mat-table [dataSource]="dataSource" matSort matSortStart="asc">
+  <table id="ExampleMaterialTable" mat-table [dataSource]="dataSource" matSort matSortStart="asc">
     <!-- First Name Column -->
     <ng-container matColumnDef="firstName">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>שם פרטי</th>

@@ -30,6 +30,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
   durationInSeconds = 5;
   saveStudentSubscription: Subscription | null = null;
   deleteStudentSubscription: Subscription | null = null;
+  studentAnswersSubscription: Subscription | null = null;
 
   years: Year[] = [
     { value: "ח", viewValue: "ח" },
@@ -55,26 +56,27 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.flexyService.getStudentAnswers(this.data.phone).pipe(
-      tap(
-        (questions: any) => {
-          if (questions) {
-            const questionsArray = JSON.parse(questions);
-            this.managerStore.update(store => {
-              return {
-                ...store,
-                studentAnswers: questionsArray
-              };
-            });
-          }
-        }
-      )
-    ).subscribe();
     if (this.data.isEdit) {
+      this.studentAnswersSubscription = this.flexyService.getStudentAnswers(this.data.phone).pipe(
+        tap(
+          (questions: any) => {
+            if (questions) {
+              const questionsArray = JSON.parse(questions);
+              this.managerStore.update(store => {
+                return {
+                  ...store,
+                  studentAnswers: questionsArray
+                };
+              });
+            }
+          }
+        )
+      ).subscribe();
+
       this.form = this.fb.group({
         firstName: this.fb.control(this.data.firstName, [Validators.required]),
         lastName: this.fb.control(this.data.lastName, [Validators.required]),
-        phone: this.fb.control("0" + this.data.phone, [
+        phone: this.fb.control(this.data.phone, [
           Validators.required,
           Validators.pattern("^[0-9]*$"),
           Validators.minLength(10),
@@ -196,6 +198,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.saveStudentSubscription?.unsubscribe();
     this.deleteStudentSubscription?.unsubscribe();
+    this.studentAnswersSubscription?.unsubscribe();
     this.managerStore.update(store => {
       return {
         ...store,

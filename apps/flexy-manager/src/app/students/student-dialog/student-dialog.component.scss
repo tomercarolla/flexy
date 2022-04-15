@@ -1,6 +1,6 @@
 :host {
   direction: rtl;
-  width: 750px;
+  width: 800px;
   display: block;
 
   .mat-dialog-title {
@@ -16,12 +16,23 @@
     }
   }
 
+  .results-accordion {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+
+  .mat-expansion-panel-header-title {
+    font-weight: 600;
+    font-size: 18px;
+  }
+
   ::ng-deep .mat-tab-body-content {
     display: flex;
     flex-direction: column;
     gap: 10px;
     height: 100%;
     padding-left: 20px;
+    padding-right: 3px;
 
     .user-info {
       max-width: 200px;
@@ -32,14 +43,24 @@
     }
 
     .question-read-only {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      border-bottom: 1px solid;
-      padding-bottom: 10px;
+      table {
+        border-spacing: 0;
+        width: 100%;
+        tr > th, td {
+          white-space: nowrap;
+          text-align: right;
+          border-bottom: 1px solid;
+          padding: 10px;
+        }
 
-      .answer-title {
-        font-style: italic;
+        tr > td {
+          white-space: normal;
+          word-break: break-all;
+        }
+
+        tbody tr:hover {
+          background-color: var(--success-300);
+        }
       }
     }
   }
@@ -49,12 +70,5 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-  }
-
-  .btn-container {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 12px;
   }
 }

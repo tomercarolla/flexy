@@ -8,6 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { StudentDialogComponent } from "./student-dialog/student-dialog.component";
 import { MatTableDataSource } from "@angular/material/table";
 import { debounceTime, distinctUntilChanged, Observable, Subject, Subscription, tap } from "rxjs";
+import * as XLSX from "xlsx";
 
 @Component({
   selector: "app-students",
@@ -31,16 +32,16 @@ export class StudentsComponent implements OnInit, OnDestroy {
   ];
   userData: UserInterface[] = [];
   resultsLength = 0;
-  isLoading$ = this.managerQuery.selectIsLoading$;
+  fileName = 'תלמידים.xlsx';
   dataSource: MatTableDataSource<Student> = new MatTableDataSource();
   allStudentsSubscription: Subscription | null = null;
 
+  isLoading$ = this.managerQuery.selectIsLoading$;
   searchSub$ = new Subject<string>();
 
   allStudents$: Observable<Student[]> = this.managerQuery.selectStudents$
     .pipe(
       tap((res) => {
-        console.log(res)
         const tableData = [];
         res.forEach(item => {
           tableData.push({
@@ -48,11 +49,13 @@ export class StudentsComponent implements OnInit, OnDestroy {
             firstName: item.firstName,
             lastName: item.lastName,
             phone: '0' + item.phone,
+            school: item.school,
             year: item.year,
             questionaryAnswered: item.questionaryAnswered,
             totalVisual: item.totalVisual,
             totalMovement: item.totalMovement,
             totalAuditory: item.totalAuditory,
+            studentProgress: item.studentProgress
           })
         })
         this.dataSource = new MatTableDataSource(tableData);
@@ -126,7 +129,10 @@ export class StudentsComponent implements OnInit, OnDestroy {
         phone: student.phone,
         school: student.school,
         year: student.year,
-        studentProgress: student.studentProgress
+        studentProgress: student.studentProgress,
+        totalVisual: student.totalVisual,
+        totalMovement: student.totalMovement,
+        totalAuditory: student.totalAuditory
       }
     }).afterClosed().subscribe(() => {
       this.refresh();
@@ -143,5 +149,17 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.allStudentsSubscription?.unsubscribe();
+  }
+
+  exportToExcel() {
+    const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(document.getElementById('ExampleMaterialTable'));
+    // const ws = document.getElementById("ExampleMaterialTable");
+    ws['!cols'][9] = {hidden: true};
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Servers');
+    // const wb = XLSX.utils.table_to_book(ws, <XLSX.Table2SheetOpts>{
+    //   sheet: this.fileName,
+    // });
+    XLSX.writeFile(wb, this.fileName);
   }
 }

@@ -36,16 +36,17 @@ export class FlexyService {
     return this.http.post<Response<string>>(`${environment.baseUrl}?Action=getStudentAnswers`, formData );
   }
 
-  updateAnswers(results: { visual, movement, auditory }) {
+  updateAnswers(results, total: { visual, movement, auditory }) {
     const formData = new FormData();
     const answers = sessionStorage.getItem("questions");
     const userToken = sessionStorage.getItem("token");
     formData.append("Action", "postQuestionaryByUser");
     formData.append("token", userToken);
     formData.append("answers", answers);
-    formData.append("totalVisual", results.visual);
-    formData.append("totalMovement", results.movement);
-    formData.append("totalAuditory", results.auditory);
+    formData.append("latestResults", results);
+    formData.append("totalVisual", total.visual);
+    formData.append("totalMovement", total.movement);
+    formData.append("totalAuditory", total.auditory);
 
     return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
   }

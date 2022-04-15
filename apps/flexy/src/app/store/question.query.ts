@@ -6,6 +6,8 @@ import {Injectable} from "@angular/core";
 export class QuestionQuery extends Query<QuestionState> {
   selectQuestions$ = this.select(store => store.questions);
   currentQuestion$ = this.select(store => store.currentQuestion);
+  selectProgress$ = this.select(store => store.progress);
+  selectSendAnswers$ = this.select(store => store.sendAnswers);
   selectVisualLearningPoints$ = this.select(store => store.visualLearningPoints);
   selectMovementLearningPoints$ = this.select(store => store.movementLearningPoints);
   selectAuditoryLearningPoints$ = this.select(store => store.auditoryLearningPoints);

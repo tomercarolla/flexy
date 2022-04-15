@@ -153,6 +153,13 @@ form {
 }
 
 .mat-tab-body {
-  min-height: 497px;
+  min-height: 560px;
   max-height: calc(100vh - 440px);
+}
+
+.btn-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }

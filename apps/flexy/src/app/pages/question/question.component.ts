@@ -6,8 +6,9 @@ import { combineLatest, filter, lastValueFrom, Subscription, take, tap } from "r
 import { FlexyService } from "../../../../../../libs/shared/flexy.service";
 import { QuestionQuery } from "../../store/question.query";
 import { QuestionStore } from "../../store/question.store";
-import { Location } from "@angular/common";
+import { DatePipe, Location } from "@angular/common";
 import { animate, style, transition, trigger } from "@angular/animations";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-question",
@@ -33,13 +34,17 @@ export class QuestionComponent implements OnInit, OnDestroy {
     { value: 4, text: "4 - מתאים לעיתים קרובות" },
     { value: 5, text: "5 - כמעט תמיד מתאים" }
   ];
+  durationInSeconds = 5;
   visualLearningPoints = 0;
   movementLearningPoints = 0;
   auditoryLearningPoints = 0;
   answerFormControl: FormControl;
+  progress: number;
+  latestQuestAnsIndex = 0;
   currentQuestion$ = this.questionQuery.currentQuestion$;
   allQuestions$ = this.questionQuery.selectQuestions$;
-  progress: number;
+  progress$ = this.questionQuery.selectProgress$;
+  sendAnswers = false;
   allQuestionsSubscription: Subscription | null = null;
   updateAnswersSubscription: Subscription | null = null;
 
@@ -49,7 +54,10 @@ export class QuestionComponent implements OnInit, OnDestroy {
               private flexyService: FlexyService,
               private router: Router,
               private fb: FormBuilder,
-              private location: Location) {
+              private _snackBar: MatSnackBar,
+              private location: Location,
+              private datePipe: DatePipe
+  ) {
   }
 
   ngOnInit() {
@@ -71,10 +79,20 @@ export class QuestionComponent implements OnInit, OnDestroy {
               //check if has answer and put in radio button
               const storage = JSON.parse(sessionStorage.getItem("questions"));
               let currentAnswer = null;
+              let currentAnswerIndex = null;
               if (storage?.length) {
                 currentAnswer = storage[+params["questionId"] - 1].answer;
+                currentAnswerIndex = storage[+params["questionId"] - 1].id;
+                this.getLatestAnsweredQuestionIndex();
+                if (currentAnswerIndex > this.latestQuestAnsIndex) {
+                  this.router.navigate(["question", this.latestQuestAnsIndex]);
+                }
                 this.progress = Math.floor((Math.floor(storage.filter(q => q.answer !== null).length) / questions.length) * 100);
+                if (this.progress === 100) {
+                  this.sendAnswers = true;
+                }
               } else {
+                this.sendAnswers = false;
                 this.router.navigate(["question", 1]);
               }
 
@@ -94,7 +112,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   initQuestionForm() {
-    this.answerFormControl = this.fb.control("", [Validators.required]);
+    this.answerFormControl = this.fb.control({value: "", disabled: this.sendAnswers}, [Validators.required]);
   }
 
   async nextQuestion(question: QuestionInterface) {
@@ -111,7 +129,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
     }
 
     if (question.id === 30) {
-      // sessionStorage.setItem('role', 'endQuest');
       this.questionStore.update((store) => {
         storage.forEach(question => {
           switch (question.learningType) {
@@ -130,15 +147,67 @@ export class QuestionComponent implements OnInit, OnDestroy {
           auditoryLearningPoints: this.auditoryLearningPoints
         };
       });
-      this.updateAnswersSubscription = this.flexyService.updateAnswers({visual: this.visualLearningPoints, movement: this.movementLearningPoints, auditory: this.auditoryLearningPoints}).subscribe();
-      this.router.navigate(["results"]);
+      const newDate = new Date();
+      const latestResult = [{
+        date: this.datePipe.transform(newDate, "dd-MM-yyy"),
+        visual: this.visualLearningPoints,
+        movement: this.movementLearningPoints,
+        auditory: this.auditoryLearningPoints
+      }];
+      const latestResultStringify = JSON.stringify(latestResult);
+      this.updateAnswersSubscription = this.flexyService.updateAnswers(latestResultStringify, {
+        visual: this.visualLearningPoints,
+        movement: this.movementLearningPoints,
+        auditory: this.auditoryLearningPoints
+      }).pipe(
+        tap(data => {
+          if (data.statusCode) {
+            switch (data.statusCode) {
+              case 200:
+                this.openSnackBar(data.message + "", "x", "success");
+                this.router.navigate(["results"]);
+                this.sendAnswers = true;
+                break;
+
+              case 401:
+                this.openSnackBar(data.message + "", "x", "failed");
+                break;
+            }
+          }
+        })
+      ).subscribe();
     } else {
       this.router.navigate(["question", questionClone.id + 1]);
     }
   }
 
+  getLatestAnsweredQuestionIndex() {
+    const storage = JSON.parse(sessionStorage.getItem("questions"));
+    if (storage.length) {
+      storage.some(question => {
+          if (question.answer === null) {
+            return this.latestQuestAnsIndex = question.id;
+          } else {
+            this.latestQuestAnsIndex = question.id;
+          }
+        }
+      );
+    }
+  }
+
+  openSnackBar(message, action, status) {
+    this._snackBar.open(message, action, {
+      horizontalPosition: "right",
+      verticalPosition: "bottom",
+      panelClass: ["flexy-snackbar", status],
+      duration: this.durationInSeconds * 1000
+    });
+  }
+
   previousQuestion() {
-    this.location.back();
+    let curr: QuestionInterface;
+    this.currentQuestion$.subscribe(currQuestion => curr = currQuestion);
+    this.router.navigate(["question", curr.id - 1]);
   }
 
   questionLearningTypeTranslate(type: string) {
@@ -148,5 +217,9 @@ export class QuestionComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.allQuestionsSubscription?.unsubscribe();
     this.updateAnswersSubscription?.unsubscribe();
+  }
+
+  goToResults() {
+    this.router.navigateByUrl("results");
   }
 }
