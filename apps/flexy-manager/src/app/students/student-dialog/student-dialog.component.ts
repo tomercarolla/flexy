@@ -97,7 +97,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
     { value: "י", viewValue: "י" },
     { value: "יא", viewValue: "יא" },
     { value: "יב", viewValue: "יב" },
-    { value: "סיים", viewValue: "סיים תהליך" }
+    { value: "סיים תהליך", viewValue: "סיים תהליך" }
   ];
 
   isLoading$ = this.managerQuery.selectIsLoading$;
@@ -122,7 +122,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
       this.studentAnswersSubscription = forkJoin([studentAnswers, studentLatestResults]).pipe(
         tap(
           (questions: any) => {
-            if (questions) {
+            if (questions[0] !== null || questions[1] !== null) {
               const questionsArray = JSON.parse(questions[0]);
               const latestResultsArray = JSON.parse(questions[1].replaceAll("],[", ","));
               this.managerStore.update(store => {
@@ -278,7 +278,8 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
     this.managerStore.update(store => {
       return {
         ...store,
-        studentAnswers: null
+        studentAnswers: null,
+        studentLatestResults: null
       };
     });
   }

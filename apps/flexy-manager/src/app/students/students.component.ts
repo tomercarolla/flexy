@@ -179,10 +179,10 @@ export class StudentsComponent implements OnInit, OnDestroy {
               this.refresh();
               break;
             case 401:
-              this.openSnackBar(data.message + "", "x", "success");
+              this.openSnackBar(data.message + "", "x", "failed");
               break;
             default:
-              this.openSnackBar(data.message + "", "x", "success");
+              this.openSnackBar(data.message + "", "x", "failed");
               break;
           }
         }
