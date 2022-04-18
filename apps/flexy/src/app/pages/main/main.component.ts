@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { AuthService } from "../../../../../../libs/auth/auth.service";
 
 @Component({
   selector: 'app-main',
@@ -9,12 +10,16 @@ import { Router } from "@angular/router";
 })
 export class MainComponent {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
   }
 
   startQuestionary() {
     this.router.navigate([
       'question', 1
     ]);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

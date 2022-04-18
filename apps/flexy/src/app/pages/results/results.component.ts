@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
 import { Label, SingleDataSet } from "ng2-charts";
 import { Router } from "@angular/router";
+import { AuthService } from "../../../../../../libs/auth/auth.service";
 
 @Component({
   selector: "app-results",
@@ -23,7 +24,7 @@ export class ResultsComponent implements OnInit {
   chartLegend = false;
   chartPlugins = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -54,5 +55,9 @@ export class ResultsComponent implements OnInit {
           return this.auditoryLearningPoints += question.answer;
       }
     });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

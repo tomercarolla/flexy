@@ -24,6 +24,9 @@ p {
 }
 
 .mat-toolbar.mat-primary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--primary-500);
 }
 
@@ -155,6 +158,10 @@ form {
 .mat-tab-body {
   min-height: 560px;
   max-height: calc(100vh - 440px);
+}
+
+.mat-tooltip {
+  font-size: 12px;
 }
 
 .btn-container {

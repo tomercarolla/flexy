@@ -6,9 +6,9 @@ import { combineLatest, filter, lastValueFrom, Subscription, take, tap } from "r
 import { FlexyService } from "../../../../../../libs/shared/flexy.service";
 import { QuestionQuery } from "../../store/question.query";
 import { QuestionStore } from "../../store/question.store";
-import { DatePipe, Location } from "@angular/common";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { AuthService } from "../../../../../../libs/auth/auth.service";
 
 @Component({
   selector: "app-question",
@@ -39,7 +39,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   movementLearningPoints = 0;
   auditoryLearningPoints = 0;
   answerFormControl: FormControl;
-  progress: number;
+  progress = 0;
   latestQuestAnsIndex = 0;
   currentQuestion$ = this.questionQuery.currentQuestion$;
   allQuestions$ = this.questionQuery.selectQuestions$;
@@ -52,11 +52,10 @@ export class QuestionComponent implements OnInit, OnDestroy {
               private questionQuery: QuestionQuery,
               private questionStore: QuestionStore,
               private flexyService: FlexyService,
+              private authService: AuthService,
               private router: Router,
               private fb: FormBuilder,
-              private _snackBar: MatSnackBar,
-              private location: Location,
-              private datePipe: DatePipe
+              private _snackBar: MatSnackBar
   ) {
   }
 
@@ -67,7 +66,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
         return {
           ...store,
           questions: questions.Table,
-          progress: this.progress
+          progress: 0
         };
       });
       combineLatest([this.activatedRoute.params, this.questionQuery.selectQuestions$.pipe(
@@ -92,6 +91,12 @@ export class QuestionComponent implements OnInit, OnDestroy {
                   this.sendAnswers = true;
                 }
               } else {
+                this.questionStore.update(store => {
+                  return {
+                    ...store,
+                    progress: 0
+                  };
+                });
                 this.sendAnswers = false;
                 this.router.navigate(["question", 1]);
               }
@@ -147,9 +152,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
           auditoryLearningPoints: this.auditoryLearningPoints
         };
       });
-      const newDate = new Date();
       const latestResult = [{
-        date: this.datePipe.transform(newDate, "dd-MM-yyy"),
+        date: new Date(),
         visual: this.visualLearningPoints,
         movement: this.movementLearningPoints,
         auditory: this.auditoryLearningPoints
@@ -166,6 +170,12 @@ export class QuestionComponent implements OnInit, OnDestroy {
               case 200:
                 this.openSnackBar(data.message + "", "x", "success");
                 this.router.navigate(["results"]);
+                this.questionStore.update(store => {
+                  return {
+                    ...store,
+                    progress: 0
+                  };
+                });
                 this.sendAnswers = true;
                 break;
 
@@ -214,12 +224,22 @@ export class QuestionComponent implements OnInit, OnDestroy {
     return type === "visual" ? "ויזואלי" : type === "movement" ? "תנועתי" : "שמיעתי";
   }
 
+  goToResults() {
+    this.router.navigateByUrl("results");
+  }
+
+  logout() {
+    this.questionStore.update(store => {
+      return {
+        ...store,
+        progress: 0
+      };
+    });
+    this.authService.logout();
+  }
+
   ngOnDestroy() {
     this.allQuestionsSubscription?.unsubscribe();
     this.updateAnswersSubscription?.unsubscribe();
-  }
-
-  goToResults() {
-    this.router.navigateByUrl("results");
   }
 }

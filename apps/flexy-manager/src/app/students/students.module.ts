@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatSelectModule } from "@angular/material/select";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { HighchartsChartModule } from "highcharts-angular";
 
 @NgModule({
   declarations: [StudentsComponent, StudentDialogComponent],
@@ -34,7 +36,9 @@ import { MatExpansionModule } from "@angular/material/expansion";
     ReactiveFormsModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule,
+    HighchartsChartModule
   ],
   exports: [StudentsComponent]
 })

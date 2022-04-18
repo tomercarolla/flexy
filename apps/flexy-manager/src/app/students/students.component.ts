@@ -9,6 +9,7 @@ import { StudentDialogComponent } from "./student-dialog/student-dialog.componen
 import { MatTableDataSource } from "@angular/material/table";
 import { debounceTime, distinctUntilChanged, Observable, Subject, Subscription, tap } from "rxjs";
 import * as XLSX from "xlsx";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-students",
@@ -32,9 +33,11 @@ export class StudentsComponent implements OnInit, OnDestroy {
   ];
   userData: UserInterface[] = [];
   resultsLength = 0;
+  durationInSeconds = 5;
   fileName = 'תלמידים.xlsx';
   dataSource: MatTableDataSource<Student> = new MatTableDataSource();
   allStudentsSubscription: Subscription | null = null;
+  resetQuestionarySubscription: Subscription | null = null;
 
   isLoading$ = this.managerQuery.selectIsLoading$;
   searchSub$ = new Subject<string>();
@@ -69,7 +72,8 @@ export class StudentsComponent implements OnInit, OnDestroy {
     private managerStore: ManagerStore,
     private managerQuery: ManagerQuery,
     private dialog: MatDialog,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private _snackBar: MatSnackBar
   ) {
   }
 
@@ -81,10 +85,6 @@ export class StudentsComponent implements OnInit, OnDestroy {
     ).subscribe((filterValue: string) => {
       this.dataSource.filter = filterValue.trim().toLowerCase();
     });
-  }
-
-  ngAfterViewInit() {
-
   }
 
   refresh() {
@@ -147,10 +147,6 @@ export class StudentsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.allStudentsSubscription?.unsubscribe();
-  }
-
   exportToExcel() {
     const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(document.getElementById('ExampleMaterialTable'));
     // const ws = document.getElementById("ExampleMaterialTable");
@@ -161,5 +157,41 @@ export class StudentsComponent implements OnInit, OnDestroy {
     //   sheet: this.fileName,
     // });
     XLSX.writeFile(wb, this.fileName);
+  }
+
+  openSnackBar(message, action, status) {
+    this._snackBar.open(message, action, {
+      horizontalPosition: "right",
+      verticalPosition: "bottom",
+      panelClass: ["flexy-snackbar", status],
+      duration: this.durationInSeconds * 1000
+    });
+  }
+
+  resetQuestionary(event, student) {
+    event.stopPropagation();
+    this.resetQuestionarySubscription = this.flexyService.resetQuestinaryPerStudend(student.phone).pipe(
+      tap( data => {
+        if(data.statusCode) {
+          switch (data.statusCode) {
+            case 200:
+              this.openSnackBar(data.message + "", "x", "success");
+              this.refresh();
+              break;
+            case 401:
+              this.openSnackBar(data.message + "", "x", "success");
+              break;
+            default:
+              this.openSnackBar(data.message + "", "x", "success");
+              break;
+          }
+        }
+      })
+    ).subscribe();
+  }
+
+  ngOnDestroy() {
+    this.allStudentsSubscription?.unsubscribe();
+    this.resetQuestionarySubscription?.unsubscribe();
   }
 }

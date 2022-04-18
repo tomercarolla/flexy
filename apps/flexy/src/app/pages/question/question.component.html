@@ -1,5 +1,9 @@
 <div class="container" *ngIf="currentQuestion$ | async as question">
-  <mat-toolbar color="primary">סגנון למידה: {{questionLearningTypeTranslate(question.learningType)}}</mat-toolbar>
+  <mat-toolbar color="primary">
+    סגנון למידה: {{questionLearningTypeTranslate(question.learningType)}}
+
+    <button mat-raised-button color="primary" (click)="logout()">יציאה</button>
+  </mat-toolbar>
 
   <ng-container *ngIf="allQuestions$ | async as all">
     <flexy-progress-bar [progress]="progress$ | async" [total]="all.length"></flexy-progress-bar>

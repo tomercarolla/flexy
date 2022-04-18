@@ -65,7 +65,7 @@
 
     <!-- Visual Column -->
     <ng-container matColumnDef="totalVisual">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef matTooltip="תוצאות אחרונות" matTooltipPosition="above">
         ויזואלי
       </th>
       <td mat-cell *matCellDef="let student">{{student.totalVisual}}</td>
@@ -73,7 +73,7 @@
 
     <!-- Movement Column -->
     <ng-container matColumnDef="totalMovement">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef matTooltip="תוצאות אחרונות" matTooltipPosition="above">
         תנועתי
       </th>
       <td mat-cell *matCellDef="let student">{{student.totalMovement}}</td>
@@ -81,7 +81,7 @@
 
     <!-- Auditory Column -->
     <ng-container matColumnDef="totalAuditory">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef matTooltip="תוצאות אחרונות" matTooltipPosition="above">
         שמיעתי
       </th>
       <td mat-cell *matCellDef="let student">{{student.totalAuditory}}</td>
@@ -92,7 +92,7 @@
       <th mat-header-cell *matHeaderCellDef>
       </th>
       <td mat-cell *matCellDef="let student">
-        <button mat-button color="accent" *ngIf="student.questionaryAnswered">איפוס אבחון</button>
+        <button mat-button color="accent" (click)="resetQuestionary($event, student)" *ngIf="student.questionaryAnswered">איפוס אבחון</button>
       </td>
     </ng-container>
 

@@ -16,6 +16,7 @@
     }
   }
 
+  .progress-tab,
   .results-accordion {
     margin-top: 20px;
     margin-bottom: 40px;
@@ -46,6 +47,7 @@
       table {
         border-spacing: 0;
         width: 100%;
+
         tr > th, td {
           white-space: nowrap;
           text-align: right;
@@ -62,6 +64,40 @@
           background-color: var(--success-300);
         }
       }
+    }
+  }
+
+  .results-table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    text-align: center;
+    width: 100%;
+
+    caption {
+      padding: 1em 0;
+      font-size: 1.2em;
+      color: #555;
+    }
+
+    th {
+      font-weight: 600;
+      padding: 0.5em;
+    }
+
+    td,
+    th,
+    caption {
+      padding: 0.5em;
+    }
+
+    thead tr,
+    tr:nth-child(even) {
+      background: #f8f8f8;
+    }
+
+    tr:hover {
+      background: #f1f7ff;
     }
   }
 

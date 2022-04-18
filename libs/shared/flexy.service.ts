@@ -33,7 +33,17 @@ export class FlexyService {
     formData.append("token", userToken);
     formData.append("studentPhone", studentPhone);
     // const params = { studentPhone };
-    return this.http.post<Response<string>>(`${environment.baseUrl}?Action=getStudentAnswers`, formData );
+    return this.http.post<Response<string>>(`${environment.baseUrl}?Action=getStudentAnswers`, formData);
+  }
+
+  getStudentLatestResults(studentPhone) {
+    const formData = new FormData();
+    const userToken = sessionStorage.getItem("token");
+    formData.append("Action", "getStudentLatestResults");
+    formData.append("token", userToken);
+    formData.append("studentPhone", studentPhone);
+    // const params = { studentPhone };
+    return this.http.post<Response<string>>(`${environment.baseUrl}?Action=getStudentLatestResults`, formData);
   }
 
   updateAnswers(results, total: { visual, movement, auditory }) {
@@ -106,18 +116,13 @@ export class FlexyService {
     return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
   }
 
-  // getAllStudents(
-  //   filter = '', sortOrder = 'asc',
-  //   pageNumber = 0, pageSize = 30
-  // ): Observable<StudentInterface[]> {
-  //   return this.http.get<StudentInterface[]>(`${environment.baseUrl}?Action=getAllStudents`, {
-  //     params: new HttpParams()
-  //       .set('filter', filter)
-  //       .set('sortOrder', sortOrder)
-  //       .set('pageNumber', pageNumber.toString())
-  //       .set('pageSize', pageSize.toString())
-  //   }).pipe(
-  //     map(result => result['payload'])
-  //   );
-  // }
+  resetQuestinaryPerStudend(phone) {
+    const formData = new FormData();
+    const userToken = sessionStorage.getItem("token");
+    formData.append("token", userToken);
+    formData.append("Action", "resetQuestionaryPerStudent");
+    formData.append("phone", phone);
+
+    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
+  }
 }

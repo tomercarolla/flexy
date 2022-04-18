@@ -157,6 +157,13 @@ export class TeacherDialogComponent implements OnInit, OnDestroy {
             }
           })
         ).subscribe();
+      } else {
+        this.managerStore.update(store => {
+          return {
+            ...store,
+            isLoading: false
+          };
+        });
       }
     });
   }

@@ -6,8 +6,9 @@ import { FlexyService } from "../../../../../../libs/shared/flexy.service";
 import { ManagerStore } from "../../store/manager.store";
 import { ManagerQuery } from "../../store/manager.query";
 import { ConfirmationDialogComponent, ConfirmDialogModel } from "@flexy/ui";
-import { Subscription, tap } from "rxjs";
+import { filter, forkJoin, map, Subscription, tap } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import * as  Highcharts from "highcharts";
 
 interface DialogData extends Student {
   title: string;
@@ -28,6 +29,64 @@ interface Year {
 export class StudentDialogComponent implements OnInit, OnDestroy {
   form: FormGroup;
   durationInSeconds = 5;
+  Highcharts: typeof Highcharts = Highcharts;
+  chartOptions$ = this.flexyService.getStudentLatestResults(this.data.phone).pipe(
+    filter(Boolean),
+    map(data => {
+      const latestResultsArray = JSON.parse((data as unknown as string).replaceAll("],[", ","));
+      const dates = [];
+      const visual = [];
+      const movement = [];
+      const auditory = [];
+      latestResultsArray.map(res => {
+        dates.push(res.date);
+        visual.push(res.visual);
+        movement.push(res.movement);
+        auditory.push(res.auditory);
+      });
+      const dataset = {'dates': dates, 'visual': visual, 'movement': movement, 'auditory': auditory};
+      return {
+        chart: {
+          type: "column",
+          width: 780,
+        },
+        title: {
+          text: "התקדמות תלמיד"
+        },
+        xAxis: {
+          type: "datetime",
+          categories: dataset.dates.map(date => {
+            return Highcharts.dateFormat('%d-%m-%Y', new Date(date).getTime());
+          })
+        },
+        yAxis: {
+          min: 0,
+          title: {
+            text: "גובה ציון"
+          }
+        },
+        legend: {
+          reversed: true,
+          rtl: true
+        },
+        series: [
+          {
+            name: "סגנון שמיעתי",
+            data: dataset.movement
+          },
+          {
+            name: "סגנון תנועתי",
+            data: dataset.auditory
+          },
+          {
+            name: "סגנון ויזואלי",
+            data: dataset.visual
+          }
+        ]
+      };
+    })
+  );
+
   saveStudentSubscription: Subscription | null = null;
   deleteStudentSubscription: Subscription | null = null;
   studentAnswersSubscription: Subscription | null = null;
@@ -43,6 +102,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
 
   isLoading$ = this.managerQuery.selectIsLoading$;
   selectQuestionsByUser$ = this.managerQuery.selectStudentsAnswers$;
+  selectStudentsAnswers$ = this.managerQuery.selectStudentsLatestResults$;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -57,22 +117,25 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.data.isEdit) {
-      this.studentAnswersSubscription = this.flexyService.getStudentAnswers(this.data.phone).pipe(
+      const studentAnswers = this.flexyService.getStudentAnswers(this.data.phone);
+      const studentLatestResults = this.flexyService.getStudentLatestResults(this.data.phone);
+      this.studentAnswersSubscription = forkJoin([studentAnswers, studentLatestResults]).pipe(
         tap(
           (questions: any) => {
             if (questions) {
-              const questionsArray = JSON.parse(questions);
+              const questionsArray = JSON.parse(questions[0]);
+              const latestResultsArray = JSON.parse(questions[1].replaceAll("],[", ","));
               this.managerStore.update(store => {
                 return {
                   ...store,
-                  studentAnswers: questionsArray
+                  studentAnswers: questionsArray,
+                  studentLatestResults: latestResultsArray
                 };
               });
             }
           }
         )
       ).subscribe();
-
       this.form = this.fb.group({
         firstName: this.fb.control(this.data.firstName, [Validators.required]),
         lastName: this.fb.control(this.data.lastName, [Validators.required]),
@@ -191,6 +254,13 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
             }
           })
         ).subscribe();
+      } else {
+        this.managerStore.update(store => {
+          return {
+            ...store,
+            isLoading: false
+          };
+        });
       }
     });
   }
