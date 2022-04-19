@@ -215,7 +215,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
 
   deleteStudent(student: Student) {
     const title = `מחיקת תלמיד`;
-    const message = `האם בטוח למחוק משתמש: ${this.data.firstName} ${this.data.lastName}`;
+    const message = `האם בטוח למחוק משתמש: ${this.data.firstName} ${this.data.lastName}?`;
 
     const dialogData = new ConfirmDialogModel(title, message);
 

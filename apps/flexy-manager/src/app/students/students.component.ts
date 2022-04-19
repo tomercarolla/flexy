@@ -10,6 +10,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { debounceTime, distinctUntilChanged, Observable, Subject, Subscription, tap } from "rxjs";
 import * as XLSX from "xlsx";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { ConfirmationDialogComponent, ConfirmDialogModel } from "@flexy/ui";
 
 @Component({
   selector: "app-students",
@@ -34,7 +35,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
   userData: UserInterface[] = [];
   resultsLength = 0;
   durationInSeconds = 5;
-  fileName = 'תלמידים.xlsx';
+  fileName = "תלמידים.xlsx";
   dataSource: MatTableDataSource<Student> = new MatTableDataSource();
   allStudentsSubscription: Subscription | null = null;
   resetQuestionarySubscription: Subscription | null = null;
@@ -51,7 +52,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
             id: item.id,
             firstName: item.firstName,
             lastName: item.lastName,
-            phone: '0' + item.phone,
+            phone: "0" + item.phone,
             school: item.school,
             year: item.year,
             questionaryAnswered: item.questionaryAnswered,
@@ -59,11 +60,11 @@ export class StudentsComponent implements OnInit, OnDestroy {
             totalMovement: item.totalMovement,
             totalAuditory: item.totalAuditory,
             studentProgress: item.studentProgress
-          })
-        })
+          });
+        });
         this.dataSource = new MatTableDataSource(tableData);
       })
-    )
+    );
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -148,11 +149,11 @@ export class StudentsComponent implements OnInit, OnDestroy {
   }
 
   exportToExcel() {
-    const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(document.getElementById('ExampleMaterialTable'));
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById("ExampleMaterialTable"));
     // const ws = document.getElementById("ExampleMaterialTable");
-    ws['!cols'][9] = {hidden: true};
+    ws["!cols"][9] = { hidden: true };
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Servers');
+    XLSX.utils.book_append_sheet(wb, ws, "Servers");
     // const wb = XLSX.utils.table_to_book(ws, <XLSX.Table2SheetOpts>{
     //   sheet: this.fileName,
     // });
@@ -170,24 +171,51 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   resetQuestionary(event, student) {
     event.stopPropagation();
-    this.resetQuestionarySubscription = this.flexyService.resetQuestinaryPerStudend(student.phone).pipe(
-      tap( data => {
-        if(data.statusCode) {
-          switch (data.statusCode) {
-            case 200:
-              this.openSnackBar(data.message + "", "x", "success");
-              this.refresh();
-              break;
-            case 401:
-              this.openSnackBar(data.message + "", "x", "failed");
-              break;
-            default:
-              this.openSnackBar(data.message + "", "x", "failed");
-              break;
-          }
-        }
-      })
-    ).subscribe();
+    const title = "איפוס אבחון";
+    const message = `האם בטוח לאפס אבחון של: ${student.firstName} ${student.lastName}?`;
+
+    const dialogData = new ConfirmDialogModel(title, message);
+
+    const deleteDialog = this.dialog.open(ConfirmationDialogComponent, {
+      width: "500px",
+      data: dialogData
+    });
+
+    deleteDialog.afterClosed().subscribe(res => {
+      this.managerStore.update(store => {
+        return {
+          ...store,
+          isLoading: true
+        };
+      });
+      if (res) {
+        this.resetQuestionarySubscription = this.flexyService.resetQuestinaryPerStudend(student.phone).pipe(
+          tap(data => {
+            if (data.statusCode) {
+              switch (data.statusCode) {
+                case 200:
+                  this.openSnackBar(data.message + "", "x", "success");
+                  this.refresh();
+                  break;
+                case 401:
+                  this.openSnackBar(data.message + "", "x", "failed");
+                  break;
+                default:
+                  this.openSnackBar(data.message + "", "x", "failed");
+                  break;
+              }
+            }
+          })
+        ).subscribe();
+      } else {
+        this.managerStore.update(store => {
+          return {
+            ...store,
+            isLoading: false
+          };
+        });
+      }
+    });
   }
 
   ngOnDestroy() {
