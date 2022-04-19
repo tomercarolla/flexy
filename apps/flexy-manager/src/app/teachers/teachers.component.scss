@@ -6,6 +6,8 @@
 
   .table-container {
     position: relative;
+    overflow: auto;
+    max-height: calc(100vh - 210px);
   }
 
   table {
@@ -13,9 +15,10 @@
 
     tr.mat-row {
       cursor: pointer;
+      height: 52px;
 
       &:hover {
-        background: whitesmoke;
+        background: var(--primary-100);
       }
     }
 
@@ -24,8 +27,9 @@
     }
 
     .mat-header-cell {
-      font-size: 14px;
+      font-size: 16px;
       text-align: right;
+      color: #000;
     }
   }
 }
