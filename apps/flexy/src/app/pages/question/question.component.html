@@ -1,5 +1,9 @@
 <div class="container" *ngIf="currentQuestion$ | async as question">
   <mat-toolbar color="primary">
+    <div class="logo-container">
+      <img src="assets/images/keshet-logo-transparent.png">
+    </div>
+
     סגנון למידה: {{questionLearningTypeTranslate(question.learningType)}}
 
     <button mat-raised-button color="primary" (click)="logout()">יציאה</button>
@@ -17,22 +21,30 @@
     <mat-radio-group
       [formControl]="answerFormControl"
       class="answers-radio-group">
-      <mat-radio-button [disabled]="sendAnswers" class="radio-button" *ngFor="let answer of answers" [value]="answer.value">
+      <mat-radio-button [disabled]="sendAnswers" class="radio-button" *ngFor="let answer of answers"
+                        [value]="answer.value">
         {{answer.text}}
       </mat-radio-button>
     </mat-radio-group>
 
     <div class="button-container" [class.first-question]="question.id === 1">
 
-      <button flexyButton appearance="ghost" color="info" *ngIf="question.id !== 1" [disabled]="sendAnswers" (click)="previousQuestion()">חזור
+      <button flexyButton appearance="ghost"
+              color="info"
+              size="medium"
+              *ngIf="question.id !== 1"
+              [disabled]="sendAnswers" (click)="previousQuestion()">חזור
       </button>
 
       <button type="button" flexyButton color="info"
+              size="medium"
               (click)="nextQuestion(question)"
               [disabled]="!answerFormControl.valid || sendAnswers">{{question.id < 30 ? 'הבא' : 'סיים'}}
       </button>
     </div>
 
-    <button flexyButton color="info" size="large" type="button" *ngIf="sendAnswers" (click)="goToResults()">לעבור לתוצאות</button>
+    <button flexyButton color="info" size="large" type="button" *ngIf="sendAnswers" (click)="goToResults()">לעבור
+      לתוצאות
+    </button>
   </section>
 </div>

@@ -32,6 +32,9 @@
       <mat-error *ngIf="managerForm.controls['userName'].hasError('required')">
         יש להכניס שם משתמש
       </mat-error>
+      <mat-error *ngIf="managerForm.controls['userName'].hasError('pattern')">
+        יש להכניס רק אותיות
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-dir-rtl user-info">

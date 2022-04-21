@@ -1,4 +1,14 @@
 :host {
+
+  .mat-toolbar.mat-primary {
+    height: 70px;
+  }
+
+  .logo-container {
+    display: flex;
+    width: 55px;
+  }
+
   .container {
     display: flex;
     flex-direction: column;

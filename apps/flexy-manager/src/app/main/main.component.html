@@ -1,8 +1,13 @@
 <mat-toolbar color="primary">
-  <button mat-mini-fab (click)="sidenav?.toggle()" *ngIf="!hideMenu">
+  <button mat-mini-fab (click)="sidenav?.toggle()" class="menu-btn" *ngIf="!hideMenu">
     <mat-icon>menu</mat-icon>
   </button>
-  <div>FLEXY MANAGER</div>
+  <div class="middle">
+    <div class="logo-container">
+      <img src="assets/images/keshet-logo-transparent.png">
+    </div>
+    <div class="title">FLEXY MANAGER</div>
+  </div>
   <button mat-raised-button color="primary" (click)="logout()">יציאה</button>
 </mat-toolbar>
 

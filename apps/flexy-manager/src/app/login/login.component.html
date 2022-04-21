@@ -3,27 +3,36 @@
   <mat-spinner></mat-spinner>
 </div>
 
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-  <mat-form-field class="form-dir-rtl" appearance="outline">
-    <mat-label>שם משתמש</mat-label>
-    <input type="text" matInput formControlName="userName">
-    <mat-error *ngIf="loginForm.controls['userName'].hasError('required')">
-      יש להכניס שם משתמש
-    </mat-error>
-  </mat-form-field>
+<section>
+  <div class="logo-container">
+    <img src="assets/images/keshet-logo.png">
+  </div>
 
-  <mat-form-field class="form-dir-rtl" appearance="outline">
-    <mat-label>סיסמא</mat-label>
-    <input type="password" matInput formControlName="password">
-    <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
-      יש להכניס סיסמא
-    </mat-error>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <mat-form-field class="form-dir-rtl" appearance="outline">
+      <mat-label>שם משתמש</mat-label>
+      <input type="text" matInput formControlName="userName">
+      <mat-error *ngIf="loginForm.controls['userName'].hasError('required')">
+        יש להכניס שם משתמש
+      </mat-error>
+      <mat-error *ngIf="loginForm.controls['userName'].hasError('pattern')">
+        יש להכניס רק אותיות
+      </mat-error>
+    </mat-form-field>
 
-    <div class="validation"
-         *ngIf="userNameOrPasswordError$ | async as errorMessage">
-      {{errorMessage}}
-    </div>
-  </mat-form-field>
+    <mat-form-field class="form-dir-rtl" appearance="outline">
+      <mat-label>סיסמא</mat-label>
+      <input type="password" matInput formControlName="password">
+      <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+        יש להכניס סיסמא
+      </mat-error>
 
-  <button mat-raised-button color="primary" [disabled]="!loginForm.valid">כניסה</button>
-</form>
+      <div class="validation"
+           *ngIf="userNameOrPasswordError$ | async as errorMessage">
+        {{errorMessage}}
+      </div>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" [disabled]="!loginForm.valid">כניסה</button>
+  </form>
+</section>

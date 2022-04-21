@@ -3,27 +3,36 @@
   <mat-spinner></mat-spinner>
 </div>
 
-<form [formGroup]="loginForm" (ngSubmit)="login()">
+<section>
 
-  <mat-form-field class="form-dir-rtl" appearance="outline">
-    <mat-label>טלפון</mat-label>
-    <input type="text" matInput formControlName="phone">
-    <mat-error *ngIf="loginForm.controls['phone'].hasError('required')">
-      יש להכניס מספר טלפון
-    </mat-error>
-    <mat-error
-      *ngIf="!loginForm.controls['phone'].valid && loginForm.controls['phone'].touched && loginForm.controls['phone'].dirty && loginForm.controls['phone'].hasError('minlength')">
-      מספר קצר מידי
-    </mat-error>
-    <mat-error
-      *ngIf="!loginForm.controls['phone'].valid && loginForm.controls['phone'].touched && loginForm.controls['phone'].dirty && loginForm.controls['phone'].hasError('maxlength')">
-      מספר ארוך מידי
-    </mat-error>
-    <div class="validation"
-      *ngIf="phoneNotExist$ | async as errorMessage">
-      {{errorMessage}}
-    </div>
-  </mat-form-field>
+  <div class="logo-container">
+    <img src="assets/images/keshet-logo.png">
+  </div>
 
-  <button flexyButton size="large" color="primary" [disabled]="!loginForm.valid">כניסה</button>
-</form>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <mat-form-field class="form-dir-rtl" appearance="outline">
+      <mat-label>טלפון</mat-label>
+      <input type="text" matInput formControlName="phone">
+      <mat-error *ngIf="loginForm.controls['phone'].hasError('required')">
+        יש להכניס מספר טלפון
+      </mat-error>
+      <mat-error *ngIf="loginForm.controls['phone'].hasError('pattern')">
+        יש להכניס רק מספרים
+      </mat-error>
+      <mat-error
+        *ngIf="!loginForm.controls['phone'].valid && loginForm.controls['phone'].touched && loginForm.controls['phone'].dirty && loginForm.controls['phone'].hasError('minlength')">
+        מספר קצר מידי
+      </mat-error>
+      <mat-error
+        *ngIf="!loginForm.controls['phone'].valid && loginForm.controls['phone'].touched && loginForm.controls['phone'].dirty && loginForm.controls['phone'].hasError('maxlength')">
+        מספר ארוך מידי
+      </mat-error>
+      <div class="validation"
+           *ngIf="phoneNotExist$ | async as errorMessage">
+        {{errorMessage}}
+      </div>
+    </mat-form-field>
+
+    <button flexyButton size="large" color="primary" [disabled]="!loginForm.valid">כניסה</button>
+  </form>
+</section>

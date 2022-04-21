@@ -45,7 +45,7 @@ export class TeacherDialogComponent implements OnInit, OnDestroy {
       this.managerForm = this.fb.group({
         firstName: [this.data.firstName, [Validators.required]],
         lastName: [this.data.lastName, [Validators.required]],
-        userName: [this.data.userName, [Validators.required]],
+        userName: [this.data.userName, [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]],
         phone: this.fb.control("0" + this.data.phone, [
           Validators.required,
           Validators.pattern("^[0-9]*$"),
@@ -59,7 +59,7 @@ export class TeacherDialogComponent implements OnInit, OnDestroy {
       this.managerForm = this.fb.group({
         firstName: ["", [Validators.required]],
         lastName: ["", [Validators.required]],
-        userName: ["", [Validators.required]],
+        userName: ["", [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]],
         phone: this.fb.control("", [
           Validators.required,
           Validators.pattern("^[0-9]*$"),
