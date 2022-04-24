@@ -13,6 +13,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatSortModule } from "@angular/material/sort";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MatSortModule } from "@angular/material/sort";
     MatIconModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule
   ],
   exports: [TeachersComponent]
 })

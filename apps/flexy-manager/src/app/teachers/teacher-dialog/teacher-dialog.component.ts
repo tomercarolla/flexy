@@ -66,8 +66,8 @@ export class TeacherDialogComponent implements OnInit, OnDestroy {
           Validators.minLength(10),
           Validators.maxLength(10)
         ]),
-        password: ["", [Validators.required]],
-        confirmPassword: ["", [Validators.required]]
+        password: ["", [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{4,}$")]],
+        confirmPassword: ["", [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{4,}$")]]
       }, { validators: passwordMatchingValidator });
     }
   }
