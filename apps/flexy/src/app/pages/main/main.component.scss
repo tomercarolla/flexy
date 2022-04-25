@@ -7,6 +7,10 @@
   .logo-container {
     display: flex;
     width: 55px;
+
+    &.flexy-logo {
+      width: 80px;
+    }
   }
 
   .container {

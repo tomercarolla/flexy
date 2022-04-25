@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
-  <div class="logo-container">
-    <img src="assets/images/keshet-logo-transparent.png">
+  <div class="logo-container flexy-logo">
+    <img src="assets/images/flexy-logo.png">
   </div>
 
   תוצאות השאלון
@@ -9,6 +9,10 @@
 </mat-toolbar>
 
 <div class="chart-container">
+
+  <div class="logo-container results">
+    <img src="assets/images/keshet-logo-transparent.png">
+  </div>
 
   <div class="legend">
     <div class="legend-box visual">
@@ -31,6 +35,10 @@
           [datasets]="chartDataSets"
           [legend]="chartLegend">
   </canvas>
+
+  <div>
+    הסגנון למידה שלך הוא: !!!
+  </div>
 
   <div class="result-explanation-text">
     <p>
