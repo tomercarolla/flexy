@@ -14,16 +14,7 @@
 
   .logo-container {
     display: flex;
-    width: 55px;
-
-    &.flexy-logo {
-      width: 80px;
-    }
-
-    &.results {
-      align-self: flex-start;
-      margin-right: 16px;
-    }
+    width: 80px;
   }
 
   .chart-container {
