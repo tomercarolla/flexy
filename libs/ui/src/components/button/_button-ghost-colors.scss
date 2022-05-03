@@ -1,6 +1,5 @@
 @import '../../../../ui/styles/tools/functions';
 
-
 @mixin ui-button-ghost() {
   [flexyButton] {
     &.ghost {
@@ -14,6 +13,11 @@
       --btn-primary-focus-background-color: var(--primary-300);
       --btn-primary-active-background-color: var(--primary-300);
 
+      --btn-secondary-font-color: var(--secondary-500);
+      --btn-secondary-hover-background-color: var(--secondary-400);
+      --btn-secondary-focus-background-color: var(--secondary-600);
+      --btn-secondary-active-background-color: var(--secondary-600);
+
       --btn-success-font-color: var(--success-500);
       --btn-success-hover-background-color: var(--success-200);
       --btn-success-focus-background-color: var(--success-300);
@@ -24,15 +28,45 @@
       --btn-info-focus-background-color: var(--info-200);
       --btn-info-active-background-color: var(--info-200);
 
-      --btn-warning-font-color: var(--warning-500);
-      --btn-warning-hover-background-color: var(--warning-200);
-      --btn-warning-focus-background-color: var(--warning-300);
-      --btn-warning-active-background-color: var(--warning-300);
+      //--btn-warning-font-color: var(--warning-500);
+      //--btn-warning-hover-background-color: var(--warning-200);
+      //--btn-warning-focus-background-color: var(--warning-300);
+      //--btn-warning-active-background-color: var(--warning-300);
 
       --btn-danger-font-color: var(--danger-500);
       --btn-danger-hover-background-color: var(--danger-200);
       --btn-danger-focus-background-color: var(--danger-300);
       --btn-danger-active-background-color: var(--danger-300);
+
+      --btn-sky-font-color: var(--clearSky-500);
+      --btn-sky-hover-background-color: var(--clearSky-400);
+      --btn-sky-focus-background-color: var(--clearSky-600);
+      --btn-sky-active-background-color: var(--clearSky-600);
+
+      --btn-critical-font-color: var(--red-500);
+      --btn-critical-hover-background-color: var(--red-400);
+      --btn-critical-focus-background-color: var(--red-600);
+      --btn-critical-active-background-color: var(--red-600);
+
+      --btn-navy-font-color: var(--blueNavy-500);
+      --btn-navy-hover-background-color: var(--blueNavy-400);
+      --btn-navy-focus-background-color: var(--blueNavy-600);
+      --btn-navy-active-background-color: var(--blueNavy-600);
+
+      --btn-wood-font-color: var(--wood-500);
+      --btn-wood-hover-background-color: var(--wood-100);
+      --btn-wood-focus-background-color: var(--wood-600);
+      --btn-wood-active-background-color: var(--wood-600);
+
+      --btn-lemon-font-color: var(--lemon-500);
+      --btn-lemon-hover-background-color: var(--lemon-400);
+      --btn-lemon-focus-background-color: var(--lemon-600);
+      --btn-lemon-active-background-color: var(--lemon-600);
+
+      --btn-ocean-font-color: var(--ocean-500);
+      --btn-ocean-hover-background-color: var(--ocean-400);
+      --btn-ocean-focus-background-color: var(--ocean-600);
+      --btn-ocean-active-background-color: var(--ocean-600);
 
       @each $color in component-colors() {
         &.color--#{$color} {

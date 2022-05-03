@@ -1,16 +1,22 @@
 @import '../../../../ui/styles/tools/functions';
 
-
 @mixin ui-button-filled() {
   [flexyButton] {
     &.filled {
       --btn-box-shadow: none;
       --btn-font-color: #FFF;
+      --btn-border-width: 1px;
+      --btn-border-style: solid;
 
       --btn-primary-background-color: var(--primary-500);
       --btn-primary-hover-background-color: var(--primary-400);
       --btn-primary-focus-background-color: var(--primary-600);
       --btn-primary-active-background-color: var(--primary-600);
+
+      --btn-secondary-background-color: var(--secondary-500);
+      --btn-secondary-hover-background-color: var(--secondary-400);
+      --btn-secondary-focus-background-color: var(--secondary-600);
+      --btn-secondary-active-background-color: var(--secondary-600);
 
       --btn-success-background-color: var(--success-500);
       --btn-success-hover-background-color: var(--success-400);
@@ -22,21 +28,54 @@
       --btn-info-focus-background-color: var(--info-600);
       --btn-info-active-background-color: var(--info-600);
 
-      --btn-warning-background-color: var(--warning-500);
-      --btn-warning-hover-background-color: var(--warning-400);
-      --btn-warning-focus-background-color: var(--warning-600);
-      --btn-warning-active-background-color: var(--warning-600);
+      //--btn-warning-background-color: var(--warning-500);
+      //--btn-warning-hover-background-color: var(--warning-400);
+      //--btn-warning-focus-background-color: var(--warning-600);
+      //--btn-warning-active-background-color: var(--warning-600);
 
       --btn-danger-background-color: var(--danger-500);
       --btn-danger-hover-background-color: var(--danger-400);
       --btn-danger-focus-background-color: var(--danger-600);
       --btn-danger-active-background-color: var(--danger-600);
 
+      --btn-sky-background-color: var(--clearSky-500);
+      --btn-sky-hover-background-color: var(--clearSky-400);
+      --btn-sky-focus-background-color: var(--clearSky-600);
+      --btn-sky-active-background-color: var(--clearSky-600);
+
+      --btn-critical-background-color: var(--red-500);
+      --btn-critical-hover-background-color: var(--red-400);
+      --btn-critical-focus-background-color: var(--red-600);
+      --btn-critical-active-background-color: var(--red-600);
+
+      --btn-navy-background-color: var(--blueNavy-500);
+      --btn-navy-hover-background-color: var(--blueNavy-400);
+      --btn-navy-focus-background-color: var(--blueNavy-600);
+      --btn-navy-active-background-color: var(--blueNavy-600);
+
+      --btn-wood-background-color: var(--wood-500);
+      --btn-wood-hover-background-color: var(--wood-400);
+      --btn-wood-focus-background-color: var(--wood-600);
+      --btn-wood-active-background-color: var(--wood-600);
+
+      --btn-lemon-background-color: var(--lemon-500);
+      --btn-lemon-hover-background-color: var(--lemon-400);
+      --btn-lemon-focus-background-color: var(--lemon-600);
+      --btn-lemon-active-background-color: var(--lemon-600);
+
+      --btn-ocean-background-color: var(--ocean-500);
+      --btn-ocean-hover-background-color: var(--ocean-400);
+      --btn-ocean-focus-background-color: var(--ocean-600);
+      --btn-ocean-active-background-color: var(--ocean-600);
+
       @each $color in component-colors() {
         &.color--#{$color} {
           background-color: var(--btn-#{$color}-background-color);
           color: var(--btn-font-color);
           box-shadow: var(--btn-box-shadow);
+          border-width: var(--btn-border-width);
+          border-style: var(--btn-border-style);
+          border-color: var(--btn-#{$color}-background-color);
 
           &:hover {
             background-color: var(--btn-#{$color}-hover-background-color);

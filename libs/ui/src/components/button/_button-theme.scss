@@ -2,7 +2,7 @@
 
 @mixin theme-button() {
   [flexyButton] {
-    --btn-font-weight: normal;
+    --btn-font-weight: 500;
     --btn-border: none;
     --btn-letter-spacing: .5px;
     --btn-disabled-opacity: .3;
@@ -23,6 +23,7 @@
     --btn-small-icon-font-size: 18px;
     --btn-small-border-radius: 8px;
     --btn-small-icon-btn-padding: 7px;
+    --btn-small-icon-margin: 4px 0;
 
     //Medium - 45px
     --btn-medium-padding: 0 20px;
@@ -55,6 +56,10 @@
         font-size: var(--btn-#{$size}-font-size);
         line-height: var(--btn-#{$size}-line-height);
         border-radius: var(--btn-#{$size}-border-radius);
+
+        mat-icon {
+          margin: var(--btn-#{$size}-icon-margin);
+        }
       }
     }
   }

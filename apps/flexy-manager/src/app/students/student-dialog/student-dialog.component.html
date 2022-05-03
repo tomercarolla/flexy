@@ -202,17 +202,17 @@
   </div>
   <div mat-dialog-actions>
     <div class="btn-container">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!(form.valid && form.dirty)">
+      <button flexyButton color="navy" type="submit" [disabled]="!(form.valid && form.dirty)">
         שמור
       </button>
-      <button mat-button type="button" (click)="close()">בטל</button>
+      <button flexyButton color="secondary" type="button" (click)="close()">בטל</button>
     </div>
 
-    <button mat-raised-button type="button" color="warn" (click)="deleteStudent(form.value)" *ngIf="data.isEdit">
+    <button flexyButton type="button" color="critical" (click)="deleteStudent(form.value)" *ngIf="data.isEdit">
       <mat-icon>delete</mat-icon>
     </button>
 
-    <button mat-button type="button" color="warn" (click)="resetForm()" *ngIf="!data.isEdit">
+    <button flexyButton type="button" color="critical" appearance="ghost" (click)="resetForm()" *ngIf="!data.isEdit">
       איפוס
     </button>
   </div>

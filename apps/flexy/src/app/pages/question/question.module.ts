@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ButtonModule, ProgressBarModule } from "@flexy/ui";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { MatButtonModule } from "@angular/material/button";
 
 
 @NgModule({
@@ -20,8 +19,7 @@ import { MatButtonModule } from "@angular/material/button";
     ProgressBarModule,
     ButtonModule,
     MatToolbarModule,
-    MatSnackBarModule,
-    MatButtonModule
+    MatSnackBarModule
   ],
   providers: [DatePipe],
   exports: [QuestionComponent]

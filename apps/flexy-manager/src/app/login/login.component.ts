@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   errorLoginMessage: string;
   isLoading: boolean;
   loginSubscription: Subscription | null = null;
+  showPassword = false;
 
   userNameOrPasswordError$ = this.authQuery.selectUserNameOrPasswordError$;
 
@@ -77,5 +78,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       ...store,
       userNameOrPasswordError: ''
     }));
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

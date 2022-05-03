@@ -3,5 +3,6 @@
 }
 
 @function component-colors() {
-  @return 'primary', 'secondary', 'success', 'info', 'warning', 'danger';
+  //'warning',
+  @return 'primary', 'secondary', 'success', 'info', 'danger', 'sky', 'critical', 'navy', 'wood', 'lemon', "ocean";
 }

@@ -28,6 +28,11 @@ export class ButtonComponent {
     return this.color === 'primary';
   }
 
+  @HostBinding('class.color--secondary')
+  get secondary() {
+    return this.color === 'secondary';
+  }
+
   @HostBinding('class.color--success')
   get success() {
     return this.color === 'success';
@@ -38,14 +43,39 @@ export class ButtonComponent {
     return this.color === 'info';
   }
 
-  @HostBinding('class.color--warning')
-  get warning() {
-    return this.color === 'warning';
-  }
+  // @HostBinding('class.color--warning')
+  // get warning() {
+  //   return this.color === 'warning';
+  // }
 
   @HostBinding('class.color--danger')
   get danger() {
     return this.color === 'danger';
+  }
+
+  @HostBinding('class.color--sky')
+  get sky() {
+    return this.color === 'sky';
+  }
+
+  @HostBinding('class.color--critical')
+  get critical() {
+    return this.color === 'critical';
+  }
+
+  @HostBinding('class.color--navy')
+  get navy() {
+    return this.color === 'navy';
+  }
+
+  @HostBinding('class.color--wood')
+  get wood() {
+    return this.color === 'wood';
+  }
+
+  @HostBinding('class.color--lemon')
+  get lemon() {
+    return this.color === 'lemon';
   }
 
   @HostBinding('class.size--xsmall')

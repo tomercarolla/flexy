@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { ResultsRoutingModule } from './results-routing.module';
-import {ResultsComponent} from "./results.component";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {ChartsModule} from "ng2-charts";
-import { MatButtonModule } from "@angular/material/button";
+import { ResultsRoutingModule } from "./results-routing.module";
+import { ResultsComponent } from "./results.component";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { ChartsModule } from "ng2-charts";
+import { ButtonModule } from "@flexy/ui";
 
 
 @NgModule({
@@ -15,8 +15,9 @@ import { MatButtonModule } from "@angular/material/button";
     ResultsRoutingModule,
     MatToolbarModule,
     ChartsModule,
-    MatButtonModule
+    ButtonModule
   ],
   exports: [ResultsComponent]
 })
-export class ResultsModule { }
+export class ResultsModule {
+}

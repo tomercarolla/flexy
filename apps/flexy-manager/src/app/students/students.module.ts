@@ -18,6 +18,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { HighchartsChartModule } from "highcharts-angular";
+import { ButtonModule } from "@flexy/ui";
 
 @NgModule({
   declarations: [StudentsComponent, StudentDialogComponent],
@@ -29,7 +30,6 @@ import { HighchartsChartModule } from "highcharts-angular";
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
     MatDialogModule,
     MatIconModule,
     MatTabsModule,
@@ -38,7 +38,8 @@ import { HighchartsChartModule } from "highcharts-angular";
     MatSelectModule,
     MatExpansionModule,
     MatTooltipModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    ButtonModule
   ],
   exports: [StudentsComponent]
 })

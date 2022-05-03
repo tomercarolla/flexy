@@ -4,8 +4,8 @@
     <input matInput (keyup)="applyFilter($event.target.value)">
   </mat-form-field>
   <div class="btn-container">
-    <button mat-raised-button color="primary" (click)="addNewStudent()">הוספה תלמיד</button>
-    <button mat-raised-button color="accent" (click)="exportToExcel()">
+    <button flexyButton color="sky" (click)="addNewStudent()">הוספה תלמיד</button>
+    <button flexyButton color="wood" (click)="exportToExcel()">
       <mat-icon>file_download</mat-icon>
       הורדה אקסל
     </button>
@@ -93,7 +93,7 @@
       <th mat-header-cell *matHeaderCellDef>
       </th>
       <td mat-cell *matCellDef="let student">
-        <button mat-button color="accent" (click)="resetQuestionary($event, student)" *ngIf="student.questionaryAnswered">איפוס אבחון</button>
+        <button flexyButton color="wood" appearance="ghost" (click)="resetQuestionary($event, student)" *ngIf="student.questionaryAnswered">איפוס אבחון</button>
       </td>
     </ng-container>
 

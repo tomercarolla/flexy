@@ -24,6 +24,8 @@
   .question {
     font-size: 20px;
     min-height: 60px;
+    display: flex;
+    align-items: center;
   }
 
   .answers-radio-group {
