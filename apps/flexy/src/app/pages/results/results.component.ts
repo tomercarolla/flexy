@@ -36,7 +36,7 @@ export class ResultsComponent implements OnInit {
     this.chartData = [this.visualLearningPoints, this.movementLearningPoints, this.auditoryLearningPoints];
     this.chartLabels = ["סגנון ויזואלי", "סגנון תנועתי", "סגנון שמיעתי"];
     this.chartDataSets = [{
-      backgroundColor: ["#E9B44C", "#4F5F76", "#FFDABF"]
+      backgroundColor: ["#E9B44C", "#4F5F76", "#DBA88B"]
     }];
   }
 

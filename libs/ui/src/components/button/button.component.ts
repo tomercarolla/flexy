@@ -78,6 +78,11 @@ export class ButtonComponent {
     return this.color === 'lemon';
   }
 
+  @HostBinding('class.color--ocean')
+  get ocean() {
+    return this.color === 'ocean';
+  }
+
   @HostBinding('class.size--xsmall')
   get xsmall() {
     return this.size === ComponentSizes.Xsmall;

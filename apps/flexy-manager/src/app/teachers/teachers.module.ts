@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { ButtonModule } from "@flexy/ui";
 
 
 @NgModule({
@@ -21,7 +22,6 @@ import { MatTooltipModule } from "@angular/material/tooltip";
   imports: [
     CommonModule,
     TeachersRoutingModule,
-    MatButtonModule,
     MatProgressSpinnerModule,
     MatTableModule,
     MatDialogModule,
@@ -30,7 +30,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     ReactiveFormsModule,
     MatSnackBarModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ButtonModule
   ],
   exports: [TeachersComponent]
 })
