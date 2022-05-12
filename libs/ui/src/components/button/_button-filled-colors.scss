@@ -94,6 +94,18 @@
               background-color: var(--btn-#{$color}-background-color);
             }
           }
+
+          @media (hover: none) {
+            &:hover {
+              background-color: var(--btn-#{$color}-background-color);
+              color: var(--btn-font-color);
+            }
+
+            &:active {
+              background-color: var(--btn-#{$color}-background-color);
+              color: var(--btn-font-color);
+            }
+          }
         }
       }
     }

@@ -34,7 +34,8 @@
               [disabled]="sendAnswers" (click)="previousQuestion()">חזור
       </button>
 
-      <button type="button" flexyButton color="info"
+      <button type="button" flexyButton
+              [color]="question.id < 30 ? 'info' : 'info'"
               size="medium"
               (click)="nextQuestion(question)"
               [disabled]="!answerFormControl.valid || sendAnswers">{{question.id < 30 ? 'הבא' : 'סיים'}}

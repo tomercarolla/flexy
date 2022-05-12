@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             switch (resData.statusCode) {
               case 200:
                 this.router.navigate(["main"]);
+                sessionStorage.setItem("userLogged", this.loginForm.value.userName)
                 sessionStorage.setItem("token", resData.data);
                 this.isLoading = false;
                 break;

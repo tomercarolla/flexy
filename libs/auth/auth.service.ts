@@ -41,8 +41,7 @@ export class AuthService {
   }
 
   logout() {
-    sessionStorage.setItem("token", null);
-    sessionStorage.setItem("role", null);
+    sessionStorage.clear();
     this.router.navigateByUrl('login');
   }
 }

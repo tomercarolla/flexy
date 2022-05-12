@@ -28,6 +28,7 @@ export class TeacherDialogComponent implements OnInit, OnDestroy {
   result: "";
   saveManagerSubscription: Subscription | null = null;
   deleteManagerSubscription: Subscription | null = null;
+  showDelete = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -42,6 +43,10 @@ export class TeacherDialogComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.data.isEdit) {
+      const userLogged = sessionStorage.getItem("userLogged");
+      if(this.data.userName === userLogged) {
+        this.showDelete = false;
+      }
       this.managerForm = this.fb.group({
         firstName: [this.data.firstName, [Validators.required]],
         lastName: [this.data.lastName, [Validators.required]],

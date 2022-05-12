@@ -102,17 +102,29 @@
 
           &:focus {
             background-color: var(--btn-#{$color}-focus-background-color);
-            color: var(--btn-#{$color}-active-font-color)
+            color: var(--btn-#{$color}-active-font-color);
           }
 
           &:active {
             background-color: var(--btn-#{$color}-active-background-color);
-            color: var(--btn-#{$color}-active-font-color)
+            color: var(--btn-#{$color}-active-font-color);
           }
 
           &[disabled] {
             &:hover {
               background-color: var(--btn-background-color);
+            }
+          }
+
+          @media (hover: none) {
+            &:hover {
+              background-color: var(--btn-background-color);
+              color: var(--btn-#{$color}-font-color);
+            }
+
+            &:active {
+              background-color: var(--btn-#{$color}-background-color);
+              color: var(--btn-#{$color}-font-color);
             }
           }
         }
