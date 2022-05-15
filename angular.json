@@ -158,7 +158,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/flexy-manager",
+            "outputPath": "dist/apps/flexy-manager",
             "index": "apps/flexy-manager/src/index.html",
             "main": "apps/flexy-manager/src/main.ts",
             "polyfills": "apps/flexy-manager/src/polyfills.ts",
