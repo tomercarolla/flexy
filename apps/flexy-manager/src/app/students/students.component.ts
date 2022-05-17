@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { Student, UserInterface } from "../../../../../libs/shared/user.interface";
+import { Student, UserInterface } from "@flexy/shared";
 import { MatSort } from "@angular/material/sort";
-import { FlexyService } from "../../../../../libs/shared/flexy.service";
+import { FlexyService } from "@flexy/shared";
 import { ManagerStore } from "../store/manager.store";
 import { ManagerQuery } from "../store/manager.query";
 import { MatDialog } from "@angular/material/dialog";

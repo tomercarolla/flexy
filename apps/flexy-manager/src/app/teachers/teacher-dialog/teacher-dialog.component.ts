@@ -1,9 +1,9 @@
 import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
-import { UserInterface } from "../../../../../../libs/shared/user.interface";
+import { UserInterface } from "@flexy/shared";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { passwordMatchingValidator } from "../../../../../../libs/shared/password-validation.directive";
-import { FlexyService } from "../../../../../../libs/shared/flexy.service";
+import { passwordMatchingValidator } from "@flexy/shared";
+import { FlexyService } from "@flexy/shared";
 import { Subscription, tap } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ConfirmationDialogComponent, ConfirmDialogModel } from "@flexy/ui";

@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthGuard } from "../../../../libs/auth/auth.guard";
-import { MobileGuard } from "../../../../libs/auth/mobile.guard";
-import { RoleGuard } from "../../../../libs/auth/role-guard";
+import { AuthGuard } from "@flexy/auth";
+import { MobileGuard } from "@flexy/auth";
+import { RoleGuard } from "@flexy/auth";
 
 const routes: Routes = [
   {

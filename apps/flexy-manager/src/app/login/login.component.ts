@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../../../../../libs/auth/auth.service";
-import { AuthStore } from "../../../../../libs/auth/auth.store";
-import { AuthQuery } from "../../../../../libs/auth/auth.query";
+import { AuthService } from "@flexy/auth";
+import { AuthStore } from "@flexy/auth";
+import { AuthQuery } from "@flexy/auth";
 import { Subscription, tap } from "rxjs";
 
 @Component({

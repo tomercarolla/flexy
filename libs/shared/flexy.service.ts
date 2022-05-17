@@ -1,11 +1,11 @@
 import {Inject, Injectable} from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { QuestionInterface } from "./question.interface";
-import { Student, UserInterface } from "./user.interface";
-import { Response } from "./response.interface";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {QuestionInterface} from "./question.interface";
+import {Student, UserInterface} from "./user.interface";
+import {Response} from "./response.interface";
 import {authInjectionToken} from "../auth";
-import {AuthModel} from "../auth/auth.model";
+import {AuthModel} from "../auth";
 
 @Injectable({
   providedIn: "root"

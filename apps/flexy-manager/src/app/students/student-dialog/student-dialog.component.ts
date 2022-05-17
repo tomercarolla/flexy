@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
-import { Student } from "../../../../../../libs/shared/user.interface";
+import { Student } from "@flexy/shared";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { FlexyService } from "../../../../../../libs/shared/flexy.service";
+import { FlexyService } from "@flexy/shared";
 import { ManagerStore } from "../../store/manager.store";
 import { ManagerQuery } from "../../store/manager.query";
 import { ConfirmationDialogComponent, ConfirmDialogModel } from "@flexy/ui";

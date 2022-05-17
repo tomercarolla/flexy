@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
 import { Label, SingleDataSet } from "ng2-charts";
 import { Router } from "@angular/router";
-import { AuthService } from "../../../../../../libs/auth/auth.service";
+import { AuthService } from "@flexy/auth";
 
 @Component({
   selector: "app-results",

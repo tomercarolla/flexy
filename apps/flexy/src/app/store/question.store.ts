@@ -1,6 +1,6 @@
 import { Store, StoreConfig } from '@datorama/akita';
 import {Injectable} from "@angular/core";
-import {QuestionInterface} from "../../../../../libs/shared/question.interface";
+import {QuestionInterface} from "@flexy/shared";
 
 export interface QuestionState {
   currentQuestion: QuestionInterface,

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { UserInterface } from "../../../../../libs/shared/user.interface";
+import { UserInterface } from "@flexy/shared";
 import { ManagerQuery } from "../store/manager.query";
 import { MatDialog } from "@angular/material/dialog";
-import { FlexyService } from "../../../../../libs/shared/flexy.service";
+import { FlexyService } from "@flexy/shared";
 import { ManagerStore } from "../store/manager.store";
 import { TeacherDialogComponent } from "./teacher-dialog/teacher-dialog.component";
 import { Subscription, tap } from "rxjs";

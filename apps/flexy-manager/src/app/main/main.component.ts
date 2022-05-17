@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { AuthService } from "../../../../../libs/auth/auth.service";
+import { AuthService } from "@flexy/auth";
 
 @Component({
   selector: "app-students",

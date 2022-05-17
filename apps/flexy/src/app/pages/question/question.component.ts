@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { QuestionInterface } from "../../../../../../libs/shared/question.interface";
+import { QuestionInterface } from "@flexy/shared";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { combineLatest, filter, lastValueFrom, Subscription, take, tap } from "rxjs";
-import { FlexyService } from "../../../../../../libs/shared/flexy.service";
+import { FlexyService } from "@flexy/shared";
 import { QuestionQuery } from "../../store/question.query";
 import { QuestionStore } from "../../store/question.store";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { AuthService } from "../../../../../../libs/auth/auth.service";
+import { AuthService } from "@flexy/auth";
 
 @Component({
   selector: "app-question",

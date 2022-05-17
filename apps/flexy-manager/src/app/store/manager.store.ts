@@ -1,7 +1,7 @@
 import { Store, StoreConfig } from "@datorama/akita";
 import { Injectable } from "@angular/core";
-import { Student, UserInterface } from "../../../../../libs/shared/user.interface";
-import { QuestionInterface, ResultsInterface } from "../../../../../libs/shared/question.interface";
+import { Student, UserInterface } from "@flexy/shared";
+import { QuestionInterface, ResultsInterface } from "@flexy/shared";
 
 export interface ManagerState {
   students: Student[];
