@@ -1,7 +1,7 @@
 {
   "npmScope": "flexy",
   "affected": {
-    "defaultBase": "undefined"
+    "defaultBase": "dev"
   },
   "implicitDependencies": {
     "angular.json": "*",
