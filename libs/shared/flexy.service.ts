@@ -1,29 +1,30 @@
-import { Injectable } from "@angular/core";
+import {Inject, Injectable} from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../apps/flexy/src/environments/environment";
 import { Observable } from "rxjs";
 import { QuestionInterface } from "./question.interface";
 import { Student, UserInterface } from "./user.interface";
 import { Response } from "./response.interface";
+import {authInjectionToken} from "../auth";
+import {AuthModel} from "../auth/auth.model";
 
 @Injectable({
   providedIn: "root"
 })
 export class FlexyService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, @Inject(authInjectionToken) private readonly authOptions: AuthModel) {
   }
 
   getAllQuestions(): Observable<QuestionInterface[]> {
-    return this.http.get<QuestionInterface[]>(`${environment.baseUrl}?Action=getAllQuestions`);
+    return this.http.get<QuestionInterface[]>(`${this.authOptions.baseUrl}?Action=getAllQuestions`);
   }
 
   getAllStudents(): Observable<UserInterface[]> {
-    return this.http.get<Student[]>(`${environment.baseUrl}?Action=getAllStudents`);
+    return this.http.get<Student[]>(`${this.authOptions.baseUrl}?Action=getAllStudents`);
   }
 
   getAllManagers(): Observable<UserInterface[]> {
-    return this.http.get<UserInterface[]>(`${environment.baseUrl}?Action=getAllManagers`);
+    return this.http.get<UserInterface[]>(`${this.authOptions.baseUrl}?Action=getAllManagers`);
   }
 
   getStudentAnswers(studentPhone) {
@@ -33,7 +34,7 @@ export class FlexyService {
     formData.append("token", userToken);
     formData.append("studentPhone", studentPhone);
     // const params = { studentPhone };
-    return this.http.post<Response<string>>(`${environment.baseUrl}?Action=getStudentAnswers`, formData);
+    return this.http.post<Response<string>>(`${this.authOptions.baseUrl}?Action=getStudentAnswers`, formData);
   }
 
   getStudentLatestResults(studentPhone) {
@@ -43,7 +44,7 @@ export class FlexyService {
     formData.append("token", userToken);
     formData.append("studentPhone", studentPhone);
     // const params = { studentPhone };
-    return this.http.post<Response<string>>(`${environment.baseUrl}?Action=getStudentLatestResults`, formData);
+    return this.http.post<Response<string>>(`${this.authOptions.baseUrl}?Action=getStudentLatestResults`, formData);
   }
 
   updateAnswers(results, total: { visual, movement, auditory }) {
@@ -58,7 +59,7 @@ export class FlexyService {
     formData.append("totalMovement", total.movement);
     formData.append("totalAuditory", total.auditory);
 
-    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
+    return this.http.post<Response<string>>(`${this.authOptions.baseUrl}`, formData);
   }
 
   addUpdateStudentProfile(id, user) {
@@ -76,7 +77,7 @@ export class FlexyService {
     formData.append("year", user.year);
     formData.append("studentProgress", user.studentProgress);
 
-    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
+    return this.http.post<Response<string>>(`${this.authOptions.baseUrl}`, formData);
   }
 
   addUpdateManagerProfile(id, user) {
@@ -93,7 +94,7 @@ export class FlexyService {
     formData.append("phone", user.phone);
     formData.append("password", user.password);
 
-    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
+    return this.http.post<Response<string>>(`${this.authOptions.baseUrl}`, formData);
   }
 
   deleteManager(id) {
@@ -103,7 +104,7 @@ export class FlexyService {
     formData.append("Action", "deleteManager");
     formData.append("id", id);
 
-    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
+    return this.http.post<Response<string>>(`${this.authOptions.baseUrl}`, formData);
   }
 
   deleteStudent(phone) {
@@ -113,7 +114,7 @@ export class FlexyService {
     formData.append("Action", "deleteStudent");
     formData.append("phone", phone);
 
-    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
+    return this.http.post<Response<string>>(`${this.authOptions.baseUrl}`, formData);
   }
 
   resetQuestinaryPerStudend(phone) {
@@ -123,6 +124,6 @@ export class FlexyService {
     formData.append("Action", "resetQuestionaryPerStudent");
     formData.append("phone", phone);
 
-    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
+    return this.http.post<Response<string>>(`${this.authOptions.baseUrl}`, formData);
   }
 }

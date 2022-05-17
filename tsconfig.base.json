@@ -19,7 +19,8 @@
     "module": "es2020",
     "lib": ["es2021", "dom"],
     "paths": {
-      "@flexy/ui": ["libs/ui/src/index.ts"]
+      "@flexy/ui": ["libs/ui/src/index.ts"],
+      "@flexy/auth": ["libs/auth/index.ts"]
     },
     "rootDir": "."
   },

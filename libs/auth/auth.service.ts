@@ -2,8 +2,10 @@ import { Injectable } from "@angular/core";
 import { UserInterface } from "../shared/user.interface";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../apps/flexy/src/environments/environment";
+import { Inject } from "@angular/core";
 import { Response } from "../shared/response.interface";
+import {authInjectionToken} from "./auth.module";
+import {AuthModel} from "./auth.model";
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +14,7 @@ export class AuthService {
 
   role: string;
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient, @Inject(authInjectionToken) private readonly authOptions: AuthModel) {
   }
 
   loginUser(user: UserInterface) {
@@ -20,7 +22,7 @@ export class AuthService {
     formData.append("Action", "loginUser");
     formData.append("phone", user.phone);
 
-    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
+    return this.http.post<Response<string>>(`${this.authOptions.baseUrl}`, formData);
   }
 
   loginManager(user: UserInterface) {
@@ -29,7 +31,7 @@ export class AuthService {
     formData.append("userName", user.userName);
     formData.append("userPassword", user.password);
 
-    return this.http.post<Response<string>>(`${environment.baseUrl}`, formData);
+    return this.http.post<Response<string>>(`${this.authOptions.baseUrl}`, formData);
   }
 
   getRole() {

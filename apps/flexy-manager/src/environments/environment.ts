@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:64448/Handlers/Handler.ashx'
+  baseUrl: 'aviv1234'
 };
 
 /*
