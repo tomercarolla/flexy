@@ -61,6 +61,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
         },
         yAxis: {
           min: 0,
+          max: 100,
           title: {
             text: "גובה ציון"
           }
