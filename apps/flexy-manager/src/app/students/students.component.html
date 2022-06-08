@@ -18,7 +18,7 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <table id="studentsTable" mat-table [dataSource]="(allStudents$ | async) && dataSource" matSort matSortStart="asc">
+  <table id="studentsTable" mat-table [dataSource]="(allStudents$ | async) || dataSource" matSort matSortStart="asc">
     <!-- First Name Column -->
     <ng-container matColumnDef="firstName">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>שם פרטי</th>

@@ -97,9 +97,9 @@ export class StudentsComponent implements OnInit, OnDestroy {
             isLoading: false
           };
         });
-        this.cd.detectChanges();
       })
     ).subscribe();
+    this.cd.detectChanges();
   }
 
   applyFilter(value: string) {
