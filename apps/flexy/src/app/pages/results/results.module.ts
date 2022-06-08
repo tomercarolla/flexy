@@ -15,7 +15,7 @@ import { ButtonModule } from "@flexy/ui";
     ResultsRoutingModule,
     MatToolbarModule,
     ChartsModule,
-    ButtonModule
+    ButtonModule,
   ],
   exports: [ResultsComponent]
 })

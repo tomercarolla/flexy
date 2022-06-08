@@ -33,7 +33,7 @@ export class FlexyService {
     formData.append("Action", "getStudentAnswers");
     formData.append("token", userToken);
     formData.append("studentPhone", studentPhone);
-    // const params = { studentPhone };
+
     return this.http.post<Response<string>>(`${this.authOptions.baseUrl}?Action=getStudentAnswers`, formData);
   }
 
@@ -43,7 +43,7 @@ export class FlexyService {
     formData.append("Action", "getStudentLatestResults");
     formData.append("token", userToken);
     formData.append("studentPhone", studentPhone);
-    // const params = { studentPhone };
+
     return this.http.post<Response<string>>(`${this.authOptions.baseUrl}?Action=getStudentLatestResults`, formData);
   }
 

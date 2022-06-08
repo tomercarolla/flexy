@@ -26,6 +26,15 @@
       cursor: pointer;
       height: 52px;
 
+      &.empty-row {
+        text-align: center;
+        cursor: default;
+
+        &:hover {
+          background: transparent;
+        }
+      }
+
       &:hover {
         background: var(--primary-100);
       }

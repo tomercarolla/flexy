@@ -29,6 +29,7 @@ export class TeacherDialogComponent implements OnInit, OnDestroy {
   saveManagerSubscription: Subscription | null = null;
   deleteManagerSubscription: Subscription | null = null;
   showDelete = true;
+  showPassword = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -186,5 +187,9 @@ export class TeacherDialogComponent implements OnInit, OnDestroy {
         isLoading: false
       };
     });
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

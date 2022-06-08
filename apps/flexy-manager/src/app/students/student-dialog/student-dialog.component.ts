@@ -139,7 +139,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
       this.form = this.fb.group({
         firstName: this.fb.control(this.data.firstName, [Validators.required]),
         lastName: this.fb.control(this.data.lastName, [Validators.required]),
-        phone: this.fb.control(this.data.phone, [
+        phone: this.fb.control("0" + this.data.phone, [
           Validators.required,
           Validators.pattern("^[0-9]*$"),
           Validators.minLength(10),
@@ -213,7 +213,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteStudent(student: Student) {
+  deleteStudent() {
     const title = `מחיקת תלמיד`;
     const message = `האם בטוח למחוק משתמש: ${this.data.firstName} ${this.data.lastName}?`;
 
@@ -232,7 +232,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
         };
       });
       if (dialogResult) {
-        this.deleteStudentSubscription = this.flexyService.deleteStudent(student.phone).pipe(
+        this.deleteStudentSubscription = this.flexyService.deleteStudent(this.data.phone).pipe(
           tap(res => {
             if (res.statusCode) {
               switch (res.statusCode) {

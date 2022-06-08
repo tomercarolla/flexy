@@ -117,7 +117,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   initQuestionForm() {
-    this.answerFormControl = this.fb.control({value: "", disabled: this.sendAnswers}, [Validators.required]);
+    this.answerFormControl = this.fb.control({ value: "", disabled: this.sendAnswers }, [Validators.required]);
   }
 
   async nextQuestion(question: QuestionInterface) {
@@ -147,22 +147,23 @@ export class QuestionComponent implements OnInit, OnDestroy {
         });
         return {
           ...store,
-          visualLearningPoints: this.visualLearningPoints,
-          movementLearningPoints: this.movementLearningPoints,
-          auditoryLearningPoints: this.auditoryLearningPoints
+          visualLearningPoints: (this.visualLearningPoints * 100) / 50,
+          movementLearningPoints: (this.movementLearningPoints * 100) / 50,
+          auditoryLearningPoints: (this.auditoryLearningPoints * 100) / 50
         };
       });
       const latestResult = [{
         date: new Date(),
-        visual: this.visualLearningPoints,
-        movement: this.movementLearningPoints,
-        auditory: this.auditoryLearningPoints
+        visual: (this.visualLearningPoints * 100) / 50,
+        movement: (this.movementLearningPoints * 100) / 50,
+        auditory: (this.auditoryLearningPoints * 100) / 50
       }];
       const latestResultStringify = JSON.stringify(latestResult);
+      debugger
       this.updateAnswersSubscription = this.flexyService.updateAnswers(latestResultStringify, {
-        visual: this.visualLearningPoints,
-        movement: this.movementLearningPoints,
-        auditory: this.auditoryLearningPoints
+        visual: (this.visualLearningPoints * 100) / 50,
+        movement: (this.movementLearningPoints * 100) / 50,
+        auditory: (this.auditoryLearningPoints * 100) / 50
       }).pipe(
         tap(data => {
           if (data.statusCode) {
@@ -218,10 +219,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
     let curr: QuestionInterface;
     this.currentQuestion$.subscribe(currQuestion => curr = currQuestion);
     this.router.navigate(["question", curr.id - 1]);
-  }
-
-  questionLearningTypeTranslate(type: string) {
-    return type === "visual" ? "ויזואלי" : type === "movement" ? "תנועתי" : "שמיעתי";
   }
 
   goToResults() {
