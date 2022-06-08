@@ -3,8 +3,6 @@
   width: 600px;
   display: block;
 
-
-
   .mat-dialog-title {
     display: flex;
     align-items: center;
@@ -24,7 +22,16 @@
 
     .user-info {
       max-width: 210px;
+
+      mat-icon {
+        cursor: pointer;
+      }
     }
+  }
+
+  .mat-dialog-actions {
+    padding: 20px 0;
+    min-height: auto;
   }
 
   .icon-button {

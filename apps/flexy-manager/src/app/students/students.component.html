@@ -5,20 +5,20 @@
   </mat-form-field>
   <div class="btn-container">
     <button flexyButton color="sky" (click)="addNewStudent()">הוספה תלמיד</button>
-    <button flexyButton color="wood" (click)="exportToExcel()">
+    <button flexyButton color="wood" (click)="exportToExcel()" [disabled]="downloadExcel">
       <mat-icon>file_download</mat-icon>
       הורדה אקסל
     </button>
   </div>
 </div>
 
-<div class="table-container" *ngIf="allStudents$ | async">
+<div class="table-container" >
   <div class="loader"
        *ngIf="isLoading$ | async">
     <mat-spinner></mat-spinner>
   </div>
 
-  <table id="ExampleMaterialTable" mat-table [dataSource]="dataSource" matSort matSortStart="asc">
+  <table id="studentsTable" mat-table [dataSource]="(allStudents$ | async) && dataSource" matSort matSortStart="asc">
     <!-- First Name Column -->
     <ng-container matColumnDef="firstName">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>שם פרטי</th>
@@ -34,7 +34,7 @@
     <!-- Phone Column -->
     <ng-container matColumnDef="phone">
       <th mat-header-cell *matHeaderCellDef>מס' טלפון</th>
-      <td mat-cell *matCellDef="let student">{{student.phone}}</td>
+      <td mat-cell *matCellDef="let student">0{{student.phone}}</td>
     </ng-container>
 
     <!-- School Column -->
@@ -60,7 +60,6 @@
       </th>
       <td mat-cell *matCellDef="let student" class="questionary-done-icon">
         {{student.questionaryAnswered ? '&#10003;' : ''}}
-<!--        <mat-icon aria-hidden="false" aria-label="Example home icon">{{student.questionaryAnswered ? 'done' : ''}}</mat-icon>-->
       </td>
     </ng-container>
 
@@ -93,9 +92,15 @@
       <th mat-header-cell *matHeaderCellDef>
       </th>
       <td mat-cell *matCellDef="let student">
-        <button flexyButton color="wood" appearance="ghost" (click)="resetQuestionary($event, student)" *ngIf="student.questionaryAnswered">איפוס אבחון</button>
+        <button flexyButton color="wood" appearance="ghost" (click)="resetQuestionary($event, student)"
+                *ngIf="student.questionaryAnswered">איפוס אבחון
+        </button>
       </td>
     </ng-container>
+
+    <tr class="mat-row empty-row" *matNoDataRow>
+      <td class="mat-cell" colspan="10">אין תלמידים רשומים</td>
+    </tr>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let student; columns: displayedColumns;" (click)="editStudent(student)"></tr>

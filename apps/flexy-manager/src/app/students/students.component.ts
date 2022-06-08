@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { Student, UserInterface } from "@flexy/shared";
+import { FlexyService, Student, UserInterface } from "@flexy/shared";
 import { MatSort } from "@angular/material/sort";
-import { FlexyService } from "@flexy/shared";
 import { ManagerStore } from "../store/manager.store";
 import { ManagerQuery } from "../store/manager.query";
 import { MatDialog } from "@angular/material/dialog";
@@ -35,6 +34,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
   userData: UserInterface[] = [];
   resultsLength = 0;
   durationInSeconds = 5;
+  downloadExcel: boolean;
   fileName = "תלמידים.xlsx";
   dataSource: MatTableDataSource<Student> = new MatTableDataSource();
   allStudentsSubscription: Subscription | null = null;
@@ -46,23 +46,10 @@ export class StudentsComponent implements OnInit, OnDestroy {
   allStudents$: Observable<Student[]> = this.managerQuery.selectStudents$
     .pipe(
       tap((res) => {
-        const tableData = [];
-        res.forEach(item => {
-          tableData.push({
-            id: item.id,
-            firstName: item.firstName,
-            lastName: item.lastName,
-            phone: "0" + item.phone,
-            school: item.school,
-            year: item.year,
-            questionaryAnswered: item.questionaryAnswered,
-            totalVisual: item.totalVisual,
-            totalMovement: item.totalMovement,
-            totalAuditory: item.totalAuditory,
-            studentProgress: item.studentProgress
-          });
-        });
-        this.dataSource = new MatTableDataSource(tableData);
+        this.downloadExcel = res === undefined;
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.sort = this.sort;
+        this.cd.detectChanges();
       })
     );
 
@@ -92,7 +79,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
     this.managerStore.update(store => {
       return {
         ...store,
-        isLoading: true
+        isLoading: false
       };
     });
     this.allStudentsSubscription = this.flexyService.getAllStudents().pipe(
@@ -149,8 +136,8 @@ export class StudentsComponent implements OnInit, OnDestroy {
   }
 
   exportToExcel() {
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById("ExampleMaterialTable"));
-    // const ws = document.getElementById("ExampleMaterialTable");
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById("studentsTable"));
+    // const ws = document.getElementById("studentsTable");
     ws["!cols"][9] = { hidden: true };
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Servers");

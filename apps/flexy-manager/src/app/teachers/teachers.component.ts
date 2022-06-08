@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { UserInterface } from "@flexy/shared";
+import { FlexyService, UserInterface } from "@flexy/shared";
 import { ManagerQuery } from "../store/manager.query";
 import { MatDialog } from "@angular/material/dialog";
-import { FlexyService } from "@flexy/shared";
 import { ManagerStore } from "../store/manager.store";
 import { TeacherDialogComponent } from "./teacher-dialog/teacher-dialog.component";
-import { Subscription, tap } from "rxjs";
+import { Observable, Subscription, tap } from "rxjs";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
 
@@ -28,10 +27,11 @@ export class TeachersComponent implements OnInit, OnDestroy {
   allManagersSubscription: Subscription | null = null;
   dataSource: MatTableDataSource<UserInterface> = new MatTableDataSource();
 
-  allTeachers$ = this.managerQuery.selectTeachers$.pipe(
+  allTeachers$: Observable<UserInterface[]> = this.managerQuery.selectTeachers$.pipe(
     tap(res => {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.sort = this.sort;
+      this.cd.detectChanges();
     })
   );
 
@@ -54,7 +54,7 @@ export class TeachersComponent implements OnInit, OnDestroy {
     this.managerStore.update(store => {
       return {
         ...store,
-        isLoading: true
+        isLoading: false
       };
     });
     this.allManagersSubscription = this.flexyService.getAllManagers().pipe(

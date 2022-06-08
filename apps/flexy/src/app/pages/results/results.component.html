@@ -11,13 +11,13 @@
 <div class="chart-container">
   <div class="legend">
     <div class="legend-box visual">
-      סגנון ויזואלי: {{visualLearningPoints}}
+      סגנון ויזואלי: {{totalVisual}}
     </div>
     <div class="legend-box movement">
-      סגנון תנועתי: {{movementLearningPoints}}
+      סגנון תנועתי: {{totalMovement}}
     </div>
     <div class="legend-box auditory">
-      סגנון שמיעתי: {{auditoryLearningPoints}}
+      סגנון שמיעתי: {{totalAuditory}}
     </div>
   </div>
 
@@ -30,10 +30,6 @@
           [datasets]="chartDataSets"
           [legend]="chartLegend">
   </canvas>
-
-<!--  <div>-->
-<!--    הסגנון למידה שלך הוא: !!!-->
-<!--  </div>-->
 
   <div class="result-explanation-text">
     <p>
