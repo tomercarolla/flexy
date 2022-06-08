@@ -159,7 +159,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
         auditory: (this.auditoryLearningPoints * 100) / 50
       }];
       const latestResultStringify = JSON.stringify(latestResult);
-      debugger
       this.updateAnswersSubscription = this.flexyService.updateAnswers(latestResultStringify, {
         visual: (this.visualLearningPoints * 100) / 50,
         movement: (this.movementLearningPoints * 100) / 50,
