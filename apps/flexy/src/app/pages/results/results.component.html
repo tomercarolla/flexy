@@ -8,35 +8,44 @@
   <button flexyButton color="navy" (click)="logout()">יציאה</button>
 </mat-toolbar>
 
-<div class="chart-container">
-  <div class="legend">
-    <div class="legend-box visual">
-      סגנון ויזואלי: {{totalVisual}}
+<div class="container">
+  <div class="chart-container">
+    <div class="legend">
+      <div class="legend-box visual">
+        סגנון ויזואלי {{totalVisual}}
+      </div>
+      <div class="legend-box movement">
+        סגנון תנועתי {{totalMovement}}
+      </div>
+      <div class="legend-box auditory">
+        סגנון שמיעתי {{totalAuditory}}
+      </div>
     </div>
-    <div class="legend-box movement">
-      סגנון תנועתי: {{totalMovement}}
-    </div>
-    <div class="legend-box auditory">
-      סגנון שמיעתי: {{totalAuditory}}
-    </div>
+
+    <canvas baseChart
+            [data]="chartData"
+            [labels]="chartLabels"
+            [chartType]="chartType"
+            [options]="chartOptions"
+            [plugins]="chartPlugins"
+            [datasets]="chartDataSets"
+            [legend]="chartLegend">
+    </canvas>
   </div>
 
-  <canvas baseChart
-          [data]="chartData"
-          [labels]="chartLabels"
-          [chartType]="chartType"
-          [options]="chartOptions"
-          [plugins]="chartPlugins"
-          [datasets]="chartDataSets"
-          [legend]="chartLegend">
-  </canvas>
-
-  <div class="result-explanation-text">
-    <p>
-      החלק בו קיבלתם את הניקוד הגבוה ביותר משקף את סגנון הלמידה המועדף עליכם. עם זאת, חשוב להיזהר מהאמונה כי זהו הסגנון
-      הבלעדי בו עלינו לנקוט בלמידה. מחקרים עדכניים מוכיחים כי גמישות בשימוש מגוון סגנונות וערוצים, תאפשר לנו ללמוד
-      ביעילות המותאמת למאה ה-21.<br>
-      <b>כלומר ככל שנעבד את החומר הלימודי במגוון סגנונות ובאפן אקטיבי, כך הוא ייטמע טוב יותר.</b>
-    </p>
+  <div class="video-container">
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/YbfmCueEMQA" title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+    </iframe>
   </div>
+
+  <!--  <div class="result-explanation-text">-->
+  <!--    <p>-->
+  <!--      החלק בו קיבלתם את הניקוד הגבוה ביותר משקף את סגנון הלמידה המועדף עליכם. עם זאת, חשוב להיזהר מהאמונה כי זהו הסגנון-->
+  <!--      הבלעדי בו עלינו לנקוט בלמידה. מחקרים עדכניים מוכיחים כי גמישות בשימוש מגוון סגנונות וערוצים, תאפשר לנו ללמוד-->
+  <!--      ביעילות המותאמת למאה ה-21.<br>-->
+  <!--      <b>כלומר ככל שנעבד את החומר הלימודי במגוון סגנונות ובאפן אקטיבי, כך הוא ייטמע טוב יותר.</b>-->
+  <!--    </p>-->
+  <!--  </div>-->
 </div>

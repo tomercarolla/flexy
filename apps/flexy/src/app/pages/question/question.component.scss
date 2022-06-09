@@ -4,14 +4,21 @@
     height: 70px;
   }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
   .logo-container {
     display: flex;
     width: 80px;
-  }
-
-  .container {
-    height: 100vh;
-    overflow-x: hidden;
   }
 
   .question-form {
@@ -19,6 +26,8 @@
     flex-direction: column;
     gap: 20px;
     padding: 16px;
+    flex: 1;
+    margin-top: 12px;
   }
 
   .question {

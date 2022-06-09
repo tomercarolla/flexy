@@ -1,4 +1,7 @@
 :host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   .mat-toolbar.mat-primary {
     height: 70px;
@@ -12,8 +15,10 @@
   .container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 12px;
     padding: 16px;
+    flex: 1;
   }
 
   .rules {
