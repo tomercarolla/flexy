@@ -4,8 +4,7 @@ import {Observable} from "rxjs";
 import {QuestionInterface} from "./question.interface";
 import {Student, UserInterface} from "./user.interface";
 import {Response} from "./response.interface";
-import {authInjectionToken} from "../auth";
-import {AuthModel} from "../auth";
+import {authInjectionToken, AuthModel} from "../auth/src";
 
 @Injectable({
   providedIn: "root"

@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "@flexy/auth";
-import { AuthStore } from "@flexy/auth";
-import { AuthQuery } from "@flexy/auth";
 import { Subscription, tap } from "rxjs";
+import {AuthQuery, AuthService, AuthStore} from "@flexy/auth";
 
 @Component({
   selector: "app-login",

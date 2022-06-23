@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { UserInterface } from "../shared/user.interface";
-import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
-import { Inject } from "@angular/core";
-import { Response } from "../shared/response.interface";
+import {Injectable} from "@angular/core";
+import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {Inject} from "@angular/core";
 import {authInjectionToken} from "./auth.module";
 import {AuthModel} from "./auth.model";
+import {UserInterface} from "@flexy/shared";
+import {Response} from "@flexy/shared";
 
 @Injectable({
   providedIn: "root"
