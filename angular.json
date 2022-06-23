@@ -1,8 +1,5 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": "d20d4513-fbc9-4bd6-957f-83a589879bf0"
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -29,10 +26,7 @@
             "polyfills": "apps/flexy/src/polyfills.ts",
             "tsConfig": "apps/flexy/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/flexy/src/favicon.ico",
-              "apps/flexy/src/assets"
-            ],
+            "assets": ["apps/flexy/src/favicon.ico", "apps/flexy/src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "./libs/ui/styles/styles.scss",
@@ -75,6 +69,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4200
+          },
           "configurations": {
             "production": {
               "browserTarget": "flexy:build:production"
@@ -99,10 +96,7 @@
             "tsConfig": "apps/flexy/tsconfig.spec.json",
             "karmaConfig": "apps/flexy/karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/flexy/src/favicon.ico",
-              "apps/flexy/src/assets"
-            ],
+            "assets": ["apps/flexy/src/favicon.ico", "apps/flexy/src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "apps/flexy/src/styles.scss"
@@ -111,35 +105,6 @@
           }
         }
       }
-    },
-    "ui": {
-      "root": "libs/ui",
-      "sourceRoot": "libs/ui/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": [
-            "{options.outputFile}"
-          ],
-          "options": {
-            "lintFilePatterns": [
-              "libs/ui/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui"
-          ],
-          "options": {
-            "jestConfig": "libs/ui/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
     },
     "flexy-manager": {
       "projectType": "application",
@@ -210,6 +175,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4300
+          },
           "configurations": {
             "production": {
               "browserTarget": "flexy-manager:build:production"
@@ -238,13 +206,57 @@
               "apps/flexy-manager/src/favicon.ico",
               "apps/flexy-manager/src/assets"
             ],
-            "styles": [
-              "apps/flexy-manager/src/styles.scss"
-            ],
+            "styles": ["apps/flexy-manager/src/styles.scss"],
             "scripts": []
           }
         }
       }
+    },
+    "auth": {
+      "root": "libs/auth",
+      "sourceRoot": "libs/auth/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/auth/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/auth"],
+          "options": {
+            "jestConfig": "libs/auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "ui": {
+      "root": "libs/ui",
+      "sourceRoot": "libs/ui/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/ui/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui"],
+          "options": {
+            "jestConfig": "libs/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
