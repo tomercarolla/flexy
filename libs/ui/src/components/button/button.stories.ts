@@ -21,6 +21,7 @@ export default {
         type: 'text'
       }
     },
+
     color: {
       name: 'Color',
       type: { name: 'string', required: true },
