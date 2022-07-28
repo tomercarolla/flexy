@@ -7,7 +7,7 @@ export default {
   component: ProgressBarComponent,
   argTypes: {
     progress: {
-      control: {type: 'number', min: 0, max: 100},
+      control: {type: 'range', min: 0, max: 100},
       defaultValue: 0
     }
   },
