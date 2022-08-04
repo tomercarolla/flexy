@@ -1,14 +1,23 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnInit
+} from "@angular/core";
 import { ComponentSizes } from "../../shared/component-sizes";
 import { ComponentColors } from "../../shared/component-colors";
 
 @Component({
   selector: 'button[flexyButton],input[type="button"][flexyButton],input[type="submit"][flexyButton],a[flexyButton]',
-  template: `<ng-content></ng-content>`,
+  templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonComponent {
+export class ButtonComponent implements OnInit {
+  @Input() icon = '';
   @Input() size: ComponentSizes = ComponentSizes.Small;
   @Input() color: ComponentColors = 'primary';
   @Input() appearance: 'filled' | 'ghost' = 'filled';
@@ -42,11 +51,6 @@ export class ButtonComponent {
   get info() {
     return this.color === 'info';
   }
-
-  // @HostBinding('class.color--warning')
-  // get warning() {
-  //   return this.color === 'warning';
-  // }
 
   @HostBinding('class.color--danger')
   get danger() {
@@ -101,6 +105,53 @@ export class ButtonComponent {
   @HostBinding('class.size--large')
   get large() {
     return this.size === ComponentSizes.Large;
+  }
+
+  get hasIcon() {
+    return Boolean(this.icon);
+  }
+
+  @HostBinding('class.with-icon')
+  withIcon = false;
+
+  @HostBinding('class.icon-btn')
+  onlyIcon = false;
+
+  constructor(
+    private el: ElementRef<HTMLButtonElement>,
+    private cd: ChangeDetectorRef,
+  ) {}
+
+  ngOnInit() {
+    this.setIconProps();
+  }
+
+  private setIconProps() {
+    if (this.hasIcon && this.elementHasChildTextNode(this.el.nativeElement)) {
+      this.withIcon = true;
+    } else if (this.hasIcon) {
+      this.onlyIcon = true;
+    }
+
+    this.cd.markForCheck();
+  }
+
+  protected elementHasChildTextNode(element: Element) {
+    const { childNodes } = element;
+
+    for (const childNode of childNodes as unknown as ChildNode[]) {
+      const node = childNode as Node;
+
+      if (
+        node.nodeType === Node.TEXT_NODE &&
+        node.nodeValue &&
+        node.nodeValue.length > 0
+      ) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
 }

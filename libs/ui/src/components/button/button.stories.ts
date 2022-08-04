@@ -21,7 +21,18 @@ export default {
         type: 'text'
       }
     },
-
+    icon: {
+      name: 'icon',
+      type: { name: 'string' },
+      defaultValue: 'delete',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'delete' },
+      },
+      control: {
+        type: 'text',
+      },
+    },
     color: {
       name: 'Color',
       type: { name: 'string', required: true },
@@ -53,14 +64,23 @@ export default {
   },
   decorators: [
     moduleMetadata({
-      imports: [ButtonModule, CommonModule],
+      imports: [ButtonModule],
     }),
   ],
 } as Meta;
 
 export const Template: Story = (args) => ({
   template: `<button flexyButton [color]="color" [size]="size">{{label}}</button>`,
-  component: ButtonComponent,
   props: args
+});
+
+export const OnlyIcon: Story = (args) => ({
+    template: `<button flexyButton [color]="color" [size]="size" [icon]="icon"></button>`,
+    props: args,
+});
+
+export const WithIcon: Story = (args) => ({
+    template: `<button flexyButton [color]="color" [size]="size" [icon]="icon">{{label}}</button>`,
+    props: args,
 });
 
