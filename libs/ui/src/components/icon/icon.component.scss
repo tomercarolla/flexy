@@ -1,0 +1,60 @@
+@import '../../../../ui/styles/tools/functions';
+
+:host {
+  --icon-svg-vertical-align: top;
+
+  display: inline-flex;
+  place-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+
+  @each $size in component-sizes() {
+    &.size--#{$size} {
+      ::ng-deep svg {
+        font-size: var(--icon-#{$size}-size);
+      }
+    }
+  }
+
+  ::ng-deep svg {
+    width: 1em;
+    height: 1em;
+    fill: #000;
+    font-size: var(--icon-default-size);
+    vertical-align: var(--icon-svg-vertical-align);
+  }
+
+  &.active {
+    ::ng-deep svg {
+      fill: var(--primary-500);
+    }
+  }
+
+  &.pointer {
+    cursor: pointer;
+
+    &:hover {
+      ::ng-deep svg {
+        fill: var(--primary-500);
+      }
+    }
+  }
+
+  &.disabled {
+    opacity: var(--disabled-opacity);
+    pointer-events: none;
+    cursor: default;
+
+    ::ng-deep svg {
+      fill: #aeaeae;
+    }
+  }
+
+  .mat-icon {
+    display: flex;
+    width: auto;
+    height: auto;
+    line-height: normal;
+    margin: 0;
+  }
+}
