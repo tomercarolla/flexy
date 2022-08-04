@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
-import { Student } from "@flexy/shared";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { FlexyService } from "@flexy/shared";
-import { ManagerStore } from "../../store/manager.store";
-import { ManagerQuery } from "../../store/manager.query";
-import { ConfirmationDialogComponent, ConfirmDialogModel } from "@flexy/ui";
-import { filter, forkJoin, map, Subscription, tap } from "rxjs";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import {ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit} from "@angular/core";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {FlexyService, Student} from "@flexy/shared";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ManagerStore} from "../../store/manager.store";
+import {ManagerQuery} from "../../store/manager.query";
+import {ConfirmationDialogComponent} from "@flexy/ui";
+import {filter, forkJoin, map, Subscription, tap} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import * as  Highcharts from "highcharts";
 
 interface DialogData extends Student {
@@ -218,7 +217,8 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
     const title = `מחיקת תלמיד`;
     const message = `האם בטוח למחוק משתמש: ${this.data.firstName} ${this.data.lastName}?`;
 
-    const dialogData = new ConfirmDialogModel(title, message);
+    // const dialogData = new ConfirmDialogModel(title, message);
+    const dialogData = {title, message};
 
     const deleteDialog = this.dialogRef.open(ConfirmationDialogComponent, {
       width: "500px",
