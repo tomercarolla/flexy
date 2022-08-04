@@ -4,6 +4,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIconModule} from "@angular/material/icon";
 import {ButtonModule} from "../button/button.module";
+import {ConfirmationDialogModule} from "./confirmation-dialog.module";
 
 export default {
   title: 'Confirmation Dialog',
@@ -11,7 +12,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [ConfirmationDialogExampleComponent],
-      imports: [MatDialogModule, ButtonModule, MatIconModule, BrowserAnimationsModule],
+      imports: [ConfirmationDialogModule, ButtonModule],
     }),
   ],
 } as Meta;
