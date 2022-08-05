@@ -63,7 +63,7 @@ export class ResultsComponent implements OnInit {
     };
 
     this.chartData = [this.totalVisual, this.totalMovement, this.totalAuditory];
-    this.chartLabels = ["סגנון ויזואלי", "סגנון תנועתי", "סגנון שמיעתי"];
+    this.chartLabels = ["סגנון חזותי", "סגנון תנועתי", "סגנון שמיעתי"];
     this.chartDataSets = [{
       backgroundColor: ["#E9B44C", "#4F5F76", "#DBA88B"]
     }];
