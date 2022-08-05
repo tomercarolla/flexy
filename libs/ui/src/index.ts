@@ -8,3 +8,6 @@ export * from './components/button/button.component';
 
 export * from './components/confirmation-dialog/confirmation-dialog.module';
 export * from './components/confirmation-dialog/confirmation-dialog.component';
+
+export * from './components/footer/footer.module';
+export * from './components/footer/footer.component';

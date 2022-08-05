@@ -5,6 +5,11 @@
 
   mat-sidenav-container {
     height: 100vh;
+
+    ::ng-deep mat-sidenav-content {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   mat-sidenav {
@@ -43,6 +48,7 @@
 
   .container {
     padding: 20px;
+    flex: 1;
   }
 
   .link {
