@@ -44,11 +44,11 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
         movement.push(res.movement);
         auditory.push(res.auditory);
       });
-      const dataset = {'dates': dates, 'visual': visual, 'movement': movement, 'auditory': auditory};
+      const dataset = { "dates": dates, "visual": visual, "movement": movement, "auditory": auditory };
       return {
         chart: {
           type: "column",
-          width: 780,
+          width: 780
         },
         title: {
           text: "התקדמות תלמיד"
@@ -56,7 +56,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
         xAxis: {
           type: "datetime",
           categories: dataset.dates.map(date => {
-            return Highcharts.dateFormat('%d-%m-%Y', new Date(date).getTime());
+            return Highcharts.dateFormat("%d-%m-%Y", new Date(date).getTime());
           })
         },
         yAxis: {
@@ -80,9 +80,12 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
             data: dataset.auditory
           },
           {
-            name: "סגנון ויזואלי",
+            name: "סגנון חזותי",
             data: dataset.visual
           }
+        ],
+        colors: [
+          "#DBA88B", "#4F5F76", "#E9B44C"
         ]
       };
     })
