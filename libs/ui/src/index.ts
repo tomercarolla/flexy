@@ -11,3 +11,6 @@ export * from './components/confirmation-dialog/confirmation-dialog.component';
 
 export * from './components/footer/footer.module';
 export * from './components/footer/footer.component';
+
+export * from './components/about-dialog/about-dialog.module';
+export * from './components/about-dialog/about-dialog.component';

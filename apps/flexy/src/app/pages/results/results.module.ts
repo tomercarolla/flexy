@@ -6,6 +6,7 @@ import { ResultsComponent } from "./results.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { ChartsModule } from "ng2-charts";
 import { ButtonModule, FooterModule } from "@flexy/ui";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ButtonModule, FooterModule } from "@flexy/ui";
     MatToolbarModule,
     ChartsModule,
     ButtonModule,
-    FooterModule
+    FooterModule,
+    MatDialogModule
   ],
   exports: [ResultsComponent]
 })

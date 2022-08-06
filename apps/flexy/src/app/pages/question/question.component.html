@@ -5,13 +5,14 @@
         <img src="assets/images/flexy-logo.png">
       </div>
 
+      <a href="javascript:void(0)" (click)="openAboutDialog()" class="about-link">אודות</a>
+
       <button flexyButton color="navy" (click)="logout()">יציאה</button>
     </mat-toolbar>
     <ng-container *ngIf="allQuestions$ | async as all">
       <flexy-progress-bar [progress]="progress$ | async" [total]="all.length"></flexy-progress-bar>
     </ng-container>
   </div>
-
 
   <section class="question-form" [@slideInOut]="question">
     <div class="question">

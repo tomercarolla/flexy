@@ -7,6 +7,7 @@ import { QuestionModule } from "../question/question.module";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { HttpClientModule } from "@angular/common/http";
 import { ButtonModule, FooterModule } from "@flexy/ui";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ButtonModule, FooterModule } from "@flexy/ui";
     MatToolbarModule,
     HttpClientModule,
     ButtonModule,
-    FooterModule
+    FooterModule,
+    MatDialogModule
   ],
   exports: [MainComponent]
 })

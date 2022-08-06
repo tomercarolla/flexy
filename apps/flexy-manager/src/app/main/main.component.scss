@@ -28,6 +28,17 @@
     margin-left: 20px;
   }
 
+  .about-link {
+    color: var(--lemon-500);
+    text-decoration: none;
+    font-size: var(--size-20);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--lemon-700);
+    }
+  }
+
   .middle {
     display: flex;
     align-items: center;
