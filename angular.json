@@ -63,8 +63,8 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "./libs/ui/styles/styles.scss",
-              "apps/flexy/src/styles.scss"
+              "apps/flexy/src/styles.scss",
+              "./libs/ui/styles/styles.scss"
             ],
             "scripts": []
           },
@@ -174,8 +174,8 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "./libs/ui/styles/styles.scss",
-              "apps/flexy-manager/src/styles.scss"
+              "apps/flexy-manager/src/styles.scss",
+              "./libs/ui/styles/styles.scss"
             ],
             "scripts": []
           },

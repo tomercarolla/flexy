@@ -21,15 +21,19 @@
   }
 }
 
+* {
+  font-family: 'Rubik', sans-serif;
+}
+
 html,
 body {
+  font-family: 'Rubik', sans-serif;
   height: 100%;
 }
 
 body {
   margin: 0;
-  font-family: 'Rubik', sans-serif;
-  //direction: rtl;
+  direction: rtl;
 }
 
 textarea {

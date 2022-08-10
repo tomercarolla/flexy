@@ -1,11 +1,11 @@
 <div class="container" *ngIf="currentQuestion$ | async as question">
   <div class="top">
     <mat-toolbar color="primary">
+      <a href="javascript:void(0)" (click)="openAboutDialog()" class="about-link">אודות</a>
+
       <div class="logo-container">
         <img src="assets/images/flexy-logo.png">
       </div>
-
-      <a href="javascript:void(0)" (click)="openAboutDialog()" class="about-link">אודות</a>
 
       <button flexyButton color="sky" (click)="logout()">יציאה</button>
     </mat-toolbar>
@@ -31,18 +31,19 @@
     <div class="button-container" [class.first-question]="question.id === 1">
 
       <button flexyButton appearance="ghost"
-              color="info"
+              color="egg"
               size="medium"
               *ngIf="question.id !== 1"
-              [disabled]="sendAnswers" (click)="previousQuestion()">חזור
+              [disabled]="sendAnswers" (click)="previousQuestion()">הקודם
       </button>
 
       <button type="button" flexyButton
-              [color]="question.id < 30 ? 'info' : 'info'"
+              [color]="question.id < 30 ? 'egg' : 'sky'"
               size="medium"
               (click)="nextQuestion(question)"
-              [disabled]="!answerFormControl.valid || sendAnswers">{{question.id < 30 ? 'הבא' : 'סיים'}}
+              [disabled]="!answerFormControl.valid || sendAnswers">{{question.id < 30 ? 'הבא' : 'סיימתי'}}
       </button>
+
     </div>
 
     <button flexyButton color="info" size="large" type="button" *ngIf="sendAnswers" (click)="goToResults()">לעבור

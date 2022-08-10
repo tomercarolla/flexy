@@ -10,5 +10,6 @@ export type ComponentColors =
   | 'wood'
   | 'lemon'
   | 'ocean'
+  | 'egg'
 
 // | 'warning'

@@ -82,6 +82,11 @@ export class ButtonComponent implements OnInit {
     return this.color === 'lemon';
   }
 
+  @HostBinding('class.color--egg')
+  get egg() {
+    return this.color === 'egg';
+  }
+
   @HostBinding('class.color--ocean')
   get ocean() {
     return this.color === 'ocean';

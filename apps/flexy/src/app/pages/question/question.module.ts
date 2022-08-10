@@ -4,7 +4,7 @@ import { QuestionRoutingModule } from "./question-routing.module";
 import { QuestionComponent } from "./question.component";
 import { MatRadioModule } from "@angular/material/radio";
 import { ReactiveFormsModule } from "@angular/forms";
-import { ButtonModule, FooterModule, ProgressBarModule } from "@flexy/ui";
+import { ButtonModule, FooterModule, IconModule, ProgressBarModule } from "@flexy/ui";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule } from "@angular/material/dialog";
@@ -22,7 +22,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatToolbarModule,
     MatSnackBarModule,
     FooterModule,
-    MatDialogModule
+    MatDialogModule,
+    IconModule
   ],
   providers: [DatePipe],
   exports: [QuestionComponent]

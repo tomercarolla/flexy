@@ -13,7 +13,7 @@
 
   .logo-container {
     display: flex;
-    width: 80px;
+    width: 90px;
   }
 
   .about-link {
@@ -33,6 +33,12 @@
     gap: 12px;
     padding: 16px;
     flex: 1;
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-family: 'Rubik', sans-serif;
+    }
   }
 
   .chart-container {

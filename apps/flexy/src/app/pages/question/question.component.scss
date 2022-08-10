@@ -18,7 +18,7 @@
 
   .logo-container {
     display: flex;
-    width: 80px;
+    width: 90px;
   }
 
   .about-link {
@@ -61,10 +61,22 @@
 
   .button-container {
     margin-top: 30px;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 30px;
+    flex-wrap: wrap;
+
+    --icon-large-size: 70px;
+
+    button {
+      min-width: 110px;
+    }
 
     &.first-question {
       justify-content: flex-end;
+    }
+
+    .finished-btn {
+      width: 100%;
     }
   }
 }

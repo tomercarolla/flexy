@@ -1,16 +1,17 @@
 <mat-toolbar color="primary">
+  <a href="javascript:void(0)" (click)="openAboutDialog()" class="about-link">אודות</a>
+
   <div class="logo-container">
     <img src="assets/images/flexy-logo.png">
   </div>
-
-  <a href="javascript:void(0)" (click)="openAboutDialog()" class="about-link">אודות</a>
-
-  תוצאות השאלון
 
   <button flexyButton color="sky" (click)="logout()">יציאה</button>
 </mat-toolbar>
 
 <div class="container">
+
+  <h1>תוצאות השאלון</h1>
+
   <div class="chart-container">
     <div class="legend">
       <div class="legend-box visual">
