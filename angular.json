@@ -52,7 +52,15 @@
             "polyfills": "apps/flexy/src/polyfills.ts",
             "tsConfig": "apps/flexy/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/flexy/src/favicon.ico", "apps/flexy/src/assets"],
+            "assets": [
+              "apps/flexy/src/favicon.ico",
+              "apps/flexy/src/assets",
+              {
+                "glob": "**/*",
+                "input": "libs/ui/assets",
+                "output": "shared-assets"
+              }
+            ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "./libs/ui/styles/styles.scss",
@@ -157,7 +165,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "apps/flexy-manager/src/favicon.ico",
-              "apps/flexy-manager/src/assets"
+              "apps/flexy-manager/src/assets",
+              {
+                "glob": "**/*",
+                "input": "libs/ui/assets",
+                "output": "shared-assets"
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
@@ -262,7 +275,10 @@
           "builder": "@nrwl/storybook:storybook",
           "options": {
             "uiFramework": "@storybook/angular",
-            "styles": ["./libs/ui/styles/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./libs/ui/styles/styles.scss"
+            ],
             "port": 4400,
             "config": {
               "configFolder": "libs/ui/.storybook"
@@ -277,10 +293,12 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
-            "styles": ["./libs/ui/styles/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./libs/ui/styles/styles.scss"
+            ],
             "outputPath": "dist/storybook/ui",
             "config": {
               "configFolder": "libs/ui/.storybook"

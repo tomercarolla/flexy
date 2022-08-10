@@ -52,6 +52,7 @@
     "@nrwl/angular": "13.4.6",
     "@nrwl/web": "^14.3.6",
     "@nrwl/workspace": "^13.4.6",
+    "@storybook/addon-controls": "^6.5.9",
     "chart.js": "^2.9.3",
     "highcharts": "^10.0.0",
     "highcharts-angular": "^3.0.0",

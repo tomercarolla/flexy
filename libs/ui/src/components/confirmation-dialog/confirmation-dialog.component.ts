@@ -29,7 +29,12 @@ export class ConfirmationDialogComponent {
   }
 }
 
-export class ConfirmDialogModel {
-  constructor(public title: string, public message: string) {
-  }
+export interface ConfirmDialogModel {
+  title: string;
+  message: string;
 }
+
+// export class ConfirmDialogModel {
+//   constructor(public title: string, public message: string) {
+//   }
+// }

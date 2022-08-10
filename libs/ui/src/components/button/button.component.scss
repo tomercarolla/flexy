@@ -9,6 +9,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 6px;
     white-space: nowrap;
     vertical-align: middle;
     user-select: none;
@@ -23,6 +24,10 @@
 
     &:focus {
       outline: none;
+    }
+
+    flexy-icon svg {
+      fill: #FFF;
     }
 
     &.full-width {

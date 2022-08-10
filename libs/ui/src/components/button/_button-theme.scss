@@ -60,6 +60,16 @@
         mat-icon {
           margin: var(--btn-#{$size}-icon-margin);
         }
+
+        &.icon-btn {
+          padding: var(--btn-#{$size}-icon-btn-padding);
+        }
+
+        flexy-icon {
+          svg {
+            font-size: var(--btn-#{$size}-icon-font-size);
+          }
+        }
       }
     }
   }
