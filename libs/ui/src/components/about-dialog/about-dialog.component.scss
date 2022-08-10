@@ -1,0 +1,73 @@
+:host {
+  direction: rtl;
+
+  .mat-dialog-title {
+    display: flex;
+    align-items: center;
+
+    .title {
+      flex: 1;
+      text-align: center;
+    }
+
+    mat-icon {
+      cursor: pointer;
+    }
+  }
+
+  .mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+    @media screen and (max-width: 1000px) {
+      font-size: 12px;
+    }
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .project-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .logo-container {
+      display: flex;
+      max-width: 200px;
+
+      @media screen and (max-width: 1000px) {
+        max-width: 160px;
+      }
+    }
+  }
+
+  .hit-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    width: 100%;
+
+    @media screen and (max-width: 1000px) {
+      flex-direction: column;
+    }
+
+    .hit-logo {
+      max-width: 120px;
+
+      @media screen and (max-width: 1000px) {
+        max-width: 90px;
+      }
+    }
+  }
+
+  .footer {
+    margin-top: 22px;
+  }
+}

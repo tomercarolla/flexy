@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { AuthService } from "@flexy/auth";
+import { MatDialog } from "@angular/material/dialog";
+import { AboutDialogComponent } from "@flexy/ui";
 
 @Component({
   selector: "app-students",
@@ -17,22 +19,28 @@ export class MainComponent implements OnInit {
   ];
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isAdmin();
   }
 
-  isAdmin() {
+  isAdmin(): void {
     if (this.authService.getRole() === "admin") {
         this.hideMenu = false;
     }
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
   }
 
+  openAboutDialog(): void {
+    this.dialog.open(AboutDialogComponent, {
+      width: '650px'
+    });
+  }
 }

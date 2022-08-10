@@ -6,8 +6,7 @@ import { LoginComponent } from "./login.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { ButtonModule } from "@flexy/ui";
+import { ButtonModule, FooterModule } from "@flexy/ui";
 
 
 @NgModule({
@@ -19,7 +18,7 @@ import { ButtonModule } from "@flexy/ui";
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    FooterModule
   ],
   exports: [LoginComponent]
 })

@@ -9,6 +9,8 @@ import { QuestionStore } from "../../store/question.store";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AuthService } from "@flexy/auth";
+import { AboutDialogComponent } from "@flexy/ui";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "app-question",
@@ -55,6 +57,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private router: Router,
               private fb: FormBuilder,
+              private dialog: MatDialog,
               private _snackBar: MatSnackBar
   ) {
   }
@@ -232,6 +235,10 @@ export class QuestionComponent implements OnInit, OnDestroy {
       };
     });
     this.authService.logout();
+  }
+
+  openAboutDialog(): void {
+    this.dialog.open(AboutDialogComponent);
   }
 
   ngOnDestroy() {

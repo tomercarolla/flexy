@@ -5,6 +5,11 @@
 
   mat-sidenav-container {
     height: 100vh;
+
+    ::ng-deep mat-sidenav-content {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   mat-sidenav {
@@ -21,6 +26,17 @@
 
   .menu-btn {
     margin-left: 20px;
+  }
+
+  .about-link {
+    color: #FFF;
+    text-decoration: none;
+    font-size: var(--size-20);
+    cursor: pointer;
+
+    &:hover {
+      color: #ffd740;
+    }
   }
 
   .middle {
@@ -43,6 +59,7 @@
 
   .container {
     padding: 20px;
+    flex: 1;
   }
 
   .link {

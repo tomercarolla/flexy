@@ -3,6 +3,8 @@ import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
 import { Label, SingleDataSet } from "ng2-charts";
 import { Router } from "@angular/router";
 import { AuthService } from "@flexy/auth";
+import { MatDialog } from "@angular/material/dialog";
+import { AboutDialogComponent } from "@flexy/ui";
 
 @Component({
   selector: "app-results",
@@ -29,7 +31,8 @@ export class ResultsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -63,7 +66,7 @@ export class ResultsComponent implements OnInit {
     };
 
     this.chartData = [this.totalVisual, this.totalMovement, this.totalAuditory];
-    this.chartLabels = ["סגנון ויזואלי", "סגנון תנועתי", "סגנון שמיעתי"];
+    this.chartLabels = ["סגנון חזותי", "סגנון תנועתי", "סגנון שמיעתי"];
     this.chartDataSets = [{
       backgroundColor: ["#E9B44C", "#4F5F76", "#DBA88B"]
     }];
@@ -91,5 +94,9 @@ export class ResultsComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  openAboutDialog(): void {
+    this.dialog.open(AboutDialogComponent);
   }
 }

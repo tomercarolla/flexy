@@ -7,7 +7,8 @@ import { MainComponent } from "./main.component";
 import { MatIconModule } from "@angular/material/icon";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
-import { ButtonModule } from "@flexy/ui";
+import { ButtonModule, FooterModule } from "@flexy/ui";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [MainComponent],
@@ -19,7 +20,10 @@ import { ButtonModule } from "@flexy/ui";
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    ButtonModule
+    MatDialogModule,
+    MatIconModule,
+    ButtonModule,
+    FooterModule
   ],
   exports: [MainComponent]
 })

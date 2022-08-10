@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "@flexy/auth";
+import { AboutDialogComponent } from "@flexy/ui";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-main',
@@ -10,13 +12,17 @@ import { AuthService } from "@flexy/auth";
 })
 export class MainComponent {
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private dialog: MatDialog) {
   }
 
   startQuestionary() {
     this.router.navigate([
       'question', 1
     ]);
+  }
+
+  openAboutDialog(): void {
+    this.dialog.open(AboutDialogComponent);
   }
 
   logout() {

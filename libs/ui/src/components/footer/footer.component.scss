@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  background-color: var(--clearSky-500);
+  color: #FFF;
+
+  a {
+    color: var(--clearSky-900);
+  }
+}

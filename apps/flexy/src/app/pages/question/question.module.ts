@@ -4,9 +4,10 @@ import { QuestionRoutingModule } from "./question-routing.module";
 import { QuestionComponent } from "./question.component";
 import { MatRadioModule } from "@angular/material/radio";
 import { ReactiveFormsModule } from "@angular/forms";
-import { ButtonModule, ProgressBarModule } from "@flexy/ui";
+import { ButtonModule, FooterModule, ProgressBarModule } from "@flexy/ui";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     ProgressBarModule,
     ButtonModule,
     MatToolbarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FooterModule,
+    MatDialogModule
   ],
   providers: [DatePipe],
   exports: [QuestionComponent]
