@@ -1,8 +1,7 @@
-import { HttpClientModule } from '@angular/common/http';
-import {Meta, moduleMetadata, Story} from '@storybook/angular';
-import {ComponentSizes} from "../../shared/component-sizes";
-import {IconComponent} from "./icon.component";
-import {IconModule} from "./icon.module";
+import { Meta, moduleMetadata, Story } from "@storybook/angular";
+import { ComponentSizes } from "../../shared/component-sizes";
+import { IconComponent } from "./icon.component";
+import { IconModule } from "./icon.module";
 
 export default {
   title: 'Icon',

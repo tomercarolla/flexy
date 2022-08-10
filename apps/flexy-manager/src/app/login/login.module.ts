@@ -7,7 +7,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
-import {ButtonModule, IconModule} from "@flexy/ui";
+import { ButtonModule } from "@flexy/ui";
 import { MatIconModule } from "@angular/material/icon";
 
 
@@ -22,7 +22,6 @@ import { MatIconModule } from "@angular/material/icon";
     ReactiveFormsModule,
     ButtonModule,
     MatIconModule,
-    IconModule
   ],
   exports: [LoginComponent]
 })
