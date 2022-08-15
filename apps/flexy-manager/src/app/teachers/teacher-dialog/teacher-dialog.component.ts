@@ -1,12 +1,12 @@
-import {Component, Inject, OnDestroy, OnInit} from "@angular/core";
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
-import {FlexyService, passwordMatchingValidator, UserInterface} from "@flexy/shared";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Subscription, tap} from "rxjs";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {ConfirmationDialogComponent} from "@flexy/ui";
-import {ManagerQuery} from "../../store/manager.query";
-import {ManagerStore} from "../../store/manager.store";
+import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+import { FlexyService, passwordMatchingValidator, UserInterface } from "@flexy/shared";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Subscription, tap } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ConfirmationDialogComponent } from "@flexy/ui";
+import { ManagerQuery } from "../../store/manager.query";
+import { ManagerStore } from "../../store/manager.store";
 
 interface DialogData extends UserInterface {
   title: string;
@@ -43,27 +43,34 @@ export class TeacherDialogComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.data.isEdit) {
       const userLogged = sessionStorage.getItem("userLogged");
-      if(this.data.userName === userLogged) {
+      if (this.data.userName === userLogged) {
         this.showDelete = false;
       }
+
       this.managerForm = this.fb.group({
         firstName: [this.data.firstName, [Validators.required]],
         lastName: [this.data.lastName, [Validators.required]],
-        userName: [this.data.userName, [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]],
+        userName: [this.data.userName, [Validators.required, Validators.pattern("^[a-zA-Z \-']+")]],
         phone: this.fb.control("0" + this.data.phone, [
           Validators.required,
           Validators.pattern("^[0-9]*$"),
           Validators.minLength(10),
           Validators.maxLength(10)
         ]),
+
         password: [this.data.password, [Validators.required]],
         confirmPassword: [this.data.password, [Validators.required]]
       }, { validators: passwordMatchingValidator });
+
+      if (this.data.userName === "telem") {
+        this.showDelete = false;
+        this.managerForm.disable();
+      }
     } else {
       this.managerForm = this.fb.group({
         firstName: ["", [Validators.required]],
         lastName: ["", [Validators.required]],
-        userName: ["", [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]],
+        userName: ["", [Validators.required, Validators.pattern("^[a-zA-Z \-']+")]],
         phone: this.fb.control("", [
           Validators.required,
           Validators.pattern("^[0-9]*$"),
@@ -125,7 +132,7 @@ export class TeacherDialogComponent implements OnInit, OnDestroy {
     const message = `האם בטוח למחוק משתמש: ${this.data.firstName} ${this.data.lastName}`;
 
     // const dialogData = new ConfirmDialogModel(title, message);
-    const dialogData = {title, message};
+    const dialogData = { title, message };
 
     const deleteDialog = this.dialogRef.open(ConfirmationDialogComponent, {
       width: "500px",
