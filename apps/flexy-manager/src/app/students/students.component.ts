@@ -159,11 +159,10 @@ export class StudentsComponent implements OnInit, OnDestroy {
   resetQuestionary(event, student) {
     event.stopPropagation();
     const title = "איפוס אבחון";
-    // const message = `האם בטוח לאפס אבחון של: ${student.firstName} ${student.lastName}?`;
     const message = 'באיפוס האבחון, התשובות האחרונות של התלמיד ' + `<b>${student.firstName} ${student.lastName}</b>` + ' יימחקו אך התוצאות נשמרות לצרכי השוואה.' +
        '<br><br>האם לאפס את האבחון האחרון?';
 
-    const confirmationButtonText = 'לאפס'
+    const confirmationButtonText = 'אפס'
 
     // const dialogData = new ConfirmDialogModel(title, message);
     const dialogData = { title, message, confirmationButtonText };

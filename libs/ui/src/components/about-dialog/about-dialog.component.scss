@@ -32,18 +32,12 @@
     align-items: center;
   }
 
-  .project-details {
+  .logo-container {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    max-width: 200px;
 
-    .logo-container {
-      display: flex;
-      max-width: 200px;
-
-      @media screen and (max-width: 1000px) {
-        max-width: 125px;
-      }
+    @media screen and (max-width: 1000px) {
+      max-width: 125px;
     }
   }
 
