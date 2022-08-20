@@ -4,12 +4,12 @@
 </div>
 
 <div mat-dialog-content>
-  <p>{{message}}</p>
+  <p [innerHTML]="message"></p>
 </div>
 
 <div mat-dialog-actions>
   <div class="btn-container">
-    <button flexyButton color="sky" size="medium" (click)="onConfirm()">כן</button>
-    <button flexyButton color="secondary" size="medium" (click)="onClose()">לא</button>
+    <button flexyButton color="sky" size="medium" (click)="onConfirm()">{{confirmationButtonText ? confirmationButtonText : 'כן'}}</button>
+    <button flexyButton color="secondary" size="medium" (click)="onClose()">בטל</button>
   </div>
 </div>

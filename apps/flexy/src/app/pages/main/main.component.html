@@ -9,14 +9,22 @@
 </mat-toolbar>
 
 <section class="container">
-  <div>
-    <iframe  width="100%" height="100%" src="https://www.youtube.com/embed/foRxP78MHBA"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-    </iframe>
+  <div class="text">
+    ברוכים הבאים ל-פלקסי, אם זו פעם ראשונה שלכם כאן, צפו בסרטון מטה להנחיות
+    אם כבר ביקרתם בעבר, לחצו על "התחלה" כדי להתחיל בשאלון.
   </div>
 
-  <button flexyButton size="large" color="wood" class="start-button" (click)="startQuestionary()">התחל</button>
+  <div class="bottom">
+    <div>
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/foRxP78MHBA"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+      </iframe>
+    </div>
+
+    <button flexyButton size="large" color="wood" class="start-button" (click)="startQuestionary()">התחל</button>
+  </div>
+
 </section>
 
 <flexy-footer></flexy-footer>

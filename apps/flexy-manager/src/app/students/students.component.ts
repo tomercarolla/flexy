@@ -1,15 +1,15 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
-import {FlexyService, Student, UserInterface} from "@flexy/shared";
-import {MatSort} from "@angular/material/sort";
-import {ManagerStore} from "../store/manager.store";
-import {ManagerQuery} from "../store/manager.query";
-import {MatDialog} from "@angular/material/dialog";
-import {StudentDialogComponent} from "./student-dialog/student-dialog.component";
-import {MatTableDataSource} from "@angular/material/table";
-import {debounceTime, distinctUntilChanged, Observable, Subject, Subscription, tap} from "rxjs";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { FlexyService, Student, UserInterface } from "@flexy/shared";
+import { MatSort } from "@angular/material/sort";
+import { ManagerStore } from "../store/manager.store";
+import { ManagerQuery } from "../store/manager.query";
+import { MatDialog } from "@angular/material/dialog";
+import { StudentDialogComponent } from "./student-dialog/student-dialog.component";
+import { MatTableDataSource } from "@angular/material/table";
+import { debounceTime, distinctUntilChanged, Observable, Subject, Subscription, tap } from "rxjs";
 import * as XLSX from "xlsx";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {ConfirmationDialogComponent} from "@flexy/ui";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ConfirmationDialogComponent } from "@flexy/ui";
 
 @Component({
   selector: "app-students",
@@ -159,10 +159,14 @@ export class StudentsComponent implements OnInit, OnDestroy {
   resetQuestionary(event, student) {
     event.stopPropagation();
     const title = "איפוס אבחון";
-    const message = `האם בטוח לאפס אבחון של: ${student.firstName} ${student.lastName}?`;
+    // const message = `האם בטוח לאפס אבחון של: ${student.firstName} ${student.lastName}?`;
+    const message = 'באיפוס האבחון, התשובות האחרונות של התלמיד ' + `<b>${student.firstName} ${student.lastName}</b>` + ' יימחקו אך התוצאות נשמרות לצרכי השוואה.' +
+       '<br><br>האם לאפס את האבחון האחרון?';
+
+    const confirmationButtonText = 'לאפס'
 
     // const dialogData = new ConfirmDialogModel(title, message);
-    const dialogData = {title, message};
+    const dialogData = { title, message, confirmationButtonText };
 
     const deleteDialog = this.dialog.open(ConfirmationDialogComponent, {
       width: "500px",

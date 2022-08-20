@@ -11,12 +11,14 @@ export class ConfirmationDialogComponent {
 
   title: string;
   message: string;
+  confirmationButtonText: string;
 
   constructor(public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogModel) {
     // Update view with given values
     this.title = data.title;
     this.message = data.message;
+    this.confirmationButtonText = data.confirmationButtonText;
   }
 
   onConfirm(): void {
@@ -32,6 +34,7 @@ export class ConfirmationDialogComponent {
 export interface ConfirmDialogModel {
   title: string;
   message: string;
+  confirmationButtonText: string;
 }
 
 // export class ConfirmDialogModel {
