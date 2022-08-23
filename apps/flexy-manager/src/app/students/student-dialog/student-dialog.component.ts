@@ -90,6 +90,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
     })
   );
 
+  resetQuestionarySubscription: Subscription | null = null;
   saveStudentSubscription: Subscription | null = null;
   deleteStudentSubscription: Subscription | null = null;
   studentAnswersSubscription: Subscription | null = null;
@@ -216,11 +217,62 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
     });
   }
 
+  resetQuestionary(firstName, lastName, phone) {
+    const title = "איפוס אבחון";
+    const message = "באיפוס האבחון, התשובות האחרונות של התלמיד " + `<b>${firstName} ${lastName}</b>` + " יימחקו אך התוצאות נשמרות לצרכי השוואה." +
+      "<br><br>האם לאפס את האבחון האחרון?";
+
+    const confirmationButtonText = "אפס";
+
+    const dialogData = { title, message, confirmationButtonText };
+
+    const resetDialog = this.dialogRef.open(ConfirmationDialogComponent, {
+      width: "500px",
+      data: dialogData
+    });
+
+    resetDialog.afterClosed().subscribe(res => {
+      this.managerStore.update(store => {
+        return {
+          ...store,
+          isLoading: true
+        };
+      });
+      if (res) {
+        this.resetQuestionarySubscription = this.flexyService.resetQuestinaryPerStudend(phone).pipe(
+          tap(data => {
+            if (data.statusCode) {
+              switch (data.statusCode) {
+                case 200:
+                  this.close();
+                  this.openSnackBar(data.message + "", "x", "success");
+                  // this.refresh();
+                  break;
+                case 401:
+                  this.openSnackBar(data.message + "", "x", "failed");
+                  break;
+                default:
+                  this.openSnackBar(data.message + "", "x", "failed");
+                  break;
+              }
+            }
+          })
+        ).subscribe();
+      } else {
+        this.managerStore.update(store => {
+          return {
+            ...store,
+            isLoading: false
+          };
+        });
+      }
+    });
+  }
+
   deleteStudent() {
     const title = `מחיקת תלמיד`;
     const message = `האם בטוח למחוק משתמש: ${this.data.firstName} ${this.data.lastName}?`;
 
-    // const dialogData = new ConfirmDialogModel(title, message);
     const dialogData = {title, message};
 
     const deleteDialog = this.dialogRef.open(ConfirmationDialogComponent, {
@@ -273,6 +325,8 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
     this.saveStudentSubscription?.unsubscribe();
     this.deleteStudentSubscription?.unsubscribe();
     this.studentAnswersSubscription?.unsubscribe();
+    this.resetQuestionarySubscription?.unsubscribe();
+
     this.managerStore.update(store => {
       return {
         ...store,

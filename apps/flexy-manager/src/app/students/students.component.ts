@@ -118,6 +118,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
         school: student.school,
         year: student.year,
         studentProgress: student.studentProgress,
+        questionaryAnswered: student.questionaryAnswered,
         totalVisual: student.totalVisual,
         totalMovement: student.totalMovement,
         totalAuditory: student.totalAuditory
@@ -129,7 +130,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   addNewStudent() {
     this.dialog.open(StudentDialogComponent, {
-      data: { title: "הוספה תלמיד", isEdit: false }
+      data: { title: "הוספת תלמיד", isEdit: false }
     }).afterClosed().subscribe(() => {
       this.refresh();
     });
@@ -137,13 +138,11 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   exportToExcel() {
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById("studentsTable"));
-    // const ws = document.getElementById("studentsTable");
+
     ws["!cols"][9] = { hidden: true };
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
+
     XLSX.utils.book_append_sheet(wb, ws, "Servers");
-    // const wb = XLSX.utils.table_to_book(ws, <XLSX.Table2SheetOpts>{
-    //   sheet: this.fileName,
-    // });
     XLSX.writeFile(wb, this.fileName);
   }
 
@@ -159,12 +158,11 @@ export class StudentsComponent implements OnInit, OnDestroy {
   resetQuestionary(event, student) {
     event.stopPropagation();
     const title = "איפוס אבחון";
-    const message = 'באיפוס האבחון, התשובות האחרונות של התלמיד ' + `<b>${student.firstName} ${student.lastName}</b>` + ' יימחקו אך התוצאות נשמרות לצרכי השוואה.' +
-       '<br><br>האם לאפס את האבחון האחרון?';
+    const message = "באיפוס האבחון, התשובות האחרונות של התלמיד " + `<b>${student.firstName} ${student.lastName}</b>` + " יימחקו אך התוצאות נשמרות לצרכי השוואה." +
+      "<br><br>האם לאפס את האבחון האחרון?";
 
-    const confirmationButtonText = 'אפס'
+    const confirmationButtonText = "אפס";
 
-    // const dialogData = new ConfirmDialogModel(title, message);
     const dialogData = { title, message, confirmationButtonText };
 
     const deleteDialog = this.dialog.open(ConfirmationDialogComponent, {

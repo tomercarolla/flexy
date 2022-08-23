@@ -4,10 +4,10 @@
     <input matInput (keyup)="applyFilter($event.target.value)">
   </mat-form-field>
   <div class="btn-container">
-    <button flexyButton color="sky" (click)="addNewStudent()">הוספה תלמיד</button>
+    <button flexyButton color="sky" (click)="addNewStudent()">הוספת תלמיד</button>
     <button flexyButton color="wood" (click)="exportToExcel()" [disabled]="downloadExcel">
       <mat-icon>file_download</mat-icon>
-      הורדה אקסל
+      הורדה לExcel
     </button>
   </div>
 </div>

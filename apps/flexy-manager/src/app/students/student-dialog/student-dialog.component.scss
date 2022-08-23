@@ -23,7 +23,6 @@
 
   .progress-tab,
   .results-accordion {
-    margin-top: 20px;
     margin-bottom: 20px;
   }
 
@@ -35,7 +34,7 @@
   ::ng-deep .mat-tab-body-content {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
     height: 100%;
     padding-left: 20px;
     padding-right: 3px;
@@ -70,6 +69,11 @@
         }
       }
     }
+  }
+
+  .reset-questionary-btn-container {
+    display: flex;
+    margin-top: 20px;
   }
 
   .results-table {

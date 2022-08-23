@@ -77,6 +77,14 @@
       </mat-tab>
       <mat-tab label="אבחון" *ngIf="data.isEdit">
         <ng-container *ngIf="selectQuestionsByUser$ | async as questions; else emptyQuestions">
+
+          <div class="reset-questionary-btn-container">
+            <button flexyButton type="button" color="wood" appearance="ghost"
+                    (click)="resetQuestionary(data.firstName, data.lastName, data.phone)"
+                    *ngIf="data.questionaryAnswered">איפוס אבחון
+            </button>
+          </div>
+
           <mat-accordion class="results-accordion" multi>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
@@ -208,11 +216,13 @@
       <button flexyButton color="secondary" size="medium" type="button" (click)="close()">בטל</button>
     </div>
 
-    <button flexyButton type="button" size="medium" class="icon-button" color="critical" (click)="deleteStudent()" *ngIf="data.isEdit">
+    <button flexyButton type="button" size="medium" class="icon-button" color="critical" (click)="deleteStudent()"
+            *ngIf="data.isEdit">
       <mat-icon>delete</mat-icon>
     </button>
 
-    <button flexyButton type="button" size="medium" color="critical" appearance="ghost" (click)="resetForm()" *ngIf="!data.isEdit">
+    <button flexyButton type="button" size="medium" color="critical" appearance="ghost" (click)="resetForm()"
+            *ngIf="!data.isEdit">
       איפוס
     </button>
   </div>
