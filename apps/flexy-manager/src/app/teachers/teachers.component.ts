@@ -79,7 +79,7 @@ export class TeachersComponent implements OnInit, OnDestroy {
 
   addNewTeacher() {
     this.dialog.open(TeacherDialogComponent, {
-      data: { title: "הוספה מדריך", isEdit: false }
+      data: { title: "הוספת מדריך", isEdit: false }
     }).afterClosed().subscribe(() => {
       this.refresh();
     });
