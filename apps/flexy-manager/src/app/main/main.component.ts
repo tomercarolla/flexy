@@ -40,7 +40,21 @@ export class MainComponent implements OnInit {
 
   openAboutDialog(): void {
     this.dialog.open(AboutDialogComponent, {
-      width: '650px'
+      width: '650px',
+      data: {
+        title: 'אודות',
+        isAbout: true,
+      }
+    });
+  }
+
+  openDetailsDialog() {
+    this.dialog.open(AboutDialogComponent, {
+      width: '950px',
+      data: {
+        title: 'הוראות',
+        isAbout: false,
+      }
     });
   }
 }

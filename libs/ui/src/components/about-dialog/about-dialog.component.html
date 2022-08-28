@@ -1,11 +1,11 @@
 <div mat-dialog-title>
-  <div class="title">אודות</div>
+  <div class="title">{{data.title}}</div>
   <mat-icon (click)="close()">close</mat-icon>
 </div>
 
-<div mat-dialog-content>
+<div mat-dialog-content [class.is-details]="!data.isAbout">
 
-  <section>
+  <section *ngIf="data.isAbout">
     <div class="logo-container">
       <img src="assets/images/flexy-logo.png">
     </div>
@@ -48,4 +48,11 @@
 
     <div class="footer">© כל הזכויות שמורות למכון טכנולוגי חולון HIT</div>
   </section>
+
+  <section *ngIf="!data.isAbout" [class.is-details]="!data.isAbout">
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/z1GM6GhFTVI"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+  </section>
+
 </div>

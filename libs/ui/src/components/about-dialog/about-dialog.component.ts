@@ -1,5 +1,10 @@
-import { Component } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
+import { Component, Inject } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+
+interface DialogData {
+  title: string;
+  isAbout: boolean;
+}
 
 @Component({
   selector: 'app-about-dialog',
@@ -8,7 +13,10 @@ import { MatDialog } from "@angular/material/dialog";
 })
 export class AboutDialogComponent {
 
-  constructor(private dialogRef: MatDialog) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private dialogRef: MatDialog
+  ) { }
 
   close(): void {
     this.dialogRef.closeAll();

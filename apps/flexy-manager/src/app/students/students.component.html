@@ -59,7 +59,7 @@
         אבחון
       </th>
       <td mat-cell *matCellDef="let student" class="questionary-done-icon">
-        {{student.questionaryAnswered ? '&#10003;' : ''}}
+        <mat-icon *ngIf="student.questionaryAnswered">done</mat-icon>
       </td>
     </ng-container>
 
