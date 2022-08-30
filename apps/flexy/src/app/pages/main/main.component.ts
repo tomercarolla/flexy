@@ -22,7 +22,13 @@ export class MainComponent {
   }
 
   openAboutDialog(): void {
-    this.dialog.open(AboutDialogComponent);
+    this.dialog.open(AboutDialogComponent, {
+      width: '650px',
+      data: {
+        title: 'אודות',
+        isAbout: true,
+      }
+    });
   }
 
   logout() {
