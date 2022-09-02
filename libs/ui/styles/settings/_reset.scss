@@ -6,16 +6,19 @@
   &::-webkit-scrollbar-track {
     background-color: transparent;
   }
+
   &::-webkit-scrollbar {
     width: 12px;
     height: 12px;
   }
+
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
     border: 3px solid transparent;
     background: var(--primary-300);
     background-clip: content-box;
   }
+
   &::-webkit-scrollbar-corner {
     background-color: transparent;
   }
@@ -38,9 +41,12 @@ body {
 
 textarea {
   min-height: 40px;
+  font-family: 'Rubik', sans-serif;
 }
 
+h1, h2, h3, h4, h5,
 p {
+  font-family: 'Rubik', sans-serif;
   margin: 0;
 }
 
